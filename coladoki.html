@@ -6533,13 +6533,13 @@ body{
     </div>
     <div class="wd-hero-center">
       <img class="wd-logo" src="assets/logo/rising_logo.svg" alt="COLADOKI">
-      <div class="wd-subtitle">COLADOKI A-TYPE <b>SLOT</b></div>
+      <div class="wd-subtitle">COLADOKI 8 MODE <b>AT SLOT</b></div>
     </div>
   </section>
 
   <div class="header">
     <div class="titleBox">
-      <div class="badge">A-TYPE / BB・RB BONUS</div>
+      <div class="badge">8 MODE / BIG・REG AT BONUS</div>
       <h1 id="titleView">COLADOKI SLOT</h1>
     </div>
     <div class="notice">配信・RP・ゲーム内ポイント専用。現金・換金・景品交換・実利益化には使用しないでください。</div>
@@ -6705,7 +6705,7 @@ body{
           <div id="oddsPanelBody">
             <h2>設定別確率（分数表記）</h2>
             <table class="oddsTable" id="settingTable"></table>
-            <h2>REG確率詳細</h2>
+            <h2>設定変更時の初期モード</h2>
             <table class="oddsTable" id="regDetailTable"></table>
           </div>
         </div>
@@ -6718,9 +6718,9 @@ body{
             <h2>全役カウンター</h2>
             <table class="oddsTable roleCounterTable">
               <tr><td>役</td><td>回数</td><td>実践値</td></tr>
-              <tr><td>BB</td><td id="roleCounterBigCount">0</td><td id="roleCounterBigOdds">-</td></tr>
-              <tr><td>PBB</td><td id="roleCounterPremiumBigCount">0</td><td id="roleCounterPremiumBigOdds">-</td></tr>
-              <tr><td>RB</td><td id="roleCounterRegCount">0</td><td id="roleCounterRegOdds">-</td></tr>
+              <tr><td>BIG</td><td id="roleCounterBigCount">0</td><td id="roleCounterBigOdds">-</td></tr>
+              <tr><td>ロングフリーズBIG</td><td id="roleCounterPremiumBigCount">0</td><td id="roleCounterPremiumBigOdds">-</td></tr>
+              <tr><td>REG</td><td id="roleCounterRegCount">0</td><td id="roleCounterRegOdds">-</td></tr>
               <tr><td>ブドウ</td><td id="roleCounterGrapeCount">0</td><td id="roleCounterGrapeOdds">-</td></tr>
               <tr><td>リプレイ</td><td id="roleCounterReplayCount">0</td><td id="roleCounterReplayOdds">-</td></tr>
               <tr><td>ベル</td><td id="roleCounterBellCount">0</td><td id="roleCounterBellOdds">-</td></tr>
@@ -6786,7 +6786,7 @@ body{
           <div class="settingInfo">
             設定 <b id="settingViewLegacy">1</b><br>
             機械割 <b id="targetRtpViewLegacy">90.0%</b><br>
-            Aタイプ <b id="stInfoViewLegacy">通常</b><br>
+            状態 <b id="stInfoViewLegacy">通常モードA</b><br>
             払出補正 <b id="payoutScaleViewLegacy">なし</b>
           </div>
         </div>
@@ -6795,7 +6795,7 @@ body{
         </div>
 
         <div class="message" id="message">READY</div>
-        <div class="subMessage" id="subMessage">3pt BET / BB・RB完全告知 / 設定1〜6でボーナス確率が変化</div>
+        <div class="subMessage" id="subMessage">3pt BET / 小役直撃・規定ゲーム数 / BIG 70G・REG 30G AT</div>
 
         <div class="sevenSegPanel">
           <div class="sevenSegLabel">BONUS</div>
@@ -6805,8 +6805,8 @@ body{
 
         <div class="stats">
           <div class="stat"><div class="k">回転数</div><div class="v" id="totalSpinsView">0</div></div>
-          <div class="stat"><div class="k">BB</div><div class="v" id="bigCountView">0</div></div>
-          <div class="stat"><div class="k">RB</div><div class="v" id="midCountView">0</div></div>
+          <div class="stat"><div class="k">BIG</div><div class="v" id="bigCountView">0</div></div>
+          <div class="stat"><div class="k">REG</div><div class="v" id="midCountView">0</div></div>
           <div class="stat"><div class="k">ブドウ</div><div class="v" id="grapeCountView">0</div></div>
           <div class="stat"><div class="k">損益</div><div class="v" id="totalProfitView">0</div></div>
         </div>
@@ -6814,8 +6814,8 @@ body{
 
       <section class="wd-info-strip" id="data-area">
         <div><span>TYPE</span><b id="wdMirrorSt">A</b></div>
-        <div><span>BB</span><b id="wdMirrorBig">0</b></div>
-        <div><span>RB</span><b id="wdMirrorReg">0</b></div>
+        <div><span>BIG</span><b id="wdMirrorBig">0</b></div>
+        <div><span>REG</span><b id="wdMirrorReg">0</b></div>
         <div><span>総回転数</span><b id="wdMirrorSpin">0G</b></div>
         <div><span>損益</span><b id="wdMirrorProfit">+0</b></div>
       </section>
@@ -6827,13 +6827,13 @@ body{
           <video muted loop playsinline preload="auto"></video>
         </div>
         <div class="wd-public-panels wd-st-status-panel wd-reel-data-panel" id="bonus-info">
-          <div class="wd-st-emblem" id="wdStEmblem">A-TYPE<br>BONUS</div>
+          <div class="wd-st-emblem" id="wdStEmblem">通常A<br>999G</div>
           <div class="wd-st-readout">
-            <span>BB確率</span>
+            <span>BIG確率</span>
             <b id="wdBigOdds">-</b>
           </div>
           <div class="wd-st-readout">
-            <span>RB確率</span>
+            <span>REG確率</span>
             <b id="wdRegOdds">-</b>
           </div>
         </div>
@@ -6845,8 +6845,8 @@ body{
           </div>
           <div class="wd-counter-rows">
             <div><span>TYPE</span><b id="wdCounterSt">A</b></div>
-            <div><span>BB</span><b id="wdCounterBig">0</b></div>
-            <div><span>RB</span><b id="wdCounterReg">0</b></div>
+            <div><span>BIG</span><b id="wdCounterBig">0</b></div>
+            <div><span>REG</span><b id="wdCounterReg">0</b></div>
             <div><span>ブドウ</span><b id="wdCounterGrape">0</b></div>
           </div>
         </div>
@@ -7016,12 +7016,12 @@ body{
         <div class="field">
           <label>設定</label>
           <select id="settingSelect">
-            <option value="1">設定1 / 90.9%</option>
-            <option value="2">設定2 / 93.9%</option>
-            <option value="3">設定3 / 96.9%</option>
-            <option value="4">設定4 / 101.9%</option>
-            <option value="5">設定5 / 104.9%</option>
-            <option value="6">設定6 / 108.9%</option>
+            <option value="1">設定1</option>
+            <option value="2">設定2</option>
+            <option value="3">設定3</option>
+            <option value="4">設定4</option>
+            <option value="5">設定5</option>
+            <option value="6">設定6</option>
           </select>
         </div>
         <div class="field">
@@ -7029,8 +7029,8 @@ body{
           <input id="feeInput" type="number" min="1" max="10000000" step="1" value="100" />
         </div>
         <div class="field">
-          <label>Aタイプ固定</label>
-          <input id="stSpinsInput" type="number" min="1" max="100" step="1" value="1" readonly />
+          <label>モード管理</label>
+          <input id="stSpinsInput" type="text" value="8モード固定" readonly />
         </div>
         <div class="field">
           <label>確率倍率（テスト用・本番は1推奨）</label>
@@ -7064,37 +7064,37 @@ body{
           <button class="dangerBtn" id="resetBtn">初期化</button>
         </div>
         <div class="help" style="margin-top:10px">
-          1プレイごとに3ptを消費します。Aタイプ中は画像の設定別確率でBB/RB/ブドウを抽選し、ハズレは払い出しなしです。
+          1プレイごとに3ptを消費します。通常時は小役直撃とモード別の規定ゲーム数でBIG／REGを抽選します。
         </div>
       </div>
 
       <div class="card">
-        <h2>ボーナス払い出し</h2>
+        <h2>ボーナスAT</h2>
         <div class="field">
-          <label>RB払い出し（96pt固定）</label>
-          <input id="midMulInput" type="number" min="0" max="1000" step="1" value="96" readonly />
+          <label>REG ATゲーム数</label>
+          <input id="midMulInput" type="number" min="0" max="1000" step="1" value="30" readonly />
         </div>
         <div class="field">
-          <label>BB払い出し（252pt固定）</label>
-          <input id="bigMulInput" type="number" min="0" max="1000" step="1" value="252" readonly />
+          <label>BIG ATゲーム数</label>
+          <input id="bigMulInput" type="number" min="0" max="1000" step="1" value="70" readonly />
         </div>
         <div class="help">
-          BB/RBは当選ゲームで確定告知し、指定純増までボーナスゲームを消化してから通常ゲームへ戻ります。ブドウは設定別確率で通常払い出しします。
+          BIG／REG中は1G連ストックを抽選。終了後はストックまたは次回モードのゲーム数テーブルに従って次のボーナスを目指します。
         </div>
       </div>
 
       <div class="card">
-        <h2>Aタイプ当選役</h2>
+        <h2>COLADOKI仕様</h2>
         <div class="field">
-          <label>RB 77BAR</label>
-          <input type="text" value="96pt固定" readonly />
+          <label>REG 77BAR</label>
+          <input type="text" value="30G AT" readonly />
         </div>
         <div class="field">
-          <label>BB 7揃い 払い出し</label>
-          <input id="bigAddInput" type="number" min="0" max="1000" step="1" value="252" readonly />
+          <label>BIG 7揃い</label>
+          <input id="bigAddInput" type="text" value="70G AT" readonly />
         </div>
         <div class="help">
-          BBは252pt、RBは96pt、ブドウは8pt、ベルは10pt、ゾウリプレイは3pt、宗介特殊役は14pt、チェリーは中段1pt・上下段2pt。
+          天国・コラドキ・超コラドキ・保障は32G以内。ロングフリーズはBIG＋超コラドキ確定です。
         </div>
       </div>
 
@@ -7106,13 +7106,14 @@ body{
             <option value="">ランダム</option>
             <option value="MISS">ハズレ</option>
             <option value="REPLAY">リプレイ（3pt）</option>
-            <option value="GRAPE">ブドウ（8pt）</option>
-            <option value="SMALL">特殊役（宗介/14pt）</option>
-            <option value="CHERRY_ANY">チェリー（中段1pt・上下段2pt）</option>
-            <option value="MID">RB（77BAR/96pt）</option>
-            <option value="MID_CHERRY">RBチェリー同時（77BAR/96pt）</option>
-            <option value="BIG">BB（777/252pt）</option>
-            <option value="BAR3">BAR</option>
+            <option value="BELL">ベル</option>
+            <option value="SUICA">スイカ</option>
+            <option value="CHERRY_ANY">チェリー</option>
+            <option value="CHERRY_DOUBLE">確定チェリー</option>
+            <option value="CHERRY_TRIPLE">中段チェリー</option>
+            <option value="MID">REG（77BAR / 30G AT）</option>
+            <option value="BIG">BIG（777 / 70G AT）</option>
+            <option value="BAR3">確定役</option>
             <option value="REACH_ME">リーチ目</option>
           </select>
         </div>
@@ -7124,14 +7125,14 @@ body{
         <div class="field" style="margin-top:12px">
           <label>直行操作</label>
           <div class="row" style="margin-top:8px">
-            <button class="subBtn" id="debugMidBtn">即RB</button>
-            <button class="subBtn" id="debugBigBtn">即BB</button>
-            <button class="subBtn" id="debugGrapeBtn">即ブドウ</button>
+            <button class="subBtn" id="debugMidBtn">即REG</button>
+            <button class="subBtn" id="debugBigBtn">即BIG</button>
+            <button class="subBtn" id="debugGrapeBtn">即スイカ</button>
             <button class="subBtn" id="debugMissBtn">即ハズレ</button>
           </div>
         </div>
         <div class="help" style="margin-top:10px">
-          このメニューは液晶5回クリックで開閉します。直行操作はAタイプの次ゲーム結果として反映します。
+          このメニューは液晶5回クリックで開閉します。直行操作は次ゲームの結果として反映します。
         </div>
       </div>
 
@@ -7171,13 +7172,13 @@ body{
           <div class="wd-history-title">BONUS HISTORY</div>
           <table class="wd-history-table">
             <tr><th>回転数</th><th>当選</th><th>種別</th></tr>
-            <tr><td>1234G</td><td>777</td><td class="red">BB</td></tr>
-            <tr><td>112G</td><td>77BAR</td><td class="blue">RB</td></tr>
-            <tr><td>45G</td><td>777</td><td class="red">BB</td></tr>
-            <tr><td>789G</td><td>777</td><td class="red">BB</td></tr>
-            <tr><td>33G</td><td>77BAR</td><td class="blue">RB</td></tr>
-            <tr><td>256G</td><td>77BAR</td><td class="blue">RB</td></tr>
-            <tr><td>654G</td><td>777</td><td class="red">BB</td></tr>
+            <tr><td>934G</td><td>777</td><td class="red">BIG</td></tr>
+            <tr><td>112G</td><td>77BAR</td><td class="blue">REG</td></tr>
+            <tr><td>45G</td><td>777</td><td class="red">BIG</td></tr>
+            <tr><td>789G</td><td>777</td><td class="red">BIG</td></tr>
+            <tr><td>33G</td><td>77BAR</td><td class="blue">REG</td></tr>
+            <tr><td>256G</td><td>77BAR</td><td class="blue">REG</td></tr>
+            <tr><td>654G</td><td>777</td><td class="red">BIG</td></tr>
           </table>
           <div class="wd-history-more">もっと見る</div>
         </div>
@@ -7201,6 +7202,7 @@ body{
 <audio id="barBgm" loop preload="auto"></audio>
 <audio id="voiceSound" preload="auto"></audio>
 
+<script src="coladoki-mode.js"></script>
 <script>
 (function(){
   "use strict";
@@ -7284,7 +7286,9 @@ body{
     6:{target:1.080}
   };
 
-  const A_TYPE_MODE = true;
+  const A_TYPE_MODE = false;
+  const COLADOKI_MODE = true;
+  const COLADOKI = window.ColadokiMode;
   const A_TYPE_BONUS_TABLE = Object.freeze({
     1:{big:394.1, reg:632.1, total:218.465163, payout:90.0},
     2:{big:377.0, reg:584.8, total:200.214759, payout:93.0},
@@ -7420,11 +7424,11 @@ body{
   const RESULT = {
     MISS:{name:"ハズレ", reel:[ELEPHANT_SYMBOL,PIERROT_SYMBOL,GRAPE_SYMBOL], label:"MISS", cls:"", kind:"miss"},
     SMALL:{name:"特殊役", reel:[PIERROT_SYMBOL,PIERROT_SYMBOL,PIERROT_SYMBOL], label:"SPECIAL", cls:"blue", kind:"payadd"},
-    MID:{name:"RB", reel:["7","7","BAR"], label:"RB", cls:"purple", kind:"payadd"},
-    MID_CHERRY:{name:"RB（チェリー同時）", reel:["7","7","BAR"], label:"RB", cls:"purple", kind:"payadd"},
+    MID:{name:"REG", reel:["7","7","BAR"], label:"REG", cls:"purple", kind:"payadd"},
+    MID_CHERRY:{name:"REG（チェリー同時）", reel:["7","7","BAR"], label:"REG", cls:"purple", kind:"payadd"},
     GRAPE:{name:"ブドウ", reel:[GRAPE_SYMBOL,GRAPE_SYMBOL,GRAPE_SYMBOL], label:"ブドウ", cls:"green", kind:"pay"},
     BAR3:{name:"BAR揃い", reel:["BAR","BAR","BAR"], label:"BAR", cls:"purple", kind:"add"},
-    BIG:{name:"BB", reel:["7","7","7"], label:"BB", cls:"red", kind:"payadd"},
+    BIG:{name:"BIG", reel:["7","7","7"], label:"BIG", cls:"red", kind:"payadd"},
     DEVIL_ZONE:{name:"DEVIL ZONE", reel:["7","7","BAR"], label:"DZ", cls:"purple", kind:"payadd"},
     SUPER_DEVIL_ZONE:{name:"SUPER DEVIL ZONE", reel:["7","7","7"], label:"SUPER DZ", cls:"red", kind:"payadd"},
     BELL:{name:"ベル", reel:[BELL_SYMBOL,BELL_SYMBOL,BELL_SYMBOL], label:"BELL", cls:"gold", kind:"pay"},
@@ -7457,7 +7461,7 @@ body{
 
   const symbols = ["7","BAR",ELEPHANT_SYMBOL,GRAPE_SYMBOL,CHERRY_SYMBOL,PIERROT_SYMBOL,BELL_SYMBOL];
   const AUDIO_BALANCE_VERSION = 9;
-  const ROLE_STAT_COUNTER_VERSION = 2;
+  const ROLE_STAT_COUNTER_VERSION = 3;
   const DEFAULT_MASTER_VOLUME = 0.70;
   const DEFAULT_BGM_VOLUME = 0.50;
   const DEFAULT_SFX_VOLUME = 0.50;
@@ -7600,7 +7604,13 @@ body{
   };
 
   let normalState = {
-    mode:"normal",
+    mode:"normalA",
+    ceilingTarget:999,
+    nextMode:"normalA",
+    transitionTrigger:"other",
+    longFreeze:false,
+    stockReleasePending:false,
+    stockedBonuses:0,
     highRemain:0,
     sinceBonus:0,
     bonusPending:false,
@@ -7618,6 +7628,7 @@ body{
     pendingPremiumVoiceSrc:"",
     morningCeilingActive:false
   };
+  let loadedColadokiNormalState = false;
 
   let session = {
     active:false,
@@ -7638,6 +7649,10 @@ body{
     bigZoneType:"",
     phase:"idle",
     bonusKind:"",
+    nextMode:"normalA",
+    longFreeze:false,
+    stockRelease:false,
+    carriedStocks:0,
     bonusTarget:0,
     bonusStartGames:0,
     premiumBonus:false,
@@ -9589,6 +9604,7 @@ body{
 
   function decideBigPremiumEffect(result, resolved, premiumForced=false){
     if(!isBigPremiumEffectEligible(result, resolved)) return false;
+    if(COLADOKI_MODE) return !!premiumForced || !!(resolved && resolved.longFreeze);
     if(A_TYPE_MODE && resolved && resolved.bonusPendingAtStart) return !!resolved.premiumBonus;
     return !!premiumForced || Math.random() < GEKIATSU_CHANCE_ON_BIG;
   }
@@ -9739,6 +9755,7 @@ body{
   function currentSetting(){ return SETTING[settings.setting] || SETTING[1]; }
   function targetRtp(){ return targetRtpFor(settings.setting); }
   function targetRtpText(settingNo = settings.setting){
+    if(COLADOKI_MODE) return "未設定";
     const value = (targetRtpFor(settingNo) || 0) * 100;
     return A_TYPE_MODE ? `${value.toFixed(1)}%` : `${Math.round(value)}%`;
   }
@@ -9764,6 +9781,7 @@ body{
   }
 
   function normalRewardFor(result, lineRow=1){
+    if(COLADOKI_MODE && (result === "BIG" || result === "MID")) return 0;
     if(A_TYPE_MODE && (result === "BIG" || result === "MID")) return 0;
     if(A_TYPE_MODE && isCherryResult(result)) return aTypeCherryPayoutForLine(lineRow);
     if(A_TYPE_MODE && A_TYPE_PAYOUTS[result]) return A_TYPE_PAYOUTS[result];
@@ -10042,11 +10060,13 @@ body{
   }
 
   function isHighMode(){
+    if(COLADOKI_MODE) return false;
     return (Number(normalState.highRemain) || 0) > 0;
   }
 
   function normalModeLabel(){
     if(normalState.bonusPending) return "BONUS確定";
+    if(COLADOKI_MODE) return COLADOKI.modeLabel(normalState.mode);
     if(normalState.morningCeilingActive) return isHighMode() ? "朝一高確" : "朝一";
     return isHighMode() ? "高確" : "通常";
   }
@@ -10297,6 +10317,11 @@ body{
   }
 
   function currentNormalCeilingGames(){
+    if(COLADOKI_MODE){
+      const fallback = COLADOKI.MODES[COLADOKI.validMode(normalState.mode)].ceiling;
+      const target = Number(normalState.ceilingTarget);
+      return Number.isFinite(target) && target >= 0 ? Math.floor(target) : fallback;
+    }
     return normalState.morningCeilingActive ? MORNING_CEILING_GAMES : NORMAL_CEILING_GAMES;
   }
 
@@ -10312,9 +10337,92 @@ body{
     return Math.max(0, currentNormalCeilingGames() - normalizeBonusAfterGames(normalState.sinceBonus));
   }
 
+  function clearColadokiPendingBonus(){
+    normalState.bonusPending = false;
+    normalState.bonusKind = "";
+    normalState.bonusSource = "";
+    normalState.premiumBonus = false;
+    normalState.oneGameRenBonus = false;
+    normalState.bonusWaitGames = 0;
+    normalState.bonusHitGamesSince = 0;
+    normalState.reachMePending = false;
+    normalState.reachMeBonusKind = "";
+    normalState.reachMeBonusSource = "";
+    normalState.reachMeHitGamesSince = 0;
+    normalState.longFreeze = false;
+    normalState.stockReleasePending = false;
+  }
+
+  function queueColadokiOneGameBonus(source, stockRelease=false){
+    const currentMode = COLADOKI.validMode(normalState.mode);
+    normalState.bonusPending = true;
+    normalState.bonusKind = "BIG";
+    normalState.bonusSource = source || "規定ゲーム数0G（1G連）";
+    normalState.premiumBonus = false;
+    normalState.oneGameRenBonus = true;
+    normalState.bonusWaitGames = 1;
+    normalState.bonusHitGamesSince = 0;
+    normalState.transitionTrigger = "other";
+    normalState.nextMode = stockRelease
+      ? currentMode
+      : COLADOKI.pickNextMode(currentMode, "other", settings.setting);
+    normalState.longFreeze = false;
+    normalState.stockReleasePending = !!stockRelease;
+    jagChanceHold = true;
+    const lamp = $("stLamp");
+    if(lamp) lamp.classList.add("on");
+  }
+
+  function enterColadokiMode(mode, options={}){
+    const nextMode = COLADOKI.validMode(mode);
+    const stockedBonuses = Math.max(0, Math.floor(Number(options.stockedBonuses) || 0));
+    normalState.mode = nextMode;
+    normalState.sinceBonus = 0;
+    normalState.highRemain = 0;
+    normalState.morningCeilingActive = false;
+    normalState.nextMode = nextMode;
+    normalState.transitionTrigger = "other";
+    normalState.stockedBonuses = stockedBonuses;
+    clearColadokiPendingBonus();
+    normalState.ceilingTarget = COLADOKI.pickCeiling(nextMode);
+    if(normalState.stockedBonuses > 0){
+      normalState.stockedBonuses--;
+      normalState.ceilingTarget = 0;
+      queueColadokiOneGameBonus("ボーナス中ストック1G連", true);
+    }else if(normalState.ceilingTarget === 0){
+      queueColadokiOneGameBonus("規定ゲーム数0G（1G連）", false);
+    }
+    return nextMode;
+  }
+
+  function initializeColadokiMode(resetDistribution=false){
+    if(!COLADOKI_MODE) return;
+    const storedMode = COLADOKI.validMode(normalState.mode);
+    const mode = resetDistribution ? COLADOKI.pickResetMode() : storedMode;
+    normalState.mode = mode;
+    normalState.nextMode = COLADOKI.validMode(normalState.nextMode || mode);
+    normalState.transitionTrigger = String(normalState.transitionTrigger || "other");
+    normalState.longFreeze = !!normalState.longFreeze;
+    normalState.stockReleasePending = !!normalState.stockReleasePending;
+    normalState.stockedBonuses = Math.max(0, Math.floor(Number(normalState.stockedBonuses) || 0));
+    const ceiling = Number(normalState.ceilingTarget);
+    normalState.ceilingTarget = resetDistribution
+      ? COLADOKI.pickCeiling(mode)
+      : Number.isFinite(ceiling) && ceiling >= 0
+        ? Math.floor(ceiling)
+        : COLADOKI.pickCeiling(mode);
+    if(resetDistribution) normalState.sinceBonus = 0;
+    normalState.sinceBonus = clamp(normalizeBonusAfterGames(normalState.sinceBonus), 0, normalState.ceilingTarget || 0);
+  }
+
   function resetNormalModeAfterBonus(){
     pendingATypeInternalBonus = null;
     bonusConfirmBgmHold = false;
+    if(COLADOKI_MODE){
+      clearColadokiPendingBonus();
+      hideBonusConfirmScreen();
+      return;
+    }
     normalState.mode = "normal";
     normalState.highRemain = 0;
     normalState.sinceBonus = 0;
@@ -10417,6 +10525,7 @@ body{
 
   function countTotalSpinIfNeeded(aTypeBonusActiveAtSpinStart=false){
     if(A_TYPE_MODE && aTypeBonusActiveAtSpinStart) return false;
+    if(COLADOKI_MODE && session.active) return false;
     stats.totalSpins = (Number(stats.totalSpins) || 0) + 1;
     return true;
   }
@@ -10843,6 +10952,25 @@ body{
     if(isATypeBonusActive()){
       return drawATypeBonusResult();
     }
+    if(COLADOKI_MODE && session.active){
+      if(pendingForceResult && RESULT[pendingForceResult]) return pendingForceResult;
+      const odds = COLADOKI.NORMAL_ROLE_PROBABILITIES;
+      let roll = Math.random();
+      if(roll < odds.middleCherry) return "CHERRY_TRIPLE";
+      roll -= odds.middleCherry;
+      if(roll < odds.confirmedCherry) return "CHERRY_DOUBLE";
+      roll -= odds.confirmedCherry;
+      if(roll < odds.confirmedRole) return "BAR3";
+      roll -= odds.confirmedRole;
+      if(roll < odds.suika) return "SUICA";
+      roll -= odds.suika;
+      if(roll < odds.cherry) return "CHERRY_ANY";
+      roll -= odds.cherry;
+      if(roll < odds.bell) return "BELL";
+      roll -= odds.bell;
+      if(roll < odds.replay) return "REPLAY";
+      return "MISS";
+    }
     if(pendingForceResult && RESULT[pendingForceResult]){
       return atInternalResult(pendingForceResult);
     }
@@ -10938,6 +11066,30 @@ body{
       return "MISS";
     }
 
+    if(COLADOKI_MODE){
+      if(normalState.bonusPending){
+        if(!pendingBonusWaitDone()) return "MISS";
+        return normalState.bonusKind === "MID" ? "MID" : "BIG";
+      }
+      if(pendingForceResult && RESULT[pendingForceResult]) return pendingForceResult;
+      const odds = COLADOKI.NORMAL_ROLE_PROBABILITIES;
+      let roll = Math.random();
+      if(roll < odds.middleCherry) return "CHERRY_TRIPLE";
+      roll -= odds.middleCherry;
+      if(roll < odds.confirmedCherry) return "CHERRY_DOUBLE";
+      roll -= odds.confirmedCherry;
+      if(roll < odds.confirmedRole) return "BAR3";
+      roll -= odds.confirmedRole;
+      if(roll < odds.suika) return "SUICA";
+      roll -= odds.suika;
+      if(roll < odds.cherry) return "CHERRY_ANY";
+      roll -= odds.cherry;
+      if(roll < odds.bell) return "BELL";
+      roll -= odds.bell;
+      if(roll < odds.replay) return "REPLAY";
+      return "MISS";
+    }
+
     if(normalState.bonusPending){
       if(!pendingBonusWaitDone()) return "MISS";
       if(normalState.bonusKind === "BAR3") return "BAR3";
@@ -11014,6 +11166,97 @@ body{
         premiumBonus:isBig && (bonusPendingAtStart ? !!normalState.premiumBonus : result === "BAR3"),
         oneGameRenBonus:isBig && bonusPendingAtStart ? !!normalState.oneGameRenBonus : false,
         aTypeBonusReady:isReadyBonus
+      };
+    }
+
+    if(COLADOKI_MODE){
+      const currentMode = COLADOKI.validMode(normalState.mode);
+      const bonusPending = !!normalState.bonusPending;
+      const bonusWaitSpin = bonusPending && !pendingBonusWaitDone();
+      const pendingReady = bonusPending && !bonusWaitSpin && (result === "BIG" || result === "MID");
+      const forcedReady = !bonusPending && (result === "BIG" || result === "MID");
+      const ceilingLimit = currentNormalCeilingGames();
+      const ceilingAfter = bonusPending
+        ? clamp(normalizeBonusAfterGames(normalState.sinceBonus), 0, ceilingLimit)
+        : clamp(nextBonusAfterGames(normalState.sinceBonus), 0, ceilingLimit);
+      const ceilingHit = !bonusPending && !forcedReady && ceilingAfter >= ceilingLimit;
+      const rates = COLADOKI.directBonusRates(currentMode, result, settings.setting);
+      const oddsMultiplier = clamp(Number(settings.oddsMultiplier) || 1, 0.1, 100);
+      const directBigRate = clamp(rates.big * oddsMultiplier, 0, 1);
+      const directRegRate = clamp(rates.reg * oddsMultiplier, 0, 1 - directBigRate);
+      let directKind = "";
+      if(!bonusPending && !forcedReady && !ceilingHit){
+        const roll = Math.random();
+        if(roll < directBigRate) directKind = "BIG";
+        else if(roll < directBigRate + directRegRate) directKind = "MID";
+      }
+      const isNewBonusHit = !!(directKind || ceilingHit);
+      const bonusKind = bonusPending
+        ? (normalState.bonusKind || "BIG")
+        : forcedReady
+          ? result
+          : directKind || (ceilingHit ? COLADOKI.pickBonusKind(settings.setting) : "");
+      const trigger = ceilingHit ? "other" : (rates.trigger || COLADOKI.triggerForResult(result));
+      const source = bonusPending
+        ? (normalState.bonusSource || "BONUS確定")
+        : forcedReady
+          ? "管理画面直撃"
+          : ceilingHit
+            ? `規定ゲーム数${ceilingLimit}G`
+            : trigger === "middleCherry"
+              ? "中段チェリー直撃"
+              : trigger === "confirmed"
+                ? (result === "CHERRY_DOUBLE" ? "確定チェリー直撃" : "確定役直撃")
+                : trigger === "suika"
+                  ? "スイカ直撃"
+                  : trigger === "cherry"
+                    ? "チェリー直撃"
+                    : "小役直撃";
+      const freezeTrigger = ceilingHit ? "ceiling" : trigger;
+      const longFreeze = bonusPending
+        ? !!normalState.longFreeze
+        : !!(isNewBonusHit && bonusKind === "BIG" && Math.random() < COLADOKI.longFreezeRate(freezeTrigger, ceilingHit));
+      const stockRelease = bonusPending && !!normalState.stockReleasePending;
+      const nextMode = bonusPending
+        ? COLADOKI.validMode(normalState.nextMode || currentMode)
+        : stockRelease
+          ? currentMode
+          : longFreeze
+            ? "superDokidoki"
+            : (isNewBonusHit || forcedReady)
+              ? COLADOKI.pickNextMode(currentMode, trigger, settings.setting)
+              : currentMode;
+      return {
+        normalGame:true,
+        reward:normalRewardFor(result, lineRow),
+        add:0,
+        sets:0,
+        bigZone:0,
+        zoneGame:false,
+        zoneSets:0,
+        zoneStGames:0,
+        zoneGameAdd:0,
+        highAtStart:false,
+        bonusPendingAtStart:bonusPending,
+        bonusWaitSpin,
+        bonusWaitGamesAtStart:bonusPending ? (Number(normalState.bonusWaitGames) || 0) : 0,
+        highAdd:0,
+        ceilingAfter:(isNewBonusHit || pendingReady || forcedReady) ? 0 : ceilingAfter,
+        gamesSinceLastBonusAtStart:bonusPending
+          ? normalizeBonusAfterGames(normalState.bonusHitGamesSince)
+          : normalizeBonusAfterGames(normalState.sinceBonus),
+        bonusHit:isNewBonusHit,
+        bonusReady:(pendingReady || forcedReady) && bonusKind === "BIG",
+        regReady:(pendingReady || forcedReady) && bonusKind === "MID",
+        bar3PremiumReady:false,
+        bonusKind,
+        bonusSource:source,
+        transitionTrigger:trigger,
+        nextMode,
+        longFreeze,
+        premiumBonus:longFreeze,
+        oneGameRenBonus:bonusPending ? !!normalState.oneGameRenBonus : false,
+        stockRelease
       };
     }
 
@@ -11124,8 +11367,12 @@ body{
       if(data?.stats) stats = {...stats, ...data.stats};
       stats.premiumBigCount = Math.max(0, Number(stats.premiumBigCount) || 0);
       if((Number(stats.roleStatVersion) || 0) < ROLE_STAT_COUNTER_VERSION){
+        stats.totalSessions = 0;
+        stats.totalSpins = 0;
         stats.normalSpins = 0;
         stats.highSpins = 0;
+        stats.bigCount = 0;
+        stats.midCount = 0;
         stats.grapeCount = 0;
         stats.smallCount = 0;
         stats.bellCount = 0;
@@ -11139,10 +11386,19 @@ body{
       if(A_TYPE_MODE){
         stats.totalSpins = (Number(stats.normalSpins) || 0) + (Number(stats.highSpins) || 0);
       }
-      if(data?.normalState){
+      const compatibleColadokiNormalState = !COLADOKI_MODE || !!(data?.normalState && COLADOKI.MODE_IDS.includes(data.normalState.mode));
+      if(data?.normalState && compatibleColadokiNormalState){
+        loadedColadokiNormalState = true;
         normalState = {
           ...normalState,
           ...data.normalState,
+          mode:COLADOKI_MODE ? COLADOKI.validMode(data.normalState.mode) : String(data.normalState.mode || "normal"),
+          ceilingTarget:Number.isFinite(Number(data.normalState.ceilingTarget)) ? Math.max(0, Math.floor(Number(data.normalState.ceilingTarget))) : NaN,
+          nextMode:COLADOKI_MODE ? COLADOKI.validMode(data.normalState.nextMode || data.normalState.mode) : String(data.normalState.nextMode || ""),
+          transitionTrigger:String(data.normalState.transitionTrigger || "other"),
+          longFreeze:!!data.normalState.longFreeze,
+          stockReleasePending:!!data.normalState.stockReleasePending,
+          stockedBonuses:Math.max(0, Math.floor(Number(data.normalState.stockedBonuses) || 0)),
           highRemain:Math.max(0, Number(data.normalState.highRemain) || 0),
           sinceBonus:normalizeBonusAfterGames(data.normalState.sinceBonus),
           bonusPending:!!data.normalState.bonusPending,
@@ -11166,6 +11422,7 @@ body{
           normalState.premiumBonus = false;
           normalState.oneGameRenBonus = false;
         }
+        initializeColadokiMode(false);
         normalState.sinceBonus = A_TYPE_MODE
           ? normalizeBonusAfterGames(normalState.sinceBonus)
           : clamp(normalState.sinceBonus, 0, currentNormalCeilingGames());
@@ -11186,7 +11443,8 @@ body{
         }
       }
       const runtime = data?.runtimeState || {};
-      if(runtime.session && typeof runtime.session === "object"){
+      const compatibleColadokiSession = !COLADOKI_MODE || !runtime.session?.active || runtime.session.phase === "coladoki_bonus";
+      if(runtime.session && typeof runtime.session === "object" && compatibleColadokiSession){
         session = {
           ...session,
           ...runtime.session,
@@ -11208,6 +11466,10 @@ body{
           bigZoneType:String(runtime.session.bigZoneType || ""),
           phase:String(runtime.session.phase || "idle"),
           bonusKind:String(runtime.session.bonusKind || ""),
+          nextMode:COLADOKI.validMode(runtime.session.nextMode || normalState.mode),
+          longFreeze:!!runtime.session.longFreeze,
+          stockRelease:!!runtime.session.stockRelease,
+          carriedStocks:Math.max(0, Math.floor(Number(runtime.session.carriedStocks) || 0)),
           bonusTarget:Number(runtime.session.bonusTarget) || 0,
           premiumBonus:!!runtime.session.premiumBonus,
           oneGameRenBonus:!!runtime.session.oneGameRenBonus,
@@ -11574,9 +11836,13 @@ body{
     if($("adminTargetRtpView")) $("adminTargetRtpView").textContent = targetRtpText();
     for(const settingNo of [1,2,3,4,5,6]){
       const option = document.querySelector(`#settingSelect option[value="${settingNo}"]`);
-      if(option) option.textContent = A_TYPE_MODE ? `設定${settingNo} / ${targetRtpText(settingNo)}` : (settingNo === 6 ? "設定6 / 目標115%" : option.textContent);
+      if(option) option.textContent = COLADOKI_MODE ? `設定${settingNo}` : A_TYPE_MODE ? `設定${settingNo} / ${targetRtpText(settingNo)}` : (settingNo === 6 ? "設定6 / 目標115%" : option.textContent);
     }
-    const adminStInfoText = A_TYPE_MODE
+    const adminStInfoText = COLADOKI_MODE
+      ? session.active
+        ? `${session.bonusKind === "MID" ? "REG" : "BIG"} ${COLADOKI.bonusGames(session.bonusKind)}G AT / 残り${session.remain}G / 1G連STOCK${(session.carriedStocks || 0) + (session.stockSets || 0)}`
+        : (normalState.bonusPending ? `BONUS確定 / ${pendingBonusLabel()}待ち` : `${normalModeLabel()} / 規定${currentNormalCeilingGames()}G / 天井まで${ceilingRemain()}G`)
+      : A_TYPE_MODE
       ? `Aタイプ / BB ${oddsText(1 / (A_TYPE_BONUS_TABLE[settings.setting] || A_TYPE_BONUS_TABLE[1]).big)} / RB ${oddsText(1 / (A_TYPE_BONUS_TABLE[settings.setting] || A_TYPE_BONUS_TABLE[1]).reg)}`
       : session.active ? setGameCount() + "G/SET" : (normalState.bonusPending ? `BONUS確定 / ${pendingBonusLabel()}待ち` : `${normalModeLabel()} / 天井まで${ceilingRemain()}G`);
     if($("stInfoView")) $("stInfoView").textContent = adminStInfoText;
@@ -11638,17 +11904,17 @@ body{
     $("feeInput").value = SPIN_COST;
     $("feeInput").readOnly = true;
     if($("feeInput").previousElementSibling) $("feeInput").previousElementSibling.textContent = "1回転コスト";
-    $("stSpinsInput").value = A_TYPE_MODE ? 1 : settings.stSpins;
-    $("stSpinsInput").readOnly = !!A_TYPE_MODE;
+    $("stSpinsInput").value = COLADOKI_MODE ? "8モード固定" : A_TYPE_MODE ? 1 : settings.stSpins;
+    $("stSpinsInput").readOnly = !!(COLADOKI_MODE || A_TYPE_MODE);
     $("oddsMultiplierInput").value = settings.oddsMultiplier;
     if($("smallMulInput")) $("smallMulInput").value = (A_TYPE_MODE ? A_TYPE_PAYOUTS.SMALL : ROLE_PAYOUTS.SMALL) / PAYOUT_BASE;
-    if($("midMulInput")) $("midMulInput").value = A_TYPE_MODE ? A_TYPE_PAYOUTS.MID : ROLE_PAYOUTS.MID / PAYOUT_BASE;
+    if($("midMulInput")) $("midMulInput").value = COLADOKI_MODE ? 30 : A_TYPE_MODE ? A_TYPE_PAYOUTS.MID : ROLE_PAYOUTS.MID / PAYOUT_BASE;
     if($("crownMulInput")) $("crownMulInput").value = 0;
     if($("cherryMulInput")) $("cherryMulInput").value = (A_TYPE_MODE ? 2 : ROLE_PAYOUTS.CHERRY_ANY) / PAYOUT_BASE;
     if($("bellMulInput")) $("bellMulInput").value = (A_TYPE_MODE ? A_TYPE_PAYOUTS.BELL : ROLE_PAYOUTS.BELL) / PAYOUT_BASE;
     if($("suikaMulInput")) $("suikaMulInput").value = ROLE_PAYOUTS.SUICA / PAYOUT_BASE;
-    if($("bigMulInput")) $("bigMulInput").value = A_TYPE_MODE ? A_TYPE_PAYOUTS.BIG : ROLE_PAYOUTS.BIG / PAYOUT_BASE;
-    if($("bigAddInput")) $("bigAddInput").value = A_TYPE_MODE ? A_TYPE_PAYOUTS.BIG : 5;
+    if($("bigMulInput")) $("bigMulInput").value = COLADOKI_MODE ? 70 : A_TYPE_MODE ? A_TYPE_PAYOUTS.BIG : ROLE_PAYOUTS.BIG / PAYOUT_BASE;
+    if($("bigAddInput")) $("bigAddInput").value = COLADOKI_MODE ? "70G AT" : A_TYPE_MODE ? A_TYPE_PAYOUTS.BIG : 5;
     $("autoDelayInput").value = settings.autoDelay;
     if($("masterVolume")) $("masterVolume").value = settings.masterVolume;
     if($("bgmVolume")) $("bgmVolume").value = settings.bgmVolume;
@@ -11740,6 +12006,73 @@ body{
         log(`${bonusLabel} BONUS開始：純増${bonusTarget}ptまで小役入賞 / 設定${settings.setting}${within50 ? " / 50G以内" : ""}`);
         updateDisplay();
         playATypeBonusBgm(bonusBgm);
+        return true;
+      }
+      if(COLADOKI_MODE){
+        const bonusKind = options.bonusKind === "MID" ? "MID" : "BIG";
+        const bonusGames = COLADOKI.bonusGames(bonusKind);
+        const longFreeze = bonusKind === "BIG" && !!options.longFreeze;
+        const stockRelease = !!options.stockRelease;
+        const currentMode = COLADOKI.validMode(normalState.mode);
+        const nextMode = longFreeze
+          ? "superDokidoki"
+          : COLADOKI.validMode(options.nextMode || currentMode);
+        const carriedStocks = Math.max(0, Math.floor(Number(normalState.stockedBonuses) || 0));
+        const gamesSinceLastBonus = normalizeBonusAfterGames(Number.isFinite(Number(options.gamesSinceLastBonus))
+          ? Number(options.gamesSinceLastBonus)
+          : normalState.sinceBonus);
+        resetNormalModeAfterBonus();
+        normalState.stockedBonuses = 0;
+        pauseNormalBgm();
+        session = {
+          active:true,
+          remain:bonusGames,
+          fee:PAYOUT_BASE,
+          cost:0,
+          paid:0,
+          hits:0,
+          added:0,
+          addedGames:0,
+          setNo:1,
+          stockSets:0,
+          barBgmSets:0,
+          nextSetBarBgm:false,
+          currentSetBarBgm:false,
+          continuationRate:0,
+          bigZone:0,
+          bigZoneType:"",
+          phase:"coladoki_bonus",
+          bonusKind,
+          nextMode,
+          longFreeze,
+          stockRelease,
+          carriedStocks,
+          bonusTarget:0,
+          bonusStartGames:gamesSinceLastBonus,
+          premiumBonus:longFreeze,
+          oneGameRenBonus:!!options.oneGameRenBonus,
+          premiumChainEligible:false,
+          bonusBgmSrc:"",
+          battleRemain:0,
+          battleWin:false,
+          battleSource:"",
+          resultPayout:null,
+          endSignal:null
+        };
+        jagLastBonusPayout = 0;
+        jagLastGamePayout = 0;
+        jagChanceHold = true;
+        stats.totalSessions++;
+        if(longFreeze) stats.premiumBigCount = (Number(stats.premiumBigCount) || 0) + 1;
+        recordSlumpPoint();
+        $("spinBtn").textContent = "BET";
+        const label = longFreeze ? "ロングフリーズ BIG" : bonusKind === "MID" ? "REG" : "BIG";
+        showMessage(`${label} BONUS`, `${bonusGames}G AT / ボーナス中1G連ストック抽選`);
+        log(`${label}開始：${bonusGames}G AT / 次回${COLADOKI.modeLabel(nextMode)} / 設定${settings.setting}`);
+        updateDisplay();
+        if(longFreeze) playBarBgm();
+        else playAtBgm();
+        playWinSound(longFreeze);
         return true;
       }
       const premiumStockSets = Math.max(0, Number(options.stockSets) || 0);
@@ -11849,10 +12182,14 @@ body{
 
   function finishSession(){
     const aTypeEnd = isATypeBonusActive();
+    const coladokiEnd = !!(COLADOKI_MODE && session.active && session.phase === "coladoki_bonus");
     const aTypeNet = aTypeEnd ? aTypeBonusNet() : 0;
     const resultPayout = aTypeEnd ? Math.min(Number(session.bonusTarget) || aTypeBonusTarget(), aTypeNet) : session.paid;
     const profit = session.paid - (Number(session.cost) || 0);
     const endedSets = session.setNo || 0;
+    const endedBonusKind = session.bonusKind === "MID" ? "MID" : "BIG";
+    const coladokiNextMode = COLADOKI.validMode(session.nextMode || normalState.mode);
+    const coladokiStocks = Math.max(0, Math.floor(Number(session.carriedStocks) || 0)) + Math.max(0, Math.floor(Number(session.stockSets) || 0));
     const bonusLabel = aTypeEnd ? aTypeBonusLabel(session.bonusKind) : "";
     const premiumOneGameRen = !!(
       aTypeEnd &&
@@ -11861,10 +12198,14 @@ body{
       normalizeATypeBonusKind(session.bonusKind) === "BIG"
     );
     const settingVoiceAfterBonus = aTypeEnd ? pickSettingBonusEndVoiceSrc(settings.setting) : "";
-    if(!A_TYPE_MODE && autoPlay) stopAutoPlay("ボーナス終了のためオート停止");
+    if(!A_TYPE_MODE && !COLADOKI_MODE && autoPlay) stopAutoPlay("ボーナス終了のためオート停止");
     if(aTypeEnd){
       showMessage(`${bonusLabel}終了`, `純増${resultPayout}pt / 払出${session.paid}pt / BET${session.cost}pt`);
       log(`${bonusLabel}終了：純増${resultPayout}pt / 払出${session.paid}pt / BET${session.cost}pt`);
+    }else if(coladokiEnd){
+      const label = endedBonusKind === "MID" ? "REG" : "BIG";
+      showMessage(`${label}終了`, `獲得${resultPayout}pt / 次回${COLADOKI.modeLabel(coladokiNextMode)} / 1G連ストック${coladokiStocks}`);
+      log(`${label}終了：獲得${resultPayout}pt / 次回${COLADOKI.modeLabel(coladokiNextMode)} / 1G連ストック${coladokiStocks}`);
     }else if(A_TYPE_MODE){
       showMessage("ボーナス終了", `獲得pt ${session.paid}pt`);
       log(`ボーナス終了：獲得${session.paid}pt / 損益${formatSigned(profit)}pt`);
@@ -11898,6 +12239,10 @@ body{
     session.battleRemain = 0;
     session.battleWin = false;
     session.battleSource = "";
+    session.nextMode = "normalA";
+    session.longFreeze = false;
+    session.stockRelease = false;
+    session.carriedStocks = 0;
     jagChanceHold = false;
     resetBonusEndSpecialEffects(true);
     setSpeedFrameOffHold(false);
@@ -11914,6 +12259,10 @@ body{
       showMessage("PBB 1G連待機", "次BETでBAR揃い / 2回目PBB");
       log("PBB 1G連予約：次BETでBAR揃い");
     }
+    if(coladokiEnd){
+      session.phase = "idle";
+      enterColadokiMode(coladokiNextMode, {stockedBonuses:coladokiStocks});
+    }
     normalState.pendingPremiumVoiceSrc = "";
     normalState.pendingSettingVoiceSrc = settingVoiceAfterBonus;
     if(settingVoiceAfterBonus) log("設定示唆ボイス予約：次GレバーON");
@@ -11925,6 +12274,13 @@ body{
         ? "PBB 1G連待機 / 次BETでBAR揃い"
         : `${bonusLabel}終了 / 純増${resultPayout}pt`;
       showOverlay(premiumOneGameRen ? "PBB 1G連" : "ボーナス終了");
+    }else if(coladokiEnd){
+      hideSessionResultScreen();
+      const nextText = normalState.bonusPending
+        ? "1G連待機"
+        : `${COLADOKI.modeLabel(normalState.mode)} / 天井まで${ceilingRemain()}G`;
+      if($("resultText")) $("resultText").textContent = `${endedBonusKind === "MID" ? "REG" : "BIG"}終了 / 獲得${resultPayout}pt / ${nextText}`;
+      showOverlay(normalState.bonusPending ? "1G連" : "ボーナス終了");
     }else if(A_TYPE_MODE){
       hideSessionResultScreen();
       if($("resultText")) $("resultText").textContent = `ボーナス終了 / 獲得${resultPayout}pt`;
@@ -12045,6 +12401,22 @@ body{
   function resolveOutcome(result){
     if(isATypeBonusActive()){
       return resolveATypeBonusOutcome(result);
+    }
+    if(COLADOKI_MODE && session.active){
+      const stockRate = COLADOKI.stockRate(result);
+      return {
+        reward:rewardFor(result),
+        add:0,
+        sets:Math.random() < stockRate ? 1 : 0,
+        bigZone:0,
+        bigZoneType:"",
+        zoneGame:false,
+        zoneType:"",
+        zoneSets:0,
+        zoneStGames:0,
+        zoneGameAdd:0,
+        zoneSevenHit:false
+      };
     }
     const inGoraiZone = session.active && session.bigZone > 0;
     const zoneType = inGoraiZone ? currentGoraiZoneType() : "";
@@ -12383,7 +12755,7 @@ body{
 
   function applyNormalResult(result, resolved, lineRow=1){
     const info = RESULT[result] || RESULT.MISS;
-    const modeAtStart = resolved.highAtStart ? "高確" : "通常";
+    const modeAtStart = COLADOKI_MODE ? COLADOKI.modeLabel(normalState.mode) : (resolved.highAtStart ? "高確" : "通常");
     const lineText = result !== "MISS" ? `${lineName(lineRow)}ライン` : "";
     const normalReward = Number(resolved.reward) || 0;
     const normalRewardText = normalReward > 0 ? ` / +${normalReward}pt` : "";
@@ -12405,14 +12777,14 @@ body{
     normalState.sinceBonus = A_TYPE_MODE
       ? normalizeBonusAfterGames(resolved.ceilingAfter)
       : clamp(Number(resolved.ceilingAfter) || 0, 0, currentNormalCeilingGames());
-    if(normalState.highRemain > 0){
+    if(!COLADOKI_MODE && normalState.highRemain > 0){
       normalState.highRemain = Math.max(0, (Number(normalState.highRemain) || 0) - 1);
     }
 
-    if(resolved.highAdd > 0){
+    if(!COLADOKI_MODE && resolved.highAdd > 0){
       normalState.highRemain = Math.max(Number(normalState.highRemain) || 0, resolved.highAdd);
       normalState.mode = "high";
-    }else{
+    }else if(!COLADOKI_MODE){
       normalState.mode = isHighMode() ? "high" : "normal";
     }
 
@@ -12423,6 +12795,10 @@ body{
       normalState.bonusSource = resolved.bonusSource || normalState.bonusSource || "BONUS確定";
       normalState.premiumBonus = !!(resolved.premiumBonus || normalState.premiumBonus);
       normalState.oneGameRenBonus = !!(resolved.oneGameRenBonus || normalState.oneGameRenBonus);
+      normalState.nextMode = COLADOKI.validMode(resolved.nextMode || normalState.nextMode || normalState.mode);
+      normalState.transitionTrigger = String(resolved.transitionTrigger || normalState.transitionTrigger || "other");
+      normalState.longFreeze = !!(resolved.longFreeze || normalState.longFreeze);
+      normalState.stockReleasePending = !!(resolved.stockRelease || normalState.stockReleasePending);
       normalState.bonusWaitGames = Math.max(1, Number(normalState.bonusWaitGames) || 1);
       $("stLamp").classList.add("on");
       showMessage("目押し失敗", `${pendingBonusLabel()}を狙ってください / BONUS確定は持ち越し`);
@@ -12494,10 +12870,11 @@ body{
       hideBonusConfirmScreen();
       normalState.sinceBonus = 0;
       $("stLamp").classList.add("on");
-      showMessage("7揃い", `${resolved.bonusSource} / BB確定${lineText ? " / " + lineText : ""}`);
-      log(`7揃い：${resolved.bonusSource} / BB確定`);
+      const freezeText = COLADOKI_MODE && resolved.longFreeze ? " / ロングフリーズ / 超コラドキ確定" : "";
+      showMessage("7揃い", `${resolved.bonusSource} / BIG 70G AT確定${freezeText}${lineText ? " / " + lineText : ""}`);
+      log(`7揃い：${resolved.bonusSource} / BIG 70G AT確定${freezeText}`);
       flashReelLight("rainbow", 2200);
-      showOverlay("BB BONUS");
+      showOverlay(COLADOKI_MODE ? "BIG BONUS" : "BB BONUS");
       confetti(90);
       playSevenConfirmSound();
       return;
@@ -12508,10 +12885,10 @@ body{
       jagLastBonusPayout = normalReward;
       resetNormalModeAfterBonus();
       $("stLamp").classList.add("on");
-      showMessage("REG", `${resolved.bonusSource} / +${normalReward}pt / 天井リセット / 天井まで${ceilingRemain()}G${lineText ? " / " + lineText : ""}`);
-      log(`REG揃い：${resolved.bonusSource} / +${normalReward}pt / 天井リセット`);
+      showMessage("REG", `${resolved.bonusSource} / REG 30G AT確定${lineText ? " / " + lineText : ""}`);
+      log(`REG揃い：${resolved.bonusSource} / REG 30G AT確定`);
       flashReelLight("rainbow", 1800);
-      showOverlay(`REG +${normalReward}pt`);
+      showOverlay(COLADOKI_MODE ? "REG BONUS" : `REG +${normalReward}pt`);
       confetti(35);
       playRegConfirmSound();
       return;
@@ -12549,11 +12926,17 @@ body{
       normalState.bonusSource = resolved.bonusSource;
       normalState.premiumBonus = (normalState.bonusKind === "BIG") && !!resolved.premiumBonus;
       normalState.oneGameRenBonus = false;
-      normalState.bonusWaitGames = 0;
+      normalState.nextMode = COLADOKI.validMode(resolved.nextMode || normalState.mode);
+      normalState.transitionTrigger = String(resolved.transitionTrigger || "other");
+      normalState.longFreeze = !!resolved.longFreeze;
+      normalState.stockReleasePending = !!resolved.stockRelease;
+      normalState.bonusWaitGames = 1;
+      normalState.bonusHitGamesSince = nextBonusAfterGames(resolved.gamesSinceLastBonusAtStart);
       hideBonusConfirmScreen();
       $("stLamp").classList.add("on");
-      showMessage("BONUS確定", `${resolved.bonusSource} / ${modeAtStart} / ${lineText || "成立役なし"}${normalRewardText} / 次BETは確定画面ハズレ / 2G目で${pendingBonusLabel()}揃い`);
-      log(`BONUS確定：${resolved.bonusSource} / ${modeAtStart} / 1G確定画面ハズレ後に${pendingBonusLabel()}揃い待ち`);
+      const freezeText = resolved.longFreeze ? " / ロングフリーズ・超コラドキ確定" : "";
+      showMessage("BONUS確定", `${resolved.bonusSource} / ${modeAtStart}${freezeText} / ${lineText || "成立役なし"}${normalRewardText} / 次BETで${pendingBonusLabel()}揃い`);
+      log(`BONUS確定：${resolved.bonusSource} / ${modeAtStart}${freezeText} / 次BETで${pendingBonusLabel()}揃い`);
       flashReelLight("rainbow", 2200);
       showOverlay("BONUS確定");
       confetti(70);
@@ -12652,7 +13035,7 @@ body{
       }
     }
     let continuationBoostText = "";
-    if(result === "BAR3"){
+    if(result === "BAR3" && !COLADOKI_MODE){
       const boostedRate = Math.max(Number(session.continuationRate) || 0, BAR3_CONTINUATION_RATE);
       session.continuationRate = boostedRate;
       continuationBoostText = `継続${formatRate(boostedRate)}`;
@@ -12663,7 +13046,7 @@ body{
       session.hits++;
     }
 
-    if(!(A_TYPE_MODE && aTypeBonusSpin)){
+    if(!(A_TYPE_MODE && aTypeBonusSpin) && !COLADOKI_MODE){
       countRoleStat(result, true);
     }
 
@@ -12672,7 +13055,7 @@ body{
     if(isHit){
       $("stLamp").classList.add("on");
       const rewardText = reward > 0 ? `+${reward}pt` : "";
-      const stockText = stockAdd > 0 ? `SET+${stockAdd}` : "";
+      const stockText = stockAdd > 0 ? (COLADOKI_MODE ? `1G連+${stockAdd}` : `SET+${stockAdd}`) : "";
       const stGameText = stGameAddTextFor(result, stGameAdd);
       const zoneGameAddText = zoneGameAdd > 0 ? `デビルゾーン+${zoneGameAdd}G` : "";
       const zoneStartText = resolved.bigZone > 0 ? goraiZoneRemainText(resolved.bigZone, resolved.bigZoneType) : "";
@@ -12680,7 +13063,9 @@ body{
       const joinText = [rewardText, stockText, continuationBoostText, stGameText, zoneGameAddText, zoneStartText, zoneRollText].filter(Boolean).join(" / ");
       const lineText = result !== "MISS" ? `${lineName(lineRow)}ライン` : "";
       const phaseText = session.phase === "battle" ? battleRemainText() : `残り${session.remain}G`;
-      const battleText = aTypeBonusSpin
+      const battleText = COLADOKI_MODE
+        ? `${session.bonusKind === "MID" ? "REG" : "BIG"} ${COLADOKI.bonusGames(session.bonusKind)}G AT / 残り${session.remain}G / 1G連STOCK${(session.carriedStocks || 0) + (session.stockSets || 0)}`
+        : aTypeBonusSpin
         ? `${aTypeBonusLabel(session.bonusKind)} BONUS / 純増${aTypeBonusNet()}/${Number(session.bonusTarget) || aTypeBonusTarget()}pt / 残り${aTypeBonusRemainingNet()}pt`
         : `${session.setNo || 1}SET / ${phaseText} / STOCK${session.stockSets || 0} / 継続${formatRate(session.continuationRate)}`;
       const subText = [joinText, lineText, battleText].filter(Boolean).join(" / ");
@@ -12708,7 +13093,7 @@ body{
           confetti(45);
         }
       }else if(result === "BAR3"){
-        showOverlay(bonusOverlayText || "+5SET 継続80%");
+        showOverlay(bonusOverlayText || (COLADOKI_MODE ? "1G連" : "+5SET 継続80%"));
         confetti(80);
         playBarBgm();
         startBarRainbowHold();
@@ -12748,7 +13133,9 @@ body{
     $("stLamp").classList.remove("on");
     const zoneRollText = zoneWasActive ? goraiZoneRemainText(session.bigZone, session.bigZoneType || resolved.zoneType) : "";
     const phaseText = session.phase === "battle" ? battleRemainText() : `残り${session.remain}G`;
-    const battleText = aTypeBonusSpin
+    const battleText = COLADOKI_MODE
+      ? `${session.bonusKind === "MID" ? "REG" : "BIG"} ${COLADOKI.bonusGames(session.bonusKind)}G AT / 残り${session.remain}G / 1G連STOCK${(session.carriedStocks || 0) + (session.stockSets || 0)}`
+      : aTypeBonusSpin
       ? `${aTypeBonusLabel(session.bonusKind)} BONUS / 純増${aTypeBonusNet()}/${Number(session.bonusTarget) || aTypeBonusTarget()}pt / 残り${aTypeBonusRemainingNet()}pt`
       : `${session.setNo || 1}SET / ${phaseText} / STOCK${session.stockSets || 0} / 継続${formatRate(session.continuationRate)}`;
     showMessage("ハズレ", [zoneRollText, battleText].filter(Boolean).join(" / "));
@@ -12786,7 +13173,9 @@ body{
       reelArea.classList.toggle("premiumBigOverlayOn", !!(isATypeBonusActive() && (session.premiumBonus || session.oneGameRenBonus)));
     }
     $("modeTag").className = "modeTag " + (active ? "active" : "");
-    $("modeTag").textContent = A_TYPE_MODE ? (active ? `${aTypeBonusLabel(session.bonusKind)} BONUS` : "A-TYPE") : active ? (isContinuationBattleActive() ? "継続BATTLE" : "BATTLE") : normalModeLabel();
+    $("modeTag").textContent = COLADOKI_MODE
+      ? (active ? `${session.bonusKind === "MID" ? "REG" : "BIG"} BONUS` : normalModeLabel())
+      : A_TYPE_MODE ? (active ? `${aTypeBonusLabel(session.bonusKind)} BONUS` : "A-TYPE") : active ? (isContinuationBattleActive() ? "継続BATTLE" : "BATTLE") : normalModeLabel();
 
     if($("settingView")) $("settingView").textContent = settings.setting;
     if($("settingViewLegacy")) $("settingViewLegacy").textContent = settings.setting;
@@ -12794,7 +13183,13 @@ body{
     if($("targetRtpViewLegacy")) $("targetRtpViewLegacy").textContent = targetRtpText();
     if($("adminSettingView")) $("adminSettingView").textContent = settings.setting;
     if($("adminTargetRtpView")) $("adminTargetRtpView").textContent = targetRtpText();
-    const stInfoText = A_TYPE_MODE
+    const stInfoText = COLADOKI_MODE
+      ? active
+        ? `${session.bonusKind === "MID" ? "REG" : "BIG"} ${COLADOKI.bonusGames(session.bonusKind)}G AT / 残り${session.remain}G / 1G連STOCK${(session.carriedStocks || 0) + (session.stockSets || 0)}`
+        : normalState.bonusPending
+          ? `BONUS確定 / ${pendingBonusLabel()}待ち / 1G ${SPIN_COST}pt`
+          : `${normalModeLabel()} / 規定${currentNormalCeilingGames()}G / 天井まで${ceilingRemain()}G`
+      : A_TYPE_MODE
       ? active
         ? `${aTypeBonusLabel(session.bonusKind)} BONUS / 純増${aTypeBonusNet()}/${Number(session.bonusTarget) || aTypeBonusTarget()}pt / 小役${A_TYPE_BONUS_PAY_PER_GAME}pt`
         : `Aタイプ / BB ${oddsText(1 / (A_TYPE_BONUS_TABLE[settings.setting] || A_TYPE_BONUS_TABLE[1]).big)} / RB ${oddsText(1 / (A_TYPE_BONUS_TABLE[settings.setting] || A_TYPE_BONUS_TABLE[1]).reg)} / 1G ${SPIN_COST}pt`
@@ -12808,7 +13203,9 @@ body{
     if($("stInfoView")) $("stInfoView").textContent = stInfoText;
     if($("stInfoViewLegacy")) $("stInfoViewLegacy").textContent = stInfoText;
     if($("adminStInfoView")) $("adminStInfoView").textContent = stInfoText;
-    const payoutScaleText = A_TYPE_MODE
+    const payoutScaleText = COLADOKI_MODE
+      ? `通常→小役直撃or規定G数 / BIG 70G AT / REG 30G AT / ボーナス中は1G連ストック抽選 / 天国以上は32G以内`
+      : A_TYPE_MODE
       ? `Aタイプ:BB純増${A_TYPE_PAYOUTS.BIG}pt/RB純増${A_TYPE_PAYOUTS.MID}pt/ブドウ${A_TYPE_PAYOUTS.GRAPE}pt/ベル${A_TYPE_PAYOUTS.BELL}pt/ゾウリプレイ${A_TYPE_PAYOUTS.REPLAY}pt/宗介特殊役${A_TYPE_PAYOUTS.SMALL}pt/チェリー中段1pt・上下段2pt`
       : `通常:ベル${NORMAL_ROLE_PAYOUTS.BELL}pt/スイカ${NORMAL_ROLE_PAYOUTS.SUICA}pt/チェリー${NORMAL_ROLE_PAYOUTS.CHERRY_ANY}pt/リプレイ${NORMAL_ROLE_PAYOUTS.REPLAY}pt/REG${NORMAL_ROLE_PAYOUTS.MID}pt / 通常小役${Math.round(NORMAL_ROLE_RATE * 100)}% / 高確小役${Math.round(HIGH_ROLE_RATE * 100)}% / ATベル${ROLE_PAYOUTS.BELL}pt/斜めベル${ROLE_PAYOUTS.BELL3}pt / 平均継続${formatRate(averageContinuationRate(settings.setting))}`;
     if($("payoutScaleView")) $("payoutScaleView").textContent = payoutScaleText;
@@ -12895,7 +13292,7 @@ body{
       if(A_TYPE_MODE){
         stEmblem.innerHTML = "A-TYPE<br>BONUS";
       }else if(active){
-        stEmblem.innerHTML = "DEVIL<br>RUSH";
+        stEmblem.innerHTML = COLADOKI_MODE ? `${session.bonusKind === "MID" ? "REG" : "BIG"}<br>${COLADOKI.bonusGames(session.bonusKind)}G AT` : "DEVIL<br>RUSH";
       }else if(normalState.bonusPending){
         stEmblem.innerHTML = "BONUS<br>確定";
       }else{
@@ -12950,12 +13347,12 @@ body{
     }else if(active){
       const zoneRemain = Math.max(0, session.bigZone || 0);
       setMirrorCell("wdMirrorSt", "AT残", `${Math.max(0, session.remain || 0)}G`);
-      setMirrorCell("wdMirrorBig", "DZ残", currentGoraiZoneType() === "devil" && isGoraiZoneActive() ? `${zoneRemain}G` : "0G");
-      setMirrorCell("wdMirrorReg", "超DZ残", isSuperGoraiZoneActive() ? `${zoneRemain}G` : "0G");
+      setMirrorCell("wdMirrorBig", COLADOKI_MODE ? "種別" : "DZ残", COLADOKI_MODE ? (session.bonusKind === "MID" ? "REG" : "BIG") : currentGoraiZoneType() === "devil" && isGoraiZoneActive() ? `${zoneRemain}G` : "0G");
+      setMirrorCell("wdMirrorReg", COLADOKI_MODE ? "1G連" : "超DZ残", COLADOKI_MODE ? String((session.carriedStocks || 0) + (session.stockSets || 0)) : isSuperGoraiZoneActive() ? `${zoneRemain}G` : "0G");
     }else{
       setMirrorCell("wdMirrorSt", "AT", atCountText);
-      setMirrorCell("wdMirrorBig", "BB", stats.bigCount || 0);
-      setMirrorCell("wdMirrorReg", "RB", stats.midCount || 0);
+      setMirrorCell("wdMirrorBig", COLADOKI_MODE ? "BIG" : "BB", stats.bigCount || 0);
+      setMirrorCell("wdMirrorReg", COLADOKI_MODE ? "REG" : "RB", stats.midCount || 0);
     }
     const mirrorStCell = $("wdMirrorSt") ? $("wdMirrorSt").parentElement : null;
     if(mirrorStCell) mirrorStCell.classList.toggle("zoneHold", active && isGoraiZoneActive());
@@ -12977,7 +13374,7 @@ body{
         }
         remainBig.classList.remove("idle");
       }else if(active){
-        if(label) label.textContent = isGoraiZoneActive() ? goraiZoneLabel() : isContinuationBattleActive() ? "BATTLE" : "残りAT";
+        if(label) label.textContent = COLADOKI_MODE ? "残りAT" : isGoraiZoneActive() ? goraiZoneLabel() : isContinuationBattleActive() ? "BATTLE" : "残りAT";
         if(isGoraiZoneActive()){
           remainBig.textContent = String(Math.max(0, session.bigZone)).padStart(2, "0");
         }else if(isContinuationBattleActive()){
@@ -12986,6 +13383,10 @@ body{
           remainBig.textContent = String(Math.max(0, session.remain)).padStart(2, "0");
         }
         remainBig.classList.remove("idle");
+      }else if(COLADOKI_MODE){
+        if(label) label.textContent = normalState.bonusPending ? "ボーナス確定" : "天井まで";
+        remainBig.textContent = normalState.bonusPending ? pendingBonusLabel() : String(ceilingRemain()).padStart(2, "0");
+        remainBig.classList.toggle("idle", !normalState.bonusPending);
       }else if(session.resultPayout !== null && session.resultPayout !== undefined){
         if(label) label.textContent = "獲得枚数";
         remainBig.textContent = String(Math.max(0, session.resultPayout));
@@ -13069,6 +13470,11 @@ body{
     const table = $("regDetailTable");
     if(!table) return;
 
+    if(COLADOKI_MODE){
+      table.innerHTML = `<tr><td>通常A</td><td>通常B</td><td>チャンス</td></tr><tr><td>57.03%</td><td>9.77%</td><td>33.20%</td></tr>`;
+      return;
+    }
+
     if(!A_TYPE_MODE){
       table.innerHTML = "";
       return;
@@ -13092,6 +13498,23 @@ body{
   function renderSettingTable(){
     const table = $("settingTable");
     if(!table) return;
+
+    if(COLADOKI_MODE){
+      let html = `<tr><td>設定</td><td>BIG</td><td>REG</td><td>BIG AT</td><td>REG AT</td></tr>`;
+      for(const i of [1,2,3,4,5,6]){
+        const bonus = A_TYPE_BONUS_TABLE[i];
+        html += `<tr>
+          <td>${i}</td>
+          <td>1/${bonus.big.toFixed(1)}</td>
+          <td>1/${bonus.reg.toFixed(1)}</td>
+          <td>70G</td>
+          <td>30G</td>
+        </tr>`;
+      }
+      table.innerHTML = html;
+      renderRegDetailTable();
+      return;
+    }
 
     if(A_TYPE_MODE){
       let html = `<tr><td>設定</td><td>BB</td><td>RB</td><td>合算</td><td>ぶどう</td><td>単独チェリー</td><td>リプレイ</td><td>ベル</td><td>宗介</td><td>機械割</td></tr>`;
@@ -13192,8 +13615,9 @@ body{
     stats = {totalSessions:0,totalFee:0,totalPaid:0,totalSpins:0,normalSpins:0,highSpins:0,roleStatVersion:ROLE_STAT_COUNTER_VERSION,bigCount:0,midCount:0,premiumBigCount:0,grapeCount:0,smallCount:0,bellCount:0,diagonalBellCount:0,replayCount:0,suikaCount:0,cherryCount:0,slumpHigh:0,slumpLow:0,slumpHistory:[{spin:0, profit:0}]};
     slumpView = {xZoom:1,yZoom:1,seekStart:0,followEnd:true};
     bonusConfirmBgmHold = false;
-    normalState = {mode:"normal",highRemain:0,sinceBonus:0,bonusPending:false,bonusKind:"",bonusSource:"",premiumBonus:false,oneGameRenBonus:false,bonusWaitGames:0,bonusHitGamesSince:0,reachMePending:false,reachMeBonusKind:"",reachMeBonusSource:"",reachMeHitGamesSince:0,pendingSettingVoiceSrc:"",pendingPremiumVoiceSrc:"",morningCeilingActive:false};
-    session = {active:false,remain:0,fee:0,cost:0,paid:0,hits:0,added:0,addedGames:0,setNo:0,stockSets:0,barBgmSets:0,nextSetBarBgm:false,currentSetBarBgm:false,continuationRate:0,bigZone:0,bigZoneType:"",phase:"idle",bonusKind:"",bonusTarget:0,bonusStartGames:0,premiumBonus:false,oneGameRenBonus:false,premiumChainEligible:false,bonusBgmSrc:"",battleRemain:0,battleWin:false,battleSource:"",resultPayout:null,endSignal:null};
+    normalState = {mode:"normalA",ceilingTarget:999,nextMode:"normalA",transitionTrigger:"other",longFreeze:false,stockReleasePending:false,stockedBonuses:0,highRemain:0,sinceBonus:0,bonusPending:false,bonusKind:"",bonusSource:"",premiumBonus:false,oneGameRenBonus:false,bonusWaitGames:0,bonusHitGamesSince:0,reachMePending:false,reachMeBonusKind:"",reachMeBonusSource:"",reachMeHitGamesSince:0,pendingSettingVoiceSrc:"",pendingPremiumVoiceSrc:"",morningCeilingActive:false};
+    initializeColadokiMode(true);
+    session = {active:false,remain:0,fee:0,cost:0,paid:0,hits:0,added:0,addedGames:0,setNo:0,stockSets:0,barBgmSets:0,nextSetBarBgm:false,currentSetBarBgm:false,continuationRate:0,bigZone:0,bigZoneType:"",phase:"idle",bonusKind:"",nextMode:"normalA",longFreeze:false,stockRelease:false,carriedStocks:0,bonusTarget:0,bonusStartGames:0,premiumBonus:false,oneGameRenBonus:false,premiumChainEligible:false,bonusBgmSrc:"",battleRemain:0,battleWin:false,battleSource:"",resultPayout:null,endSignal:null};
     jagLastGamePayout = 0;
     jagLastBonusPayout = 0;
     jagChanceHold = false;
@@ -13207,7 +13631,7 @@ body{
     if($("premiumForceStatus")) $("premiumForceStatus").value = "OFF";
     $("stLamp").classList.remove("on");
     setMorningBarReels();
-    showMessage("READY",`1回転${SPIN_COST}pt / BB・RB完全告知 / 設定${settings.setting}`);
+    showMessage("READY",`1回転${SPIN_COST}pt / 小役直撃・規定ゲーム数 / 設定${settings.setting}`);
     $("resultText").textContent = "-";
     updateDisplay();
     log("統計を初期化しました");
@@ -13247,8 +13671,9 @@ body{
     stats = {totalSessions:0,totalFee:0,totalPaid:0,totalSpins:0,normalSpins:0,highSpins:0,roleStatVersion:ROLE_STAT_COUNTER_VERSION,bigCount:0,midCount:0,premiumBigCount:0,grapeCount:0,smallCount:0,bellCount:0,diagonalBellCount:0,replayCount:0,suikaCount:0,cherryCount:0,slumpHigh:0,slumpLow:0,slumpHistory:[{spin:0, profit:0}]};
     slumpView = {xZoom:1,yZoom:1,seekStart:0,followEnd:true};
     bonusConfirmBgmHold = false;
-    normalState = {mode:"normal",highRemain:0,sinceBonus:0,bonusPending:false,bonusKind:"",bonusSource:"",premiumBonus:false,oneGameRenBonus:false,bonusWaitGames:0,bonusHitGamesSince:0,reachMePending:false,reachMeBonusKind:"",reachMeBonusSource:"",reachMeHitGamesSince:0,pendingSettingVoiceSrc:"",pendingPremiumVoiceSrc:"",morningCeilingActive:!A_TYPE_MODE};
-    session = {active:false,remain:0,fee:0,cost:0,paid:0,hits:0,added:0,addedGames:0,setNo:0,stockSets:0,barBgmSets:0,nextSetBarBgm:false,currentSetBarBgm:false,continuationRate:0,bigZone:0,bigZoneType:"",phase:"idle",bonusKind:"",bonusTarget:0,bonusStartGames:0,premiumBonus:false,oneGameRenBonus:false,premiumChainEligible:false,bonusBgmSrc:"",battleRemain:0,battleWin:false,battleSource:"",resultPayout:null,endSignal:null};
+    normalState = {mode:"normalA",ceilingTarget:999,nextMode:"normalA",transitionTrigger:"other",longFreeze:false,stockReleasePending:false,stockedBonuses:0,highRemain:0,sinceBonus:0,bonusPending:false,bonusKind:"",bonusSource:"",premiumBonus:false,oneGameRenBonus:false,bonusWaitGames:0,bonusHitGamesSince:0,reachMePending:false,reachMeBonusKind:"",reachMeBonusSource:"",reachMeHitGamesSince:0,pendingSettingVoiceSrc:"",pendingPremiumVoiceSrc:"",morningCeilingActive:false};
+    initializeColadokiMode(true);
+    session = {active:false,remain:0,fee:0,cost:0,paid:0,hits:0,added:0,addedGames:0,setNo:0,stockSets:0,barBgmSets:0,nextSetBarBgm:false,currentSetBarBgm:false,continuationRate:0,bigZone:0,bigZoneType:"",phase:"idle",bonusKind:"",nextMode:"normalA",longFreeze:false,stockRelease:false,carriedStocks:0,bonusTarget:0,bonusStartGames:0,premiumBonus:false,oneGameRenBonus:false,premiumChainEligible:false,bonusBgmSrc:"",battleRemain:0,battleWin:false,battleSource:"",resultPayout:null,endSignal:null};
     jagLastGamePayout = 0;
     jagLastBonusPayout = 0;
     jagChanceHold = false;
@@ -13262,16 +13687,18 @@ body{
     if($("premiumForceStatus")) $("premiumForceStatus").value = "OFF";
     $("stLamp").classList.remove("on");
     setMorningBarReels();
-    showMessage(reason, A_TYPE_MODE ? `設定${settings.setting}据え置き / Aタイプ通常へリセット` : `設定${settings.setting}据え置き / 初回天井${MORNING_CEILING_GAMES}G / COMPLETE解除`);
-    $("resultText").textContent = A_TYPE_MODE ? "Aタイプ通常" : `朝一モード / 天井まで${ceilingRemain()}G`;
+    showMessage(reason, COLADOKI_MODE ? `設定${settings.setting} / ${COLADOKI.modeLabel(normalState.mode)} / 天井${currentNormalCeilingGames()}G` : A_TYPE_MODE ? `設定${settings.setting}据え置き / Aタイプ通常へリセット` : `設定${settings.setting}据え置き / 初回天井${MORNING_CEILING_GAMES}G / COMPLETE解除`);
+    $("resultText").textContent = COLADOKI_MODE ? `${COLADOKI.modeLabel(normalState.mode)} / 天井まで${ceilingRemain()}G` : A_TYPE_MODE ? "Aタイプ通常" : `朝一モード / 天井まで${ceilingRemain()}G`;
     persistState();
     updateDisplay();
-    log(A_TYPE_MODE ? `[RESET] ${reason} / 設定${settings.setting} / Aタイプ通常` : `[RESET] ${reason} / 設定${settings.setting} / 初回天井${MORNING_CEILING_GAMES}G / COMPLETE解除`);
+    log(COLADOKI_MODE ? `[RESET] ${reason} / 設定${settings.setting} / ${COLADOKI.modeLabel(normalState.mode)} / 天井${currentNormalCeilingGames()}G` : A_TYPE_MODE ? `[RESET] ${reason} / 設定${settings.setting} / Aタイプ通常` : `[RESET] ${reason} / 設定${settings.setting} / 初回天井${MORNING_CEILING_GAMES}G / COMPLETE解除`);
     return true;
   }
 
   function morningResetGame(confirmFirst=true, reason="朝一リセット"){
-    const message = A_TYPE_MODE
+    const message = COLADOKI_MODE
+      ? "設定はそのままで統計と遊技状態をリセットし、設定変更時のモード抽選を行いますか？"
+      : A_TYPE_MODE
       ? "設定はそのままでCOMPLETEを解除し、Aタイプ通常状態に戻しますか？"
       : `設定はそのままでCOMPLETEを解除し、朝一モード（初回天井${MORNING_CEILING_GAMES}G）にしますか？`;
     if(confirmFirst && !confirm(message)) return false;
@@ -13285,7 +13712,7 @@ body{
     const row = document.createElement("div");
     row.className = "row";
     row.style.marginBottom = "8px";
-    row.innerHTML = `<button class="subBtn" id="morningResetBtn" type="button">${A_TYPE_MODE ? "Aタイプ通常リセット" : "朝一リセット"}</button>`;
+    row.innerHTML = `<button class="subBtn" id="morningResetBtn" type="button">${COLADOKI_MODE ? "設定変更リセット" : A_TYPE_MODE ? "Aタイプ通常リセット" : "朝一リセット"}</button>`;
     const simBtn = document.createElement("button");
     simBtn.className = "subBtn";
     simBtn.id = "tenKSimBtn";
@@ -13295,7 +13722,9 @@ body{
     const help = document.createElement("div");
     help.className = "help";
     help.style.margin = "-2px 0 10px";
-    help.textContent = A_TYPE_MODE
+    help.textContent = COLADOKI_MODE
+      ? "設定変更リセット：通常A 57.03%／通常B 9.77%／チャンス 33.20%で初期モードを抽選します。"
+      : A_TYPE_MODE
       ? "Aタイプリセット：設定はそのまま、COMPLETE解除、通常状態へ戻します。"
       : `朝一リセット：設定はそのまま、COMPLETE解除、初回BB/RBまで天井${MORNING_CEILING_GAMES}G。`;
     anchor.insertAdjacentElement("afterend", help);
@@ -14049,6 +14478,11 @@ body{
       syncDevilZoneConfirmScreen();
     }
     if(session.active && !aTypeBonusActiveAtSpinStart && session.remain <= 0 && session.phase !== "battle" && !zoneActiveAtSpinStart){
+      if(COLADOKI_MODE){
+        finishSession();
+        scheduleNextAuto();
+        return;
+      }
       startContinuationBattlePart();
       scheduleNextAuto();
       return;
@@ -14143,6 +14577,11 @@ body{
     const bigPremiumEffect = !bar3LeverEffect && decideBigPremiumEffect(result, resolved, premiumForced);
     if(A_TYPE_MODE && normalActiveAtSpinStart && resolved && (resolved.bonusHit || resolved.bonusReady) && resolved.bonusKind === "BIG"){
       resolved.premiumBonus = !!(resolved.premiumBonus || bigPremiumEffect);
+    }
+    if(COLADOKI_MODE && normalActiveAtSpinStart && bigPremiumEffect && resolved && (resolved.bonusHit || resolved.bonusReady) && resolved.bonusKind !== "MID"){
+      resolved.longFreeze = true;
+      resolved.premiumBonus = true;
+      resolved.nextMode = "superDokidoki";
     }
     const premiumConfirmMovieEffect = !!(
       A_TYPE_MODE &&
@@ -14450,7 +14889,7 @@ body{
     const isNormalSpinResult = currentSpin && currentSpin.normalActiveAtStart;
     const resultParts = [];
     if(reward > 0) resultParts.push("+" + reward + "pt");
-    if(stockAdd > 0) resultParts.push("SET+" + stockAdd);
+    if(stockAdd > 0) resultParts.push((COLADOKI_MODE ? "1G連+" : "SET+") + stockAdd);
     if(stGameAdd > 0) resultParts.push("AT+" + stGameAdd + "G");
     if(zoneGameAdd > 0) resultParts.push(goraiZoneName(resolved.zoneType) + "+" + zoneGameAdd + "G");
     if(resolved.bigZone > 0 && zoneText) resultParts.push(zoneText);
@@ -14509,6 +14948,17 @@ body{
           barBgmSets:stockSetsForResult("BAR3"),
           initialPaid:Number(resolved.reward) || 0
         });
+      }else if(COLADOKI_MODE && (resolved.bonusReady || resolved.regReady)){
+        stopSpeedToBonus("ボーナス確定のためSPEED停止");
+        setSpeedFrameOffHold(true);
+        queueBonusSessionStart(180, {
+          bonusKind:resolved.regReady ? "MID" : "BIG",
+          bonusSource:resolved.bonusSource || "",
+          nextMode:resolved.nextMode || normalState.mode,
+          longFreeze:!!resolved.longFreeze,
+          stockRelease:!!resolved.stockRelease,
+          gamesSinceLastBonus:resolved.gamesSinceLastBonusAtStart
+        });
       }else if(!A_TYPE_MODE && resolved.bonusReady){
         stopSpeedToBonus("ボーナス確定のためSPEED停止");
         setSpeedFrameOffHold(true);
@@ -14531,7 +14981,8 @@ body{
     }
     const finishedBattleFinalGame = currentSpin && currentSpin.battleActiveAtStart && session.battleRemain <= 0;
     const shouldFinishATypeBonus = currentSpin && currentSpin.aTypeBonusActiveAtStart && isATypeBonusComplete();
-    const shouldEnterBattle = session.active && !shouldFinishATypeBonus && session.phase !== "battle" && session.remain <= 0 && !isGoraiZoneActive();
+    const shouldFinishColadokiBonus = !!(COLADOKI_MODE && session.active && session.phase === "coladoki_bonus" && session.remain <= 0);
+    const shouldEnterBattle = !COLADOKI_MODE && session.active && !shouldFinishATypeBonus && session.phase !== "battle" && session.remain <= 0 && !isGoraiZoneActive();
     const pendingBattleOutcome = currentSpin ? currentSpin.pendingBattleOutcome : null;
     if(!shouldEnterBattle){
       hideBattleIntro();
@@ -14543,7 +14994,10 @@ body{
     ensureBarBgmContinuing();
     setTimeout(()=>clearReelVideos(), 900);
 
-    if(shouldFinishATypeBonus){
+    if(shouldFinishColadokiBonus){
+      finishSession();
+      scheduleNextAuto();
+    }else if(shouldFinishATypeBonus){
       playBonusEndBgmThen(()=>{
         finishSession();
         scheduleNextAuto();
@@ -14578,6 +15032,11 @@ body{
     if(A_TYPE_MODE && normalDirect && resolved && (resolved.bonusHit || resolved.bonusReady) && resolved.bonusKind === "BIG"){
       resolved.premiumBonus = !!(resolved.premiumBonus || bigPremiumEffect);
     }
+    if(COLADOKI_MODE && normalDirect && bigPremiumEffect && resolved && (resolved.bonusHit || resolved.bonusReady) && resolved.bonusKind !== "MID"){
+      resolved.longFreeze = true;
+      resolved.premiumBonus = true;
+      resolved.nextMode = "superDokidoki";
+    }
     if(premiumForced){
       forcePremiumEffect = false;
       if($("premiumForceStatus")) $("premiumForceStatus").value = "OFF";
@@ -14601,6 +15060,15 @@ body{
           oneGameRenBonus:!!resolved.oneGameRenBonus,
           gamesSinceLastBonus:resolved.gamesSinceLastBonusAtStart
         }), 700);
+      }else if(COLADOKI_MODE && (resolved.bonusReady || resolved.regReady)){
+        setTimeout(()=>startSession({
+          bonusKind:resolved.regReady ? "MID" : "BIG",
+          bonusSource:resolved.bonusSource || "",
+          nextMode:resolved.nextMode || normalState.mode,
+          longFreeze:!!resolved.longFreeze,
+          stockRelease:!!resolved.stockRelease,
+          gamesSinceLastBonus:resolved.gamesSinceLastBonusAtStart
+        }), 700);
       }else if(!A_TYPE_MODE && resolved.bonusReady){
         setTimeout(()=>startSession(), 700);
       }
@@ -14612,6 +15080,18 @@ body{
   }
 
   function forceHighModeNow(){
+    if(COLADOKI_MODE){
+      if(isSpinning || session.active || normalState.bonusPending){
+        showMessage("天国強制", "通常待機中に使用してください");
+        return;
+      }
+      enterColadokiMode("heaven");
+      normalState.ceilingTarget = 31;
+      showMessage("天国強制", "天国モード / 31G以内のボーナス確定");
+      log("モード強制：天国モード / 規定31G");
+      updateDisplay();
+      return;
+    }
     if(A_TYPE_MODE){
       showMessage("Aタイプ固定", "高確は使用しません");
       log("高確強制：Aタイプでは未使用");
@@ -14688,7 +15168,7 @@ body{
     autoPlay = true;
     startAutoWatchdog();
     updateAutoUi();
-    log(A_TYPE_MODE ? "オート開始" : "オートAT開始");
+    log(COLADOKI_MODE ? "オート開始" : A_TYPE_MODE ? "オート開始" : "オートAT開始");
     runAutoStep();
   }
 
@@ -15064,6 +15544,10 @@ body{
       return false;
     }
     if(session.active && !aTypeBonusActiveAtSpinStart && session.remain <= 0 && session.phase !== "battle" && !zoneActiveAtSpinStart){
+      if(COLADOKI_MODE){
+        finishSession();
+        return false;
+      }
       startContinuationBattlePart();
       return false;
     }
@@ -15105,6 +15589,11 @@ body{
     if(A_TYPE_MODE && normalActiveAtSpinStart && resolved && (resolved.bonusHit || resolved.bonusReady) && resolved.bonusKind === "BIG"){
       resolved.premiumBonus = !!(resolved.premiumBonus || bigPremiumEffect);
     }
+    if(COLADOKI_MODE && normalActiveAtSpinStart && bigPremiumEffect && resolved && (resolved.bonusHit || resolved.bonusReady) && resolved.bonusKind !== "MID"){
+      resolved.longFreeze = true;
+      resolved.premiumBonus = true;
+      resolved.nextMode = "superDokidoki";
+    }
     if(A_TYPE_MODE && normalActiveAtSpinStart && shouldScheduleBonusAnnouncement(normalActiveAtSpinStart, resolved)){
       jagChanceHold = true;
       const lamp = $("stLamp");
@@ -15129,6 +15618,15 @@ body{
           barBgmSets:stockSetsForResult("BAR3"),
           initialPaid:Number(resolved.reward) || 0
         });
+      }else if(COLADOKI_MODE && (resolved.bonusReady || resolved.regReady)){
+        startBonusSessionNow({
+          bonusKind:resolved.regReady ? "MID" : "BIG",
+          bonusSource:resolved.bonusSource || "",
+          nextMode:resolved.nextMode || normalState.mode,
+          longFreeze:!!resolved.longFreeze,
+          stockRelease:!!resolved.stockRelease,
+          gamesSinceLastBonus:resolved.gamesSinceLastBonusAtStart
+        });
       }else if(!A_TYPE_MODE && resolved.bonusReady){
         startBonusSessionNow();
       }
@@ -15138,10 +15636,13 @@ body{
     applyResult(result, resolved, lineRow);
     const shouldResolveBattle = battleActiveAtSpinStart && session.active && session.battleRemain <= 0;
     const shouldFinishATypeBonus = aTypeBonusActiveAtSpinStart && isATypeBonusComplete();
-    const shouldEnterBattle = session.active && !shouldFinishATypeBonus && session.phase !== "battle" && session.remain <= 0 && !isGoraiZoneActive();
+    const shouldFinishColadokiBonus = !!(COLADOKI_MODE && session.active && session.phase === "coladoki_bonus" && session.remain <= 0);
+    const shouldEnterBattle = !COLADOKI_MODE && session.active && !shouldFinishATypeBonus && session.phase !== "battle" && session.remain <= 0 && !isGoraiZoneActive();
     pendingForceResult = "";
 
-    if(shouldFinishATypeBonus){
+    if(shouldFinishColadokiBonus){
+      finishSession();
+    }else if(shouldFinishATypeBonus){
       finishSession();
     }else if(shouldResolveBattle){
       completeContinuationBattle(result);
@@ -15863,7 +16364,7 @@ body{
     onClick("debugMidBtn", ()=>direct("MID"));
     onClick("debugBar3Btn", ()=>direct("BAR3"));
     onClick("debugBigBtn", ()=>direct("BIG"));
-    onClick("debugGrapeBtn", ()=>direct("GRAPE"));
+    onClick("debugGrapeBtn", ()=>direct(COLADOKI_MODE ? "SUICA" : "GRAPE"));
     onClick("debugBellPayBtn", ()=>direct("BELL"));
     onClick("debugBell3Btn", ()=>direct("BELL3"));
     onClick("debugReplayBtn", ()=>direct("REPLAY"));
@@ -15937,6 +16438,7 @@ body{
   }
 
   load();
+  initializeColadokiMode(!loadedColadokiNormalState);
   initializePlaySessionBaseline();
   loadPageZoom();
   loadPagePan();
@@ -15946,7 +16448,7 @@ body{
   setup();
   connectAdminCommands();
   reels.forEach((_,i)=>setRandomReel(i));
-  showMessage("READY",`1回転${SPIN_COST}pt / BB・RB完全告知 / 設定${settings.setting}`);
+  showMessage("READY",`1回転${SPIN_COST}pt / 小役直撃・規定ゲーム数 / 設定${settings.setting}`);
   if($("forceResult")) $("forceResult").value = forceResult;
   if($("premiumForceStatus")) $("premiumForceStatus").value = forcePremiumEffect ? "ON" : "OFF";
   updateDisplay();

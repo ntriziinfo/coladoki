@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "node server.js",
-    "check": "node --check server.js && node --check api/index.mjs && node --check api/health.mjs"
+    "check": "node --check server.js && node --check api/index.mjs && node --check api/health.mjs && node --check coladoki-mode.js && node tests/coladoki-mode.test.cjs"
   },
   "engines": {
     "node": "20.x"
