@@ -1,0 +1,52 @@
+{
+  "version": 2,
+  "redirects": [
+    {
+      "source": "/coladoki/",
+      "destination": "/coladoki",
+      "permanent": false
+    },
+    {
+      "source": "/jag",
+      "destination": "/coladoki",
+      "permanent": false
+    },
+    {
+      "source": "/jag/",
+      "destination": "/coladoki",
+      "permanent": false
+    },
+    {
+      "source": "/jag.html",
+      "destination": "/coladoki.html",
+      "permanent": false
+    },
+    {
+      "source": "/gorai",
+      "destination": "/coladoki",
+      "permanent": false
+    },
+    {
+      "source": "/gourai",
+      "destination": "/coladoki",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index?path=$1"
+    },
+    {
+      "source": "/",
+      "destination": "/coladoki.html"
+    },
+    {
+      "source": "/coladoki",
+      "destination": "/coladoki.html"
+    }
+  ],
+  "framework": null,
+  "buildCommand": null,
+  "outputDirectory": "."
+}
