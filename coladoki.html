@@ -7286,12 +7286,12 @@ body{
 
   const A_TYPE_MODE = true;
   const A_TYPE_BONUS_TABLE = Object.freeze({
-    1:{big:354.112628, reg:570.311235, total:218.465163, payout:90.0},
-    2:{big:335.340933, reg:496.870459, total:200.214759, payout:93.0},
-    3:{big:318.675842, reg:391.096799, total:175.595810, payout:96.0},
-    4:{big:295.728558, reg:359.759320, total:162.308272, payout:101.0},
-    5:{big:288.226978, reg:283.780845, total:142.993316, payout:104.0},
-    6:{big:276.519476, reg:276.524590, total:138.261016, payout:108.0}
+    1:{big:394.1, reg:632.1, total:218.465163, payout:90.0},
+    2:{big:377.0, reg:584.8, total:200.214759, payout:93.0},
+    3:{big:362.4, reg:546.2, total:175.595810, payout:96.0},
+    4:{big:347.6, reg:510.5, total:162.308272, payout:101.0},
+    5:{big:334.7, reg:479.6, total:142.993316, payout:104.0},
+    6:{big:322.6, reg:452.1, total:138.261016, payout:108.0}
   });
   const A_TYPE_BIG_DETAIL_TABLE = Object.freeze({
     1:{solo:507.333036, cherry:1172.513751},
@@ -10887,13 +10887,18 @@ body{
       const bell = A_TYPE_BELL_TABLE[settings.setting] || A_TYPE_BELL_TABLE[1];
       const pierrot = A_TYPE_PIERROT_TABLE[settings.setting] || A_TYPE_PIERROT_TABLE[1];
       const regDetail = A_TYPE_REG_DETAIL_TABLE[settings.setting] || A_TYPE_REG_DETAIL_TABLE[1];
+      const bonus = A_TYPE_BONUS_TABLE[settings.setting] || A_TYPE_BONUS_TABLE[1];
       let roll = Math.random();
       const multiplier = clamp(Number(settings.oddsMultiplier) || 1, 0.1, 100);
       const soloCherryP = clamp((1 / soloCherry) * multiplier, 0, 0.98);
-      const bigCherryP = clamp((1 / bigDetail.cherry) * multiplier, 0, 0.98 - soloCherryP);
-      const regCherryP = clamp((1 / regDetail.cherry) * multiplier, 0, 0.98 - soloCherryP - bigCherryP);
-      const bigSoloP = clamp((1 / bigDetail.solo) * multiplier, 0, 0.98 - soloCherryP - bigCherryP - regCherryP);
-      const regSoloP = clamp((1 / regDetail.solo) * multiplier, 0, 0.98 - soloCherryP - bigCherryP - regCherryP - bigSoloP);
+      const bigCherryShare = (1 / bigDetail.cherry) / ((1 / bigDetail.solo) + (1 / bigDetail.cherry));
+      const regCherryShare = (1 / regDetail.cherry) / ((1 / regDetail.solo) + (1 / regDetail.cherry));
+      const bigP = (1 / bonus.big) * multiplier;
+      const regP = (1 / bonus.reg) * multiplier;
+      const bigCherryP = clamp(bigP * bigCherryShare, 0, 0.98 - soloCherryP);
+      const regCherryP = clamp(regP * regCherryShare, 0, 0.98 - soloCherryP - bigCherryP);
+      const bigSoloP = clamp(bigP - bigCherryP, 0, 0.98 - soloCherryP - bigCherryP - regCherryP);
+      const regSoloP = clamp(regP - regCherryP, 0, 0.98 - soloCherryP - bigCherryP - regCherryP - bigSoloP);
       const grapeP = clamp((1 / grape) * multiplier, 0, 0.98 - soloCherryP - bigCherryP - regCherryP - bigSoloP - regSoloP);
       const replayP = clamp((1 / replay) * multiplier, 0, 0.98 - soloCherryP - bigCherryP - regCherryP - bigSoloP - regSoloP - grapeP);
       const bellP = clamp((1 / bell) * multiplier, 0, 0.98 - soloCherryP - bigCherryP - regCherryP - bigSoloP - regSoloP - grapeP - replayP);
