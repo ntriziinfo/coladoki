@@ -165,6 +165,12 @@
     CHERRY_DOUBLE:1,
     CHERRY_TRIPLE:1
   });
+  const AT_PAYOUT_SPEC = Object.freeze({
+    spinCost:3,
+    bigGrossPerGame:6,
+    regGrossLow:5,
+    regGrossHigh:6
+  });
 
   function validMode(mode){ return MODE_IDS.includes(mode) ? mode : "normalA"; }
   function modeLabel(mode){ return MODES[validMode(mode)].label; }
@@ -253,6 +259,17 @@
   }
   function stockRate(result){ return BONUS_STOCK_RATES[result] || 0; }
   function bonusGames(kind){ return kind === "MID" ? 30 : 70; }
+  function atGrossPayout(kind, rng=Math.random){
+    if(kind === "MID") return rng() < 0.5 ? AT_PAYOUT_SPEC.regGrossLow : AT_PAYOUT_SPEC.regGrossHigh;
+    return AT_PAYOUT_SPEC.bigGrossPerGame;
+  }
+  function expectedBonusNet(kind){
+    if(kind === "MID"){
+      const averageGross = (AT_PAYOUT_SPEC.regGrossLow + AT_PAYOUT_SPEC.regGrossHigh) / 2;
+      return bonusGames(kind) * (averageGross - AT_PAYOUT_SPEC.spinCost);
+    }
+    return bonusGames(kind) * (AT_PAYOUT_SPEC.bigGrossPerGame - AT_PAYOUT_SPEC.spinCost);
+  }
   function isSpecial(mode){ return SPECIAL_MODES.includes(validMode(mode)); }
   function transitionRows(){
     const rows = [];
@@ -276,6 +293,7 @@
     NORMAL_ROLE_PROBABILITIES,
     LONG_FREEZE_RATES,
     BONUS_STOCK_RATES,
+    AT_PAYOUT_SPEC,
     validMode,
     modeLabel,
     transitionEntries,
@@ -289,6 +307,8 @@
     pickBonusKind,
     stockRate,
     bonusGames,
+    atGrossPayout,
+    expectedBonusNet,
     isSpecial
   });
 });

@@ -7079,7 +7079,7 @@ body{
           <input id="bigMulInput" type="number" min="0" max="1000" step="1" value="70" readonly />
         </div>
         <div class="help">
-          BIG／REG中は1G連ストックを抽選。終了後はストックまたは次回モードのゲーム数テーブルに従って次のボーナスを目指します。
+          BIGは70G・純増3pt/Gで210pt。REGは30G・純増2～3pt/Gで60～90pt（平均75pt）。どちらも消化中に1G連ストックを抽選します。
         </div>
       </div>
 
@@ -9824,6 +9824,10 @@ body{
     return Math.max(0, (Number(session.paid) || 0) - (Number(session.cost) || 0));
   }
 
+  function coladokiBonusNet(){
+    return Math.max(0, (Number(session.paid) || 0) - (Number(session.cost) || 0));
+  }
+
   function aTypeBonusRemainingNet(){
     return Math.max(0, (Number(session.bonusTarget) || aTypeBonusTarget()) - aTypeBonusNet());
   }
@@ -11840,7 +11844,7 @@ body{
     }
     const adminStInfoText = COLADOKI_MODE
       ? session.active
-        ? `${session.bonusKind === "MID" ? "REG" : "BIG"} ${COLADOKI.bonusGames(session.bonusKind)}G AT / 残り${session.remain}G / 1G連STOCK${(session.carriedStocks || 0) + (session.stockSets || 0)}`
+        ? `${session.bonusKind === "MID" ? "REG" : "BIG"} ${COLADOKI.bonusGames(session.bonusKind)}G AT / 残り${session.remain}G / 純増${coladokiBonusNet()}pt / 1G連STOCK${(session.carriedStocks || 0) + (session.stockSets || 0)}`
         : (normalState.bonusPending ? `BONUS確定 / ${pendingBonusLabel()}待ち` : `${normalModeLabel()} / 規定${currentNormalCeilingGames()}G / 天井まで${ceilingRemain()}G`)
       : A_TYPE_MODE
       ? `Aタイプ / BB ${oddsText(1 / (A_TYPE_BONUS_TABLE[settings.setting] || A_TYPE_BONUS_TABLE[1]).big)} / RB ${oddsText(1 / (A_TYPE_BONUS_TABLE[settings.setting] || A_TYPE_BONUS_TABLE[1]).reg)}`
@@ -12067,8 +12071,10 @@ body{
         recordSlumpPoint();
         $("spinBtn").textContent = "BET";
         const label = longFreeze ? "ロングフリーズ BIG" : bonusKind === "MID" ? "REG" : "BIG";
-        showMessage(`${label} BONUS`, `${bonusGames}G AT / ボーナス中1G連ストック抽選`);
-        log(`${label}開始：${bonusGames}G AT / 次回${COLADOKI.modeLabel(nextMode)} / 設定${settings.setting}`);
+        const expectedNet = COLADOKI.expectedBonusNet(bonusKind);
+        const netLabel = bonusKind === "MID" ? "純増2～3pt/G・平均75pt" : "純増3pt/G・平均210pt";
+        showMessage(`${label} BONUS`, `${bonusGames}G AT / ${netLabel} / 1G連ストック抽選`);
+        log(`${label}開始：${bonusGames}G AT / 期待純増${expectedNet}pt / 次回${COLADOKI.modeLabel(nextMode)} / 設定${settings.setting}`);
         updateDisplay();
         if(longFreeze) playBarBgm();
         else playAtBgm();
@@ -12184,8 +12190,12 @@ body{
     const aTypeEnd = isATypeBonusActive();
     const coladokiEnd = !!(COLADOKI_MODE && session.active && session.phase === "coladoki_bonus");
     const aTypeNet = aTypeEnd ? aTypeBonusNet() : 0;
-    const resultPayout = aTypeEnd ? Math.min(Number(session.bonusTarget) || aTypeBonusTarget(), aTypeNet) : session.paid;
     const profit = session.paid - (Number(session.cost) || 0);
+    const resultPayout = aTypeEnd
+      ? Math.min(Number(session.bonusTarget) || aTypeBonusTarget(), aTypeNet)
+      : coladokiEnd
+        ? Math.max(0, profit)
+        : session.paid;
     const endedSets = session.setNo || 0;
     const endedBonusKind = session.bonusKind === "MID" ? "MID" : "BIG";
     const coladokiNextMode = COLADOKI.validMode(session.nextMode || normalState.mode);
@@ -12405,7 +12415,7 @@ body{
     if(COLADOKI_MODE && session.active){
       const stockRate = COLADOKI.stockRate(result);
       return {
-        reward:rewardFor(result),
+        reward:COLADOKI.atGrossPayout(session.bonusKind),
         add:0,
         sets:Math.random() < stockRate ? 1 : 0,
         bigZone:0,
@@ -13064,7 +13074,7 @@ body{
       const lineText = result !== "MISS" ? `${lineName(lineRow)}ライン` : "";
       const phaseText = session.phase === "battle" ? battleRemainText() : `残り${session.remain}G`;
       const battleText = COLADOKI_MODE
-        ? `${session.bonusKind === "MID" ? "REG" : "BIG"} ${COLADOKI.bonusGames(session.bonusKind)}G AT / 残り${session.remain}G / 1G連STOCK${(session.carriedStocks || 0) + (session.stockSets || 0)}`
+        ? `${session.bonusKind === "MID" ? "REG" : "BIG"} ${COLADOKI.bonusGames(session.bonusKind)}G AT / 残り${session.remain}G / 純増${coladokiBonusNet()}pt / 1G連STOCK${(session.carriedStocks || 0) + (session.stockSets || 0)}`
         : aTypeBonusSpin
         ? `${aTypeBonusLabel(session.bonusKind)} BONUS / 純増${aTypeBonusNet()}/${Number(session.bonusTarget) || aTypeBonusTarget()}pt / 残り${aTypeBonusRemainingNet()}pt`
         : `${session.setNo || 1}SET / ${phaseText} / STOCK${session.stockSets || 0} / 継続${formatRate(session.continuationRate)}`;
@@ -13134,7 +13144,7 @@ body{
     const zoneRollText = zoneWasActive ? goraiZoneRemainText(session.bigZone, session.bigZoneType || resolved.zoneType) : "";
     const phaseText = session.phase === "battle" ? battleRemainText() : `残り${session.remain}G`;
     const battleText = COLADOKI_MODE
-      ? `${session.bonusKind === "MID" ? "REG" : "BIG"} ${COLADOKI.bonusGames(session.bonusKind)}G AT / 残り${session.remain}G / 1G連STOCK${(session.carriedStocks || 0) + (session.stockSets || 0)}`
+      ? `${session.bonusKind === "MID" ? "REG" : "BIG"} ${COLADOKI.bonusGames(session.bonusKind)}G AT / 残り${session.remain}G / 純増${coladokiBonusNet()}pt / 1G連STOCK${(session.carriedStocks || 0) + (session.stockSets || 0)}`
       : aTypeBonusSpin
       ? `${aTypeBonusLabel(session.bonusKind)} BONUS / 純増${aTypeBonusNet()}/${Number(session.bonusTarget) || aTypeBonusTarget()}pt / 残り${aTypeBonusRemainingNet()}pt`
       : `${session.setNo || 1}SET / ${phaseText} / STOCK${session.stockSets || 0} / 継続${formatRate(session.continuationRate)}`;
@@ -13185,7 +13195,7 @@ body{
     if($("adminTargetRtpView")) $("adminTargetRtpView").textContent = targetRtpText();
     const stInfoText = COLADOKI_MODE
       ? active
-        ? `${session.bonusKind === "MID" ? "REG" : "BIG"} ${COLADOKI.bonusGames(session.bonusKind)}G AT / 残り${session.remain}G / 1G連STOCK${(session.carriedStocks || 0) + (session.stockSets || 0)}`
+        ? `${session.bonusKind === "MID" ? "REG" : "BIG"} ${COLADOKI.bonusGames(session.bonusKind)}G AT / 残り${session.remain}G / 純増${coladokiBonusNet()}pt / 1G連STOCK${(session.carriedStocks || 0) + (session.stockSets || 0)}`
         : normalState.bonusPending
           ? `BONUS確定 / ${pendingBonusLabel()}待ち / 1G ${SPIN_COST}pt`
           : `${normalModeLabel()} / 規定${currentNormalCeilingGames()}G / 天井まで${ceilingRemain()}G`
@@ -13204,7 +13214,7 @@ body{
     if($("stInfoViewLegacy")) $("stInfoViewLegacy").textContent = stInfoText;
     if($("adminStInfoView")) $("adminStInfoView").textContent = stInfoText;
     const payoutScaleText = COLADOKI_MODE
-      ? `通常→小役直撃or規定G数 / BIG 70G AT / REG 30G AT / ボーナス中は1G連ストック抽選 / 天国以上は32G以内`
+      ? `通常→小役直撃or規定G数 / BIG 70G・純増210pt / REG 30G・純増60～90pt（平均75pt） / ボーナス中は1G連ストック抽選 / 天国以上は32G以内`
       : A_TYPE_MODE
       ? `Aタイプ:BB純増${A_TYPE_PAYOUTS.BIG}pt/RB純増${A_TYPE_PAYOUTS.MID}pt/ブドウ${A_TYPE_PAYOUTS.GRAPE}pt/ベル${A_TYPE_PAYOUTS.BELL}pt/ゾウリプレイ${A_TYPE_PAYOUTS.REPLAY}pt/宗介特殊役${A_TYPE_PAYOUTS.SMALL}pt/チェリー中段1pt・上下段2pt`
       : `通常:ベル${NORMAL_ROLE_PAYOUTS.BELL}pt/スイカ${NORMAL_ROLE_PAYOUTS.SUICA}pt/チェリー${NORMAL_ROLE_PAYOUTS.CHERRY_ANY}pt/リプレイ${NORMAL_ROLE_PAYOUTS.REPLAY}pt/REG${NORMAL_ROLE_PAYOUTS.MID}pt / 通常小役${Math.round(NORMAL_ROLE_RATE * 100)}% / 高確小役${Math.round(HIGH_ROLE_RATE * 100)}% / ATベル${ROLE_PAYOUTS.BELL}pt/斜めベル${ROLE_PAYOUTS.BELL3}pt / 平均継続${formatRate(averageContinuationRate(settings.setting))}`;
@@ -13278,7 +13288,11 @@ body{
     }
     const displayCredit = SLOT_PLAY_SESSION ? profit - playSessionBaselineProfit() : profit;
     const displayCount = active
-      ? (isATypeBonusActive() ? aTypeBonusNet() : Math.max(0, Number(session.paid) || 0))
+      ? (isATypeBonusActive()
+        ? aTypeBonusNet()
+        : COLADOKI_MODE
+          ? coladokiBonusNet()
+          : Math.max(0, Number(session.paid) || 0))
       : 0;
     setText("jagCreditMeter", formatCreditDifference(displayCredit));
     setText("jagCountMeter", formatMeterDigits(displayCount, 3, 999));
