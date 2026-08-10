@@ -6531,6 +6531,82 @@ body{
 .playControls .autoArea .speedInlineBtn{
   display:none !important;
 }
+.pushOrderNavi{
+  position:absolute;
+  left:var(--layout-reels-x);
+  top:78.2%;
+  width:var(--layout-reels-w);
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:5.9%;
+  z-index:78;
+  pointer-events:none;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(5px);
+  transition:opacity .14s ease, visibility .14s ease, transform .14s ease;
+}
+.pushOrderNavi.show{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+.pushOrderNaviItem{
+  min-height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  border:2px solid rgba(77,231,255,.88);
+  border-radius:12px;
+  color:#eefdff;
+  background:linear-gradient(180deg,rgba(20,90,166,.96),rgba(4,20,62,.98));
+  box-shadow:0 0 10px rgba(77,231,255,.62), inset 0 0 12px rgba(77,231,255,.22);
+  font-family:Impact,"Arial Black",sans-serif;
+  font-weight:1000;
+  line-height:1;
+  text-shadow:0 1px 2px rgba(0,0,0,.72);
+  transition:filter .12s ease, transform .12s ease, border-color .12s ease, background .12s ease;
+}
+.pushOrderNaviNumber{
+  font-size:26px;
+  color:#fff36c;
+}
+.pushOrderNaviReel{
+  font-size:10px;
+  letter-spacing:.08em;
+  opacity:.88;
+}
+.pushOrderNaviItem.is-next{
+  transform:scale(1.06);
+  border-color:#fff36c;
+  background:linear-gradient(180deg,rgba(255,104,18,.98),rgba(126,14,5,.98));
+  box-shadow:0 0 17px rgba(255,226,75,.94), inset 0 0 14px rgba(255,244,144,.28);
+  animation:pushOrderPulse .62s ease-in-out infinite alternate;
+}
+.pushOrderNaviItem.is-done{
+  filter:saturate(.45) brightness(.72);
+  border-color:rgba(118,255,154,.88);
+  background:linear-gradient(180deg,rgba(16,120,72,.95),rgba(4,47,34,.98));
+}
+.pushOrderNaviItem.is-wrong,
+.pushOrderNavi.is-miss .pushOrderNaviItem{
+  animation:none;
+  border-color:#ff365d;
+  color:#fff;
+  background:linear-gradient(180deg,rgba(204,24,56,.98),rgba(70,0,18,.98));
+  box-shadow:0 0 15px rgba(255,54,93,.84), inset 0 0 12px rgba(255,130,148,.24);
+}
+.pushOrderNavi.is-success .pushOrderNaviItem{
+  animation:none;
+  border-color:#78ff9d;
+  background:linear-gradient(180deg,rgba(18,142,79,.98),rgba(4,55,36,.98));
+  box-shadow:0 0 13px rgba(74,255,137,.72), inset 0 0 12px rgba(137,255,177,.22);
+}
+@keyframes pushOrderPulse{
+  from{filter:brightness(.96)}
+  to{filter:brightness(1.28)}
+}
 .machine .resultBoxWide{
   display:none !important;
 }
@@ -6896,6 +6972,11 @@ body{
             <div class="cell center"><img class="symImg barSymImg" src="assets/symbols/sym_bar.png" alt="BAR symbol" loading="eager" decoding="sync" draggable="false"></div>
             <div class="cell"><div class="sym">🐘</div></div>
           </div></div>
+        </div>
+        <div class="pushOrderNavi" id="pushOrderNavi" aria-hidden="true">
+          <div class="pushOrderNaviItem" data-push-reel="0"><span class="pushOrderNaviNumber">1</span><span class="pushOrderNaviReel">LEFT</span></div>
+          <div class="pushOrderNaviItem" data-push-reel="1"><span class="pushOrderNaviNumber">2</span><span class="pushOrderNaviReel">CENTER</span></div>
+          <div class="pushOrderNaviItem" data-push-reel="2"><span class="pushOrderNaviNumber">3</span><span class="pushOrderNaviReel">RIGHT</span></div>
         </div>
         <div class="reelCenterBandLayer" aria-hidden="true">
           <img src="assets/cabinet/parts/rising_part_reel_center_bands.png" alt="">
@@ -7949,6 +8030,8 @@ body{
   const reversePushGuideLayer = $("reversePushGuideLayer");
   const atNaviLayer = $("atNaviLayer");
   const atNaviVideo = $("atNaviVideo");
+  const pushOrderNavi = $("pushOrderNavi");
+  const pushOrderNaviItems = [...document.querySelectorAll("[data-push-reel]")];
   const devilRushEntryLayer = $("devilRushEntryLayer");
   const devilRushEntryImage = $("devilRushEntryImage");
   const rogiBlackoutLayer = $("rogiBlackoutLayer");
@@ -9318,6 +9401,114 @@ body{
     if(atNaviVideo){
       try{ atNaviVideo.pause(); }catch(e){}
     }
+  }
+
+  function pushOrderText(order){
+    const labels = ["左", "中", "右"];
+    return Array.isArray(order) ? order.map(index=>labels[index] || "?").join("→") : "";
+  }
+
+  function shouldGuidePushOrderForSpin(spin=currentSpin){
+    return !!(
+      shouldShowAtNaviForSpin(spin)
+      && spin
+      && Array.isArray(spin.pushOrder)
+      && spin.pushOrder.length === 3
+    );
+  }
+
+  function updatePushOrderNavi(spin=currentSpin){
+    if(!pushOrderNavi || !shouldGuidePushOrderForSpin(spin)) return false;
+    const required = spin.pushOrder;
+    const actual = Array.isArray(spin.pushStops) ? spin.pushStops : [];
+    const failed = !!spin.pushOrderFailed;
+    const complete = actual.length === 3;
+    pushOrderNavi.classList.toggle("is-miss", failed);
+    pushOrderNavi.classList.toggle("is-success", complete && !failed);
+    pushOrderNaviItems.forEach((item, reelIndex)=>{
+      const requiredStep = required.indexOf(reelIndex);
+      const actualStep = actual.indexOf(reelIndex);
+      const stoppedCorrectly = actualStep >= 0 && required[actualStep] === reelIndex;
+      const stoppedWrong = actualStep >= 0 && !stoppedCorrectly;
+      const number = item.querySelector(".pushOrderNaviNumber");
+      if(number) number.textContent = String(requiredStep + 1);
+      item.classList.toggle("is-next", !failed && !complete && required[actual.length] === reelIndex);
+      item.classList.toggle("is-done", stoppedCorrectly);
+      item.classList.toggle("is-wrong", stoppedWrong);
+    });
+    return true;
+  }
+
+  function showPushOrderNavi(spin=currentSpin){
+    if(!pushOrderNavi || !shouldGuidePushOrderForSpin(spin)) return false;
+    const roleLabel = atNaviKindForResult(spin.result) === "replay" ? "リプレイ" : "ベル";
+    pushOrderNavi.classList.add("show");
+    pushOrderNavi.setAttribute("aria-hidden", "false");
+    pushOrderNavi.setAttribute("aria-label", `${roleLabel}押し順 ${pushOrderText(spin.pushOrder)}`);
+    updatePushOrderNavi(spin);
+    return true;
+  }
+
+  function hidePushOrderNavi(){
+    if(!pushOrderNavi) return;
+    pushOrderNavi.classList.remove("show", "is-miss", "is-success");
+    pushOrderNavi.setAttribute("aria-hidden", "true");
+    pushOrderNavi.removeAttribute("aria-label");
+    pushOrderNaviItems.forEach(item=>item.classList.remove("is-next", "is-done", "is-wrong"));
+  }
+
+  function recordGuidedReelStop(spin, reelIndex){
+    if(!shouldGuidePushOrderForSpin(spin)) return false;
+    if(!Array.isArray(spin.pushStops)) spin.pushStops = [];
+    const step = spin.pushStops.length;
+    spin.pushStops.push(reelIndex);
+    spin.lastPushStop = reelIndex;
+    if(spin.pushOrder[step] !== reelIndex) spin.pushOrderFailed = true;
+    updatePushOrderNavi(spin);
+    return true;
+  }
+
+  function pushOrderMissColumn(spin, reelIndex, columnSymbols){
+    const column = Array.isArray(columnSymbols) ? [...columnSymbols] : ["BAR", GRAPE_SYMBOL, PIERROT_SYMBOL];
+    const rawRow = Number(spin && spin.lineRow);
+    const row = Number.isFinite(rawRow) ? Math.max(0, Math.min(2, Math.round(rawRow))) : 1;
+    const missSymbols = [GRAPE_SYMBOL, PIERROT_SYMBOL, "BAR"];
+    column[row] = missSymbols[reelIndex] || "BAR";
+    return column;
+  }
+
+  function finalizePushOrderOutcome(spin=currentSpin){
+    if(!shouldGuidePushOrderForSpin(spin)) return true;
+    const correct = COLADOKI.isPushOrderCorrect(spin.pushOrder, spin.pushStops);
+    spin.pushOrderCorrect = correct;
+    if(correct){
+      updatePushOrderNavi(spin);
+      return true;
+    }
+    spin.pushOrderFailed = true;
+    spin.result = "MISS";
+    spin.spec = RESULT.MISS;
+    spin.lineRow = null;
+    Object.assign(spin.resolved, {
+      reward:COLADOKI.AT_PAYOUT_SPEC.pushOrderMissPayout,
+      add:0,
+      sets:0,
+      bigZone:0,
+      bigZoneType:"",
+      zoneGame:false,
+      zoneType:"",
+      zoneSets:0,
+      zoneStGames:0,
+      zoneGameAdd:0,
+      zoneSevenHit:false
+    });
+    updatePushOrderNavi(spin);
+    return false;
+  }
+
+  function automaticStopOrder(spin=currentSpin){
+    if(shouldGuidePushOrderForSpin(spin)) return [...spin.pushOrder];
+    return spin && spin.zoneActiveAtStart ? [2,1,0] : [0,1,2];
   }
 
   function shouldShowDevilZoneFireVideos(){
@@ -13155,6 +13346,15 @@ body{
       continuationBoostText = `継続${formatRate(boostedRate)}`;
     }
 
+    if(currentSpin && currentSpin.pushOrderFailed){
+      const guidedRole = currentSpin.guidedResult === "REPLAY" ? "リプレイ" : "ベル";
+      recordSlumpPoint();
+      $("stLamp").classList.remove("on");
+      showMessage("押し順ミス", `${guidedRole}不成立 / ナビ ${pushOrderText(currentSpin.pushOrder)} / +${reward}pt`);
+      log(`押し順ミス：${guidedRole}不成立 / 指定${pushOrderText(currentSpin.pushOrder)} / 実際${pushOrderText(currentSpin.pushStops)} / +${reward}pt`);
+      return;
+    }
+
     const isHit = result !== "MISS" || reward > 0 || stockAdd > 0 || stGameAdd > 0 || zoneGameAdd > 0 || resolved.bigZone > 0;
     if(isHit){
       session.hits++;
@@ -13717,6 +13917,7 @@ body{
     hideRogiContinuationBlackout();
     hideSessionResultScreen();
     clearReelVideos({forceReversePush:true});
+    hidePushOrderNavi();
     stopGuaranteedSetStartLight();
     spinIntervals.forEach(id=>clearInterval(id));
     if(spinWaitTimer){
@@ -13773,6 +13974,7 @@ body{
     hideRogiContinuationBlackout();
     hideSessionResultScreen();
     clearReelVideos({forceReversePush:true});
+    hidePushOrderNavi();
     stopGuaranteedSetStartLight();
     spinIntervals.forEach(id=>clearInterval(id));
     if(spinWaitTimer){
@@ -14565,6 +14767,7 @@ body{
     hideRogiContinuationBlackout();
     hideBonusConfirmScreen();
     clearReelVideos();
+    hidePushOrderNavi();
 
     if(normalActiveAtSpinStart && normalState.bonusPending){
       setSpeedFrameOffHold(false);
@@ -14679,6 +14882,7 @@ body{
     const spec = RESULT[result];
     const lineRow = resultLineRow(result);
     const resolved = normalActiveAtSpinStart ? resolveNormalOutcome(result, lineRow) : resolveOutcome(result);
+    const pushOrder = atSpinAtStart && atNaviKindForResult(result) ? COLADOKI.randomPushOrder() : [];
     const reversePushGuide = zoneActiveAtSpinStart ? decideReversePushGuide(result, zoneActiveAtSpinStart ? currentGoraiZoneType() : "") : "";
     let grid = zoneActiveAtSpinStart && reversePushGuide && result === "MISS"
       ? buildReversePushMissGrid()
@@ -14741,7 +14945,12 @@ body{
       zoneType:zoneActiveAtSpinStart ? currentGoraiZoneType() : "",
       battleActiveAtStart:battleActiveAtSpinStart,
       atSpinAtStart,
-      atNaviIndex:randomInt(1, 3),
+      atNaviIndex:pushOrder.length === 3 ? pushOrder[0] + 1 : randomInt(1, 3),
+      guidedResult:pushOrder.length === 3 ? result : "",
+      pushOrder,
+      pushStops:[],
+      pushOrderFailed:false,
+      pushOrderCorrect:null,
       normalActiveAtStart:normalActiveAtSpinStart,
       speedModeAtStart:speedModeSpinAtStart,
       autoStopAtStart:autoPlay,
@@ -14799,6 +15008,7 @@ body{
       showReversePushGuide(reversePushGuide);
     }
     showAtNaviForSpin(currentSpin);
+    showPushOrderNavi(currentSpin);
     if(currentSpin.bonusAnnouncementTiming === "lever"){
       lightBonusAnnouncement(currentSpin, "lever");
     }
@@ -14832,7 +15042,7 @@ body{
 
     // オート/SPEED中だけ自動停止。手動時はストップ/左中右を押すまで止まらない。
     if(autoPlay || speedModeSpinAtStart){
-      const stopOrder = zoneActiveAtSpinStart ? [2,1,0] : [0,1,2];
+      const stopOrder = automaticStopOrder(currentSpin);
       stopOrder.forEach((i,idx)=>{
         const normalAutoStopDelay = autoStopDelayMs(idx);
         const delay = speedModeSpinAtStart ? speedModeStopDelay(i) : normalAutoStopDelay;
@@ -14880,18 +15090,22 @@ body{
     const {grid, spec, result, lineRow} = currentSpin;
     const stopOrder = currentSpin.stopped.filter(Boolean).length + 1;
     const reversePushWrongFirst = isReversePushGuidedMiss(currentSpin) && stopOrder === 1 && i !== 2;
+    const guidedPushStop = recordGuidedReelStop(currentSpin, i);
     let col = currentSpin.manualBonusStop
       ? manualStopColumnForReel(i, currentSpin)
       : [grid[0][i], grid[1][i], grid[2][i]];
     if(currentSpin.manualBonusStop && stopOrder === 3){
       col = manualBonusFinalColumnForReel(i, currentSpin, col);
     }
-    if(currentSpin.manualBonusStop){
+    if(guidedPushStop && currentSpin.pushOrderFailed){
+      col = pushOrderMissColumn(currentSpin, i, col);
+    }
+    if(currentSpin.manualBonusStop || (guidedPushStop && currentSpin.pushOrderFailed)){
       setGridColumn(grid, i, col);
     }
-    const label = i === 1 ? spec.label : "";
+    const label = !currentSpin.pushOrderFailed && i === 1 ? spec.label : "";
 
-    stopReel(i, col, label, spec.cls, currentSpin.manualBonusStop || result === "MISS" ? null : lineRow, stopOrder);
+    stopReel(i, col, label, spec.cls, currentSpin.manualBonusStop || currentSpin.pushOrderFailed || result === "MISS" ? null : lineRow, stopOrder);
     currentSpin.stopped[i] = true;
     syncCabinetControlState();
     maybePlayPremiumBigLineupVoice(stopOrder, currentSpin);
@@ -14931,13 +15145,18 @@ body{
 
     if(currentSpin.stopped.every(Boolean) && !currentSpin.finishScheduled){
       currentSpin.finishScheduled = true;
+      finalizePushOrderOutcome(currentSpin);
       prepareManualBonusOutcome(currentSpin);
       updatePremiumBigReelMovie();
       if(willEnterBattleAfterCurrentSpin(currentSpin)){
         ensurePendingBattleOutcome(currentSpin);
         showBattleIntro(battleRoundNumber(), !!(currentSpin.pendingBattleOutcome && currentSpin.pendingBattleOutcome.win));
       }
-      $("resultText").textContent = currentSpin.speedModeAtStart ? "全リール停止 / 結果反映中..." : "全リール停止 / 結果確定待ち...";
+      $("resultText").textContent = currentSpin.pushOrderFailed
+        ? `押し順ミス / 不成立 / +${COLADOKI.AT_PAYOUT_SPEC.pushOrderMissPayout}pt`
+        : currentSpin.speedModeAtStart
+          ? "全リール停止 / 結果反映中..."
+          : "全リール停止 / 結果確定待ち...";
       const keyboardResultWaitMs = currentSpin.keyboardTurboStop
         ? Math.round(RESULT_WAIT_MS / KEYBOARD_STOP_TURBO_MULTIPLIER)
         : RESULT_WAIT_MS;
@@ -14965,8 +15184,8 @@ body{
     }
 
 
-    // DZ/超DZ中は右→中→左、それ以外は左→中→右で全停止する。
-    const stopOrder = currentSpin.zoneActiveAtStart ? [2,1,0] : [0,1,2];
+    // 押し順ナビ中はナビ順、DZ/超DZ中は右→中→左、それ以外は左→中→右で全停止する。
+    const stopOrder = automaticStopOrder(currentSpin);
     stopOrder.forEach((i,idx)=>{
       if(!currentSpin.stopped[i]){
         setTimeout(()=>stopSingleReel(i), idx * 180);
@@ -15016,7 +15235,9 @@ body{
     if(resolved.bigZone > 0 && zoneText) resultParts.push(zoneText);
     if(resultParts.length === 0) resultParts.push(isNormalSpinResult ? "払い出しなし" : "0pt");
     if(resolved.zoneGame && zoneText) resultParts.push(zoneText);
-    $("resultText").textContent = `${RESULT[result].name}${lineText} / ${resultParts.join(" / ")}`;
+    $("resultText").textContent = currentSpin && currentSpin.pushOrderFailed
+      ? `押し順ミス / 不成立 / +${reward}pt`
+      : `${RESULT[result].name}${lineText} / ${resultParts.join(" / ")}`;
     const holdRogiThirdStopEffect = shouldHoldRogiThirdStopEffect(currentSpin);
     const holdSpeedBonusRogiEffect = currentSpin && currentSpin.speedModeBonusRogiEffect;
     const premiumConfirmMovieSpin = currentSpin && currentSpin.premiumBigConfirmMovieEffect;
@@ -15046,7 +15267,10 @@ body{
       const finishedSpin = currentSpin;
       currentSpin = null;
       updateDisplay();
-      setTimeout(()=>clearReelVideos(), 900);
+      setTimeout(()=>{
+        clearReelVideos();
+        hidePushOrderNavi();
+      }, 900);
       if(A_TYPE_MODE && resolved.aTypeBonusReady){
         const bonusStartOptions = {
           bonusKind:resolved.bonusKind || (resolved.regReady ? "MID" : "BIG"),
@@ -15113,7 +15337,10 @@ body{
     currentSpin = null;
     updateDisplay();
     ensureBarBgmContinuing();
-    setTimeout(()=>clearReelVideos(), 900);
+    setTimeout(()=>{
+      clearReelVideos();
+      hidePushOrderNavi();
+    }, 900);
 
     if(shouldFinishColadokiBonus){
       finishSession();

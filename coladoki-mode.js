@@ -169,8 +169,17 @@
     spinCost:3,
     bigGrossPerGame:6,
     regGrossLow:5,
-    regGrossHigh:6
+    regGrossHigh:6,
+    pushOrderMissPayout:2
   });
+  const PUSH_ORDER_PERMUTATIONS = Object.freeze([
+    Object.freeze([0, 1, 2]),
+    Object.freeze([0, 2, 1]),
+    Object.freeze([1, 0, 2]),
+    Object.freeze([1, 2, 0]),
+    Object.freeze([2, 0, 1]),
+    Object.freeze([2, 1, 0])
+  ]);
 
   function validMode(mode){ return MODE_IDS.includes(mode) ? mode : "normalA"; }
   function modeLabel(mode){ return MODES[validMode(mode)].label; }
@@ -270,6 +279,17 @@
     }
     return bonusGames(kind) * (AT_PAYOUT_SPEC.bigGrossPerGame - AT_PAYOUT_SPEC.spinCost);
   }
+  function randomPushOrder(rng=Math.random){
+    const roll = Math.max(0, Math.min(0.999999999999, Number(rng()) || 0));
+    return [...PUSH_ORDER_PERMUTATIONS[Math.floor(roll * PUSH_ORDER_PERMUTATIONS.length)]];
+  }
+  function isPushOrderCorrect(required, actual){
+    return Array.isArray(required)
+      && Array.isArray(actual)
+      && required.length === 3
+      && actual.length === 3
+      && required.every((reelIndex, step)=>reelIndex === actual[step]);
+  }
   function isSpecial(mode){ return SPECIAL_MODES.includes(validMode(mode)); }
   function transitionRows(){
     const rows = [];
@@ -294,6 +314,7 @@
     LONG_FREEZE_RATES,
     BONUS_STOCK_RATES,
     AT_PAYOUT_SPEC,
+    PUSH_ORDER_PERMUTATIONS,
     validMode,
     modeLabel,
     transitionEntries,
@@ -309,6 +330,8 @@
     bonusGames,
     atGrossPayout,
     expectedBonusNet,
+    randomPushOrder,
+    isPushOrderCorrect,
     isSpecial
   });
 });
