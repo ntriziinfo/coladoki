@@ -6526,42 +6526,23 @@ body{
   transform:translateY(0);
 }
 .pushOrderNaviItem{
-  min-height:42px;
+  min-height:54px;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:7px;
-  border:2px solid rgba(77,231,255,.88);
-  border-radius:12px;
-  color:#eefdff;
-  background:linear-gradient(180deg,rgba(20,90,166,.96),rgba(4,20,62,.98));
-  box-shadow:0 0 10px rgba(77,231,255,.62), inset 0 0 12px rgba(77,231,255,.22);
-  font-family:Impact,"Arial Black",sans-serif;
-  font-weight:1000;
-  line-height:1;
-  text-shadow:0 1px 2px rgba(0,0,0,.72);
-  transition:filter .12s ease, transform .12s ease, border-color .12s ease, background .12s ease, opacity .12s ease, visibility .12s ease;
+  transition:filter .12s ease, transform .12s ease, opacity .12s ease, visibility .12s ease;
 }
 .pushOrderNaviVideo{
-  width:34px;
-  height:34px;
-  flex:0 0 34px;
+  width:50px;
+  height:50px;
+  flex:0 0 50px;
   display:block;
   object-fit:contain;
-  border-radius:8px;
-  background:radial-gradient(circle,rgba(22,80,138,.88),rgba(3,13,38,.96));
-  filter:drop-shadow(0 0 6px rgba(255,255,255,.32)) saturate(1.05) contrast(1.03);
-}
-.pushOrderNaviReel{
-  font-size:10px;
-  letter-spacing:.08em;
-  opacity:.88;
+  filter:drop-shadow(0 0 8px rgba(255,255,255,.4)) saturate(1.08) contrast(1.04);
 }
 .pushOrderNaviItem.is-next{
-  transform:scale(1.06);
-  border-color:#fff36c;
-  background:linear-gradient(180deg,rgba(255,104,18,.98),rgba(126,14,5,.98));
-  box-shadow:0 0 17px rgba(255,226,75,.94), inset 0 0 14px rgba(255,244,144,.28);
+  transform:scale(1.1);
+  filter:drop-shadow(0 0 10px rgba(255,238,89,.94));
   animation:pushOrderPulse .62s ease-in-out infinite alternate;
 }
 .pushOrderNaviItem.is-done{
@@ -6569,16 +6550,11 @@ body{
   visibility:hidden;
   transform:scale(.84);
   filter:saturate(.45) brightness(.72);
-  border-color:rgba(118,255,154,.88);
-  background:linear-gradient(180deg,rgba(16,120,72,.95),rgba(4,47,34,.98));
 }
 .pushOrderNaviItem.is-wrong,
 .pushOrderNavi.is-miss .pushOrderNaviItem{
   animation:none;
-  border-color:#ff365d;
-  color:#fff;
-  background:linear-gradient(180deg,rgba(204,24,56,.98),rgba(70,0,18,.98));
-  box-shadow:0 0 15px rgba(255,54,93,.84), inset 0 0 12px rgba(255,130,148,.24);
+  filter:drop-shadow(0 0 8px rgba(255,54,93,.84));
 }
 .pushOrderNaviItem.is-wrong{
   opacity:0;
@@ -6587,9 +6563,6 @@ body{
 }
 .pushOrderNavi.is-success .pushOrderNaviItem{
   animation:none;
-  border-color:#78ff9d;
-  background:linear-gradient(180deg,rgba(18,142,79,.98),rgba(4,55,36,.98));
-  box-shadow:0 0 13px rgba(74,255,137,.72), inset 0 0 12px rgba(137,255,177,.22);
 }
 @keyframes pushOrderPulse{
   from{filter:brightness(.96)}
@@ -6959,9 +6932,9 @@ body{
           </div></div>
         </div>
         <div class="pushOrderNavi" id="pushOrderNavi" aria-hidden="true">
-          <div class="pushOrderNaviItem" data-push-reel="0"><video class="pushOrderNaviVideo" muted loop playsinline preload="auto" aria-hidden="true"></video><span class="pushOrderNaviReel">LEFT</span></div>
-          <div class="pushOrderNaviItem" data-push-reel="1"><video class="pushOrderNaviVideo" muted loop playsinline preload="auto" aria-hidden="true"></video><span class="pushOrderNaviReel">CENTER</span></div>
-          <div class="pushOrderNaviItem" data-push-reel="2"><video class="pushOrderNaviVideo" muted loop playsinline preload="auto" aria-hidden="true"></video><span class="pushOrderNaviReel">RIGHT</span></div>
+          <div class="pushOrderNaviItem" data-push-reel="0"><video class="pushOrderNaviVideo" muted loop playsinline preload="auto" aria-hidden="true"></video></div>
+          <div class="pushOrderNaviItem" data-push-reel="1"><video class="pushOrderNaviVideo" muted loop playsinline preload="auto" aria-hidden="true"></video></div>
+          <div class="pushOrderNaviItem" data-push-reel="2"><video class="pushOrderNaviVideo" muted loop playsinline preload="auto" aria-hidden="true"></video></div>
         </div>
         <div class="reelCenterBandLayer" aria-hidden="true">
           <img src="assets/cabinet/parts/rising_part_reel_center_bands.png" alt="">
