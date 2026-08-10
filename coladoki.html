@@ -11,14 +11,11 @@
 <link rel="preload" as="image" href="assets/symbols/sym_suika.png">
 <link rel="preload" as="image" href="assets/symbols/sym_coin.webp">
 <link rel="preload" as="image" href="assets/symbols/sym_grape.png">
-<link rel="preload" as="image" href="assets/symbols/sym_seven.png">
+<link rel="preload" as="image" href="assets/symbols/sym_seven_coladoki.png">
 <link rel="preload" as="image" href="assets/symbols/sym_bar.png">
 <link rel="preload" as="image" href="assets/symbols/sym_replay.png">
 <link rel="preload" as="image" href="assets/cabinet/edit_parts/piero.png">
 <link rel="preload" as="image" href="assets/logo/rising_logo.svg">
-<link rel="preload" as="image" href="assets/ui/rising_chance_lamp_bg.png">
-<link rel="preload" as="image" href="assets/ui/rising_chance_lamp_text.png">
-<link rel="preload" as="image" href="assets/ui/rising_chance_bar_confirm.png">
 <link rel="preload" as="image" href="assets/frames/rising_reel_frame_on.svg">
 <link rel="preload" as="image" href="assets/buttons/btn_auto_gold_transparent.png">
 <link rel="preload" as="image" href="assets/buttons/btn_speed_half_blue.png">
@@ -5194,9 +5191,14 @@ body{
   height:100%;
   z-index:0;
   pointer-events:none;
-  background:url("assets/ui/rising_gogo_chance.png") center / contain no-repeat;
-  opacity:.74;
-  filter:brightness(.17) saturate(1.5) hue-rotate(232deg) drop-shadow(0 8px 8px rgba(0,0,0,.92)) drop-shadow(0 0 7px rgba(55,0,115,.72));
+  border-radius:48% 42% 50% 44%;
+  background:
+    radial-gradient(circle at 28% 28%,rgba(255,255,255,.26) 0 5%,transparent 6%),
+    radial-gradient(circle at 72% 68%,rgba(88,235,255,.42) 0 7%,transparent 8%),
+    linear-gradient(145deg,#ff3e86,#ff1858 48%,#04b9ce 49%,#0879a6);
+  border:3px solid rgba(255,255,255,.9);
+  box-shadow:inset 0 0 0 3px rgba(255,48,116,.72),0 5px 8px rgba(0,0,0,.62),0 0 9px rgba(0,218,255,.54);
+  opacity:1;
 }
 .jagGogoChanceBack{
   position:absolute;
@@ -5207,9 +5209,10 @@ body{
   transform:none;
   z-index:1;
   pointer-events:none;
-  background:url("assets/ui/rising_chance_lamp_bg.png") center / contain no-repeat;
-  opacity:.58;
-  filter:brightness(.28) saturate(1.35) hue-rotate(235deg) drop-shadow(0 8px 8px rgba(0,0,0,.92)) drop-shadow(0 0 6px rgba(38,0,92,.52));
+  border-radius:48% 42% 50% 44%;
+  background:radial-gradient(ellipse at 50% 45%,rgba(70,244,255,.45),rgba(255,54,120,.22) 48%,rgba(43,0,24,.82) 76%);
+  opacity:.78;
+  filter:drop-shadow(0 5px 6px rgba(0,0,0,.7));
 }
 .jagGogoChance::before{
   content:"";
@@ -5233,6 +5236,24 @@ body{
   opacity:1;
   filter:grayscale(.92) brightness(.42) contrast(1.18) drop-shadow(0 5px 5px rgba(0,0,0,.70));
   transition:filter .22s ease, opacity .22s ease;
+}
+.coladokiChanceText,
+.coladokiChanceBar{
+  position:absolute;
+  inset:14% 3% 23%;
+  z-index:2;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  font-family:Impact,"Arial Black",sans-serif;
+  font-size:clamp(10px,2.2cqw,20px);
+  font-weight:1000;
+  line-height:.9;
+  letter-spacing:.02em;
+  text-align:center;
+  transform:rotate(-4deg);
+  text-shadow:2px 2px 0 #8c003d,-1px -1px 0 #00687c,0 0 7px rgba(255,255,255,.84);
+  transition:filter .22s ease,opacity .22s ease;
 }
 .jagGogoChanceBar{
   visibility:hidden;
@@ -5283,6 +5304,10 @@ body{
 .reelArea.jagChanceLit .jagGogoChance img{
   opacity:1;
   filter:saturate(1.24) brightness(1.15) contrast(1.08) drop-shadow(0 0 14px rgba(255,224,56,.88)) drop-shadow(0 0 28px rgba(255,60,24,.62));
+}
+.reelArea.jagChanceLit .coladokiChanceText,
+.reelArea.jagChanceLit .coladokiChanceBar{
+  filter:brightness(1.2) drop-shadow(0 0 8px rgba(255,255,255,.9));
 }
 .jagFrameLamps{
   position:absolute;
@@ -5912,22 +5937,22 @@ body{
   --layout-reels-y:20.4%;
   --layout-reels-w:57.4%;
   --layout-reels-h:56.4%;
-  --layout-chance-x:14.6%;
-  --layout-chance-y:76%;
-  --layout-chance-w:11.9%;
-  --layout-chance-h:22.4%;
-  --layout-credit-x:28%;
-  --layout-credit-y:80.4%;
-  --layout-credit-w:12.2%;
-  --layout-credit-h:22.1%;
-  --layout-count-x:41.6%;
-  --layout-count-y:83.2%;
-  --layout-count-w:12.2%;
-  --layout-count-h:11.2%;
-  --layout-payout-x:57%;
-  --layout-payout-y:83.2%;
-  --layout-payout-w:12.2%;
-  --layout-payout-h:11.2%;
+  --layout-chance-x:5%;
+  --layout-chance-y:78.5%;
+  --layout-chance-w:11.5%;
+  --layout-chance-h:16.5%;
+  --layout-credit-x:29.7%;
+  --layout-credit-y:10.5%;
+  --layout-credit-w:10.6%;
+  --layout-credit-h:8.4%;
+  --layout-count-x:44.6%;
+  --layout-count-y:10.5%;
+  --layout-count-w:10.6%;
+  --layout-count-h:8.4%;
+  --layout-payout-x:59.5%;
+  --layout-payout-y:10.5%;
+  --layout-payout-w:10.6%;
+  --layout-payout-h:8.4%;
   --layout-bonusdata-x:19%;
   --layout-bonusdata-y:6.5%;
   --layout-bonusdata-w:62.9%;
@@ -6017,7 +6042,7 @@ body{
   width:var(--layout-bonusdata-w);
   height:var(--layout-bonusdata-h);
   z-index:47;
-  display:grid;
+  display:none;
   grid-template-columns:1.2fr 1.2fr .82fr .82fr;
   gap:7px;
   padding:5px 8px;
@@ -6243,16 +6268,16 @@ body{
   position:absolute !important;
   left:8% !important;
   right:8% !important;
-  top:8% !important;
-  bottom:auto !important;
+  top:38% !important;
+  bottom:4% !important;
   width:auto !important;
-  height:38% !important;
+  height:auto !important;
   z-index:2 !important;
   display:flex !important;
   align-items:center !important;
   justify-content:flex-end !important;
   font-family:"DSEG7Classic","Courier New",monospace !important;
-  font-size:min(60cqh, 21cqw) !important;
+  font-size:min(56cqh, 23cqw) !important;
   font-weight:400 !important;
   line-height:1 !important;
   letter-spacing:.00em !important;
@@ -6268,7 +6293,7 @@ body{
   display:none;
 }
 .jagPayoutMeterCredit b{
-  font-size:min(60cqh, 18cqw) !important;
+  font-size:min(56cqh, 20cqw) !important;
 }
 .jagGogoChance{
   left:var(--layout-chance-x) !important;
@@ -6508,7 +6533,7 @@ body{
 .pushOrderNavi{
   position:absolute;
   left:var(--layout-reels-x);
-  top:78.2%;
+  top:75.5%;
   width:var(--layout-reels-w);
   display:grid;
   grid-template-columns:repeat(3, 1fr);
@@ -6526,7 +6551,7 @@ body{
   transform:translateY(0);
 }
 .pushOrderNaviItem{
-  min-height:108px;
+  min-height:100px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -6612,15 +6637,10 @@ body{
     <section class="machine normal" id="machine">
       <div class="jagCabinetShell" aria-hidden="true">
         <div class="cabinetPartsScene" aria-hidden="true">
-          <img class="cabinetPart cabinetPartTop" src="assets/cabinet/parts/rising_part_top.png" alt="">
-          <div class="cabinetTopSevenOverlay" aria-hidden="true">
-            <img src="assets/symbols/sym_seven.png" alt="">
-            <img src="assets/symbols/sym_seven.png" alt="">
-            <img src="assets/symbols/sym_seven.png" alt="">
-          </div>
-          <img class="cabinetPart cabinetPartReelBack" src="assets/cabinet/parts/rising_part_reel_back_roles.png" alt="">
-          <img class="cabinetPart cabinetPartControls" src="assets/cabinet/parts/rising_part_controls.png" alt="">
-          <img class="cabinetPart cabinetPartLower" src="assets/cabinet/parts/rising_part_lower.png" alt="">
+          <img class="cabinetPart cabinetPartTop" src="assets/cabinet/parts/coladoki_part_top.png" alt="">
+          <img class="cabinetPart cabinetPartReelBack" src="assets/cabinet/parts/coladoki_part_reel_face.png" alt="">
+          <img class="cabinetPart cabinetPartControls" src="assets/cabinet/parts/coladoki_part_controls.png" alt="">
+          <img class="cabinetPart cabinetPartLower" src="assets/cabinet/parts/coladoki_part_lower.png" alt="">
         </div>
         <div class="jagSideRail jagSideRailLeft"></div>
         <div class="jagSideRail jagSideRailRight"></div>
@@ -6917,7 +6937,7 @@ body{
         <div class="reels">
           <div class="reel" data-reel="0"><div class="window">
             <div class="cell"><img class="symImg barSymImg" src="assets/symbols/sym_bar.png" alt="BAR symbol" loading="eager" decoding="sync" draggable="false"></div>
-            <div class="cell center"><img class="symImg sevenSymImg" src="assets/symbols/sym_seven.png" alt="7 symbol" loading="eager" decoding="sync" draggable="false"></div>
+            <div class="cell center"><img class="symImg sevenSymImg" src="assets/symbols/sym_seven_coladoki.png" alt="7 symbol" loading="eager" decoding="sync" draggable="false"></div>
             <div class="cell"><img class="symImg grapeSymImg" src="assets/symbols/sym_grape.png" alt="grape symbol" loading="eager" decoding="sync" draggable="false"></div>
           </div></div>
           <div class="reel" data-reel="1"><div class="window">
@@ -6936,11 +6956,8 @@ body{
           <div class="pushOrderNaviItem" data-push-reel="1"><video class="pushOrderNaviVideo" muted loop playsinline preload="auto" aria-hidden="true"></video></div>
           <div class="pushOrderNaviItem" data-push-reel="2"><video class="pushOrderNaviVideo" muted loop playsinline preload="auto" aria-hidden="true"></video></div>
         </div>
-        <div class="reelCenterBandLayer" aria-hidden="true">
-          <img src="assets/cabinet/parts/rising_part_reel_center_bands.png" alt="">
-        </div>
         <div class="cabinetFrontParts" aria-hidden="true">
-          <img class="cabinetPart cabinetPartReelFront" src="assets/cabinet/parts/rising_part_reel_front_roles.png" alt="">
+          <img class="cabinetPart cabinetPartReelFront" src="assets/cabinet/parts/coladoki_part_reel_face.png" alt="">
         </div>
         <div class="jagBonusDataMeters" aria-label="BONUS GAME DATA">
           <div class="jagBonusDataMeter">
@@ -6960,10 +6977,10 @@ body{
             <b id="jagRegDataMeter">000</b>
           </div>
         </div>
-        <div class="jagGogoChance" id="jagGogoChance" aria-label="GOGO CHANCE">
+        <div class="jagGogoChance" id="jagGogoChance" aria-label="COLADOKI CHANCE">
           <span class="jagGogoChanceBack" aria-hidden="true"></span>
-          <img class="jagGogoChanceText" src="assets/ui/rising_chance_lamp_text.png" alt="COLADOKI CHANCE" loading="eager" decoding="async" draggable="false">
-          <img class="jagGogoChanceBar" src="assets/ui/rising_chance_bar_confirm.png" alt="BAR COLADOKI CHANCE" loading="eager" decoding="async" draggable="false">
+          <span class="jagGogoChanceText coladokiChanceText" aria-hidden="true">COLADOKI!</span>
+          <span class="jagGogoChanceBar coladokiChanceBar" aria-hidden="true">COLADOKI!</span>
           <span class="jagGogoChanceLabel">CHANCE</span>
         </div>
         <div class="jagFrameLamps" aria-hidden="true">
@@ -7454,7 +7471,7 @@ body{
   const SUICA_IMAGE_SRC = "assets/symbols/sym_suika.png";
   const CHERRY_IMAGE_SRC = "assets/symbols/sym_cherry.png";
   const BELL_IMAGE_SRC = "assets/symbols/sym_bell.png";
-  const SEVEN_IMAGE_SRC = "assets/symbols/sym_seven.png";
+  const SEVEN_IMAGE_SRC = "assets/symbols/sym_seven_coladoki.png";
   const MISS_IMAGE_SRC = "assets/symbols/sym_coin.webp";
   const GRAPE_IMAGE_SRC = "assets/symbols/sym_grape.png";
   const BAR_IMAGE_SRC = "assets/symbols/sym_bar.png";
@@ -8106,8 +8123,8 @@ body{
   if(SLOT_DEBUG_ENABLED) document.body.classList.add("debugMode");
   const PAGE_ZOOM_STORAGE_KEY = "jag_unified_page_zoom_v3";
   const PAGE_PAN_STORAGE_KEY = "jag_unified_page_pan_x_v3";
-  const LAYOUT_EDIT_STORAGE_KEY = "jag_layout_editor_v3";
-  const LAYOUT_DEFAULT_STORAGE_KEY = "jag_layout_default_v3";
+  const LAYOUT_EDIT_STORAGE_KEY = "coladoki_layout_editor_v4";
+  const LAYOUT_DEFAULT_STORAGE_KEY = "coladoki_layout_default_v4";
   const LAYOUT_EDITOR_ENABLED = true;
   const PAGE_STAGE_WIDTH = 1360;
   const PAGE_ZOOM_MIN = 0.75;
@@ -8128,10 +8145,10 @@ body{
   const BG_LOGO_LOWER_ANCHOR_Y = 742;
   const LAYOUT_DEFAULTS = Object.freeze({
     reels:{x:20.6, y:20.4, w:57.4, h:56.4},
-    chance:{x:14.6, y:76.0, w:11.9, h:22.4},
-    credit:{x:28.0, y:80.4, w:12.2, h:22.1},
-    count:{x:41.6, y:83.2, w:12.2, h:11.2},
-    payout:{x:57.0, y:83.2, w:12.2, h:11.2},
+    chance:{x:5.0, y:78.5, w:11.5, h:16.5},
+    credit:{x:29.7, y:10.5, w:10.6, h:8.4},
+    count:{x:44.6, y:10.5, w:10.6, h:8.4},
+    payout:{x:59.5, y:10.5, w:10.6, h:8.4},
     bonusdata:{x:19.0, y:6.5, w:62.9, h:13.3}
   });
   let pageZoom = 1;
