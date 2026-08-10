@@ -1286,6 +1286,32 @@ body.layoutEditOpen .jagBonusDataMeters{
   object-fit:cover;
   filter:saturate(1.16) brightness(1.04) contrast(.98);
 }
+.atNaviLayer{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:min(72%, 760px);
+  aspect-ratio:1 / 1;
+  transform:translate(-50%, -50%) scale(.98);
+  display:grid;
+  place-items:center;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  z-index:74;
+  transition:opacity .12s ease, visibility .12s ease, transform .12s ease;
+}
+.atNaviLayer.show{
+  opacity:1;
+  visibility:visible;
+  transform:translate(-50%, -50%) scale(1);
+}
+.atNaviLayer video{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 0 18px rgba(255,255,255,.35)) saturate(1.08) contrast(1.03);
+}
 .devilRushEntryLayer{
   position:absolute;
   left:12.7%;
@@ -6826,6 +6852,9 @@ body{
         <div class="premiumBigReelMovie" id="premiumBigReelMovie" aria-hidden="true">
           <video muted loop playsinline preload="auto"></video>
         </div>
+        <div class="atNaviLayer" id="atNaviLayer" aria-hidden="true">
+          <video id="atNaviVideo" muted loop playsinline preload="auto"></video>
+        </div>
         <div class="wd-public-panels wd-st-status-panel wd-reel-data-panel" id="bonus-info">
           <div class="wd-st-emblem" id="wdStEmblem">通常A<br>999G</div>
           <div class="wd-st-readout">
@@ -7393,6 +7422,18 @@ body{
   const PIERROT_IMAGE_SRC = "assets/cabinet/edit_parts/piero.png";
   const USER_FACE_SRC = "assets/symbols/sym_hourglass.png";
   const REPLAY_IMAGE_SRC = "assets/symbols/sym_replay.png";
+  const AT_NAVI_VIDEO_SRCS = Object.freeze({
+    bell:[
+      "assets/effects/at_navi/bell_1.webm",
+      "assets/effects/at_navi/bell_2.webm",
+      "assets/effects/at_navi/bell_3.webm"
+    ],
+    replay:[
+      "assets/effects/at_navi/replay_1.webm",
+      "assets/effects/at_navi/replay_2.webm",
+      "assets/effects/at_navi/replay_3.webm"
+    ]
+  });
   const SYMBOL_IMAGE_SRCS = Object.freeze([
     SUICA_IMAGE_SRC,
     CHERRY_IMAGE_SRC,
@@ -7906,6 +7947,8 @@ body{
   const bonusConfirmLayer = $("bonusConfirmLayer");
   const devilZoneConfirmLayer = $("devilZoneConfirmLayer");
   const reversePushGuideLayer = $("reversePushGuideLayer");
+  const atNaviLayer = $("atNaviLayer");
+  const atNaviVideo = $("atNaviVideo");
   const devilRushEntryLayer = $("devilRushEntryLayer");
   const devilRushEntryImage = $("devilRushEntryImage");
   const rogiBlackoutLayer = $("rogiBlackoutLayer");
@@ -9217,6 +9260,66 @@ body{
     });
   }
 
+  function atNaviKindForResult(result){
+    if(result === "REPLAY") return "replay";
+    if(result === "BELL" || result === "BELL3") return "bell";
+    return "";
+  }
+
+  function atNaviSrcFor(kind, index){
+    const list = AT_NAVI_VIDEO_SRCS[kind];
+    if(!Array.isArray(list) || list.length === 0) return "";
+    const safeIndex = Math.max(0, Math.min(list.length - 1, Math.round(Number(index) || 1) - 1));
+    return list[safeIndex] || "";
+  }
+
+  function shouldShowAtNaviForSpin(spin=currentSpin){
+    return !!(
+      spin &&
+      spin.atSpinAtStart &&
+      !spin.zoneActiveAtStart &&
+      !spin.battleActiveAtStart &&
+      !spin.aTypeBonusActiveAtStart &&
+      atNaviKindForResult(spin.result)
+    );
+  }
+
+  function showAtNavi(kind, index=1){
+    if(!atNaviLayer || !atNaviVideo) return false;
+    if(speedModeVisualsSuppressed()) return false;
+    const src = atNaviSrcFor(kind, index);
+    if(!src) return false;
+    if(atNaviVideo.getAttribute("src") !== src){
+      atNaviVideo.setAttribute("src", src);
+      try{ atNaviVideo.load(); }catch(e){}
+    }
+    atNaviVideo.loop = true;
+    atNaviVideo.muted = true;
+    atNaviVideo.playsInline = true;
+    try{ atNaviVideo.currentTime = 0; }catch(e){}
+    atNaviLayer.classList.add("show");
+    atNaviLayer.setAttribute("aria-hidden", "false");
+    try{
+      const p = atNaviVideo.play();
+      if(p && typeof p.catch === "function") p.catch(()=>{});
+    }catch(e){}
+    return true;
+  }
+
+  function showAtNaviForSpin(spin=currentSpin){
+    if(!shouldShowAtNaviForSpin(spin)) return false;
+    return showAtNavi(atNaviKindForResult(spin.result), spin.atNaviIndex);
+  }
+
+  function hideAtNavi(){
+    if(!atNaviLayer) return;
+    atNaviLayer.classList.remove("show");
+    atNaviLayer.setAttribute("aria-hidden", "true");
+    if(atNaviVideo){
+      try{ atNaviVideo.pause(); }catch(e){}
+    }
+  }
+
   function shouldShowDevilZoneFireVideos(){
     const highNormal = !session.active && isHighMode();
     return !debugFastSpinActive && (isGoraiZoneActive() || highNormal);
@@ -9463,6 +9566,7 @@ body{
 
   function clearReelVideos(options={}){
     const forceReversePush = !!(options && options.forceReversePush);
+    hideAtNavi();
     clearBellZakoVideos();
     [0,1,2].forEach(hideReelVideo);
     if(forceReversePush || !shouldKeepReversePushGuide()){
@@ -14636,6 +14740,8 @@ body{
       aTypeBonusActiveAtStart:aTypeBonusActiveAtSpinStart,
       zoneType:zoneActiveAtSpinStart ? currentGoraiZoneType() : "",
       battleActiveAtStart:battleActiveAtSpinStart,
+      atSpinAtStart,
+      atNaviIndex:randomInt(1, 3),
       normalActiveAtStart:normalActiveAtSpinStart,
       speedModeAtStart:speedModeSpinAtStart,
       autoStopAtStart:autoPlay,
@@ -14692,6 +14798,7 @@ body{
     if(reversePushGuide){
       showReversePushGuide(reversePushGuide);
     }
+    showAtNaviForSpin(currentSpin);
     if(currentSpin.bonusAnnouncementTiming === "lever"){
       lightBonusAnnouncement(currentSpin, "lever");
     }
