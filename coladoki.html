@@ -5992,10 +5992,22 @@ body{
   pointer-events:none;
   user-select:none;
 }
-.cabinetPartTop{top:0;}
-.cabinetPartReelBack{top:466px;}
-.cabinetPartControls{top:944px;}
-.cabinetPartLower{top:1129px;}
+.cabinetPartChassis{
+  inset:0;
+  height:var(--jag-cabinet-height);
+  object-fit:fill;
+  z-index:0;
+  filter:saturate(.82) contrast(1.02);
+}
+.cabinetPartTop{top:0;z-index:2;}
+.cabinetPartReelBack{top:466px;z-index:2;}
+.cabinetPartControls{top:899px;z-index:3;}
+.cabinetPartLower{
+  left:5%;
+  top:1134px;
+  width:90%;
+  z-index:2;
+}
 .cabinetTopSevenOverlay{
   position:absolute;
   left:18.8%;
@@ -6324,7 +6336,7 @@ body{
   opacity:.01 !important;
 }
 .playControls .betArea{
-  left:23.7% !important;
+  left:15.1% !important;
   top:65.1% !important;
   width:11.5% !important;
   height:8.0% !important;
@@ -6442,8 +6454,8 @@ body{
   background-size:contain;
 }
 .cabinetStartLever{
-  left:23.7%;
-  top:65.1%;
+  left:15.1%;
+  top:61.1%;
   width:15.4%;
   height:15.4%;
   transform:translate(-50%, -50%);
@@ -6452,7 +6464,7 @@ body{
   transition:top .09s ease, transform .09s ease, filter .09s ease;
 }
 .playControls.leverDown .cabinetStartLever{
-  top:66.3%;
+  top:62.3%;
   transform:translate(-50%, -50%) rotate(4deg) scale(.985);
   filter:brightness(.92) drop-shadow(0 2px 3px rgba(0,0,0,.46));
 }
@@ -6502,8 +6514,8 @@ body{
   transform:scale(.92);
 }
 .playControls .autoArea{
-  left:72.7% !important;
-  top:65.1% !important;
+  left:84.1% !important;
+  top:62.0% !important;
   width:8.2% !important;
   height:auto !important;
   aspect-ratio:1 / 1 !important;
@@ -6640,9 +6652,10 @@ body{
     <section class="machine normal" id="machine">
       <div class="jagCabinetShell" aria-hidden="true">
         <div class="cabinetPartsScene" aria-hidden="true">
+          <img class="cabinetPart cabinetPartChassis" src="assets/cabinet/parts/coladoki_part_chassis_v3.png" alt="">
           <img class="cabinetPart cabinetPartTop" src="assets/cabinet/parts/coladoki_part_top_v2.png" alt="">
           <img class="cabinetPart cabinetPartReelBack" src="assets/cabinet/parts/coladoki_part_reel_face_v2.png" alt="">
-          <img class="cabinetPart cabinetPartControls" src="assets/cabinet/parts/coladoki_part_controls_v2.png" alt="">
+          <img class="cabinetPart cabinetPartControls" src="assets/cabinet/parts/coladoki_part_controls_v3.png" alt="">
           <img class="cabinetPart cabinetPartLower" src="assets/cabinet/parts/coladoki_part_lower_v2.png" alt="">
         </div>
         <div class="jagSideRail jagSideRailLeft"></div>
