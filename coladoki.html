@@ -8130,13 +8130,13 @@ body{
   const ADMIN_COMMAND_LAST_ID_KEY = "jag_admin_command_last_id_" + machineId;
   let adminCommandLastId = Number(safeStorageGet(ADMIN_COMMAND_LAST_ID_KEY) || 0) || 0;
   const ADMIN_STATE_PUSH_INTERVAL_MS = 5000;
-  const SLOT_DEBUG_ENABLED = adminParams.get("debug") === "1";
+  const SLOT_DEBUG_ENABLED = true;
   const CREDIT_BASELINE_PROFIT = Number(adminParams.get("creditBaseline") || 0) || 0;
   const PLAY_SESSION_ID = bootPlaySessionId;
   const SLOT_PLAY_SESSION = adminParams.has("creditBaseline") || !!PLAY_SESSION_ID;
   const PLAY_SESSION_BASELINE_STORAGE_KEY = PLAY_SESSION_ID ? `jag_play_session_baseline_${PLAY_SESSION_ID}` : "";
   let playSessionStartStats = null;
-  if(SLOT_DEBUG_ENABLED) document.body.classList.add("debugMode");
+  if(SLOT_DEBUG_ENABLED) document.body.classList.add("debugMode", "debugOpen");
   const PAGE_ZOOM_STORAGE_KEY = "jag_unified_page_zoom_v3";
   const PAGE_PAN_STORAGE_KEY = "jag_unified_page_pan_x_v3";
   const LAYOUT_EDIT_STORAGE_KEY = "coladoki_layout_editor_v6";
