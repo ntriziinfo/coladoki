@@ -5933,26 +5933,26 @@ body{
   --jag-cabinet-height:1610px;
   --jag-reel-top:466px;
   --jag-reel-height:478px;
-  --layout-reels-x:23.4%;
-  --layout-reels-y:20.3%;
-  --layout-reels-w:52.9%;
-  --layout-reels-h:49%;
-  --layout-chance-x:5%;
-  --layout-chance-y:78.5%;
-  --layout-chance-w:11.5%;
-  --layout-chance-h:16.5%;
-  --layout-credit-x:30.5%;
-  --layout-credit-y:9.3%;
-  --layout-credit-w:11.2%;
-  --layout-credit-h:8.4%;
-  --layout-count-x:44%;
-  --layout-count-y:9.3%;
-  --layout-count-w:11.6%;
-  --layout-count-h:8.4%;
-  --layout-payout-x:58.3%;
-  --layout-payout-y:9.3%;
-  --layout-payout-w:11.2%;
-  --layout-payout-h:8.4%;
+  --layout-reels-x:14%;
+  --layout-reels-y:25.1%;
+  --layout-reels-w:72%;
+  --layout-reels-h:46.2%;
+  --layout-chance-x:16%;
+  --layout-chance-y:79%;
+  --layout-chance-w:11%;
+  --layout-chance-h:12%;
+  --layout-credit-x:20.5%;
+  --layout-credit-y:8.7%;
+  --layout-credit-w:16.8%;
+  --layout-credit-h:9%;
+  --layout-count-x:43.2%;
+  --layout-count-y:8.7%;
+  --layout-count-w:13.6%;
+  --layout-count-h:9%;
+  --layout-payout-x:62.8%;
+  --layout-payout-y:8.7%;
+  --layout-payout-w:16.5%;
+  --layout-payout-h:9%;
   --layout-bonusdata-x:19%;
   --layout-bonusdata-y:6.5%;
   --layout-bonusdata-w:62.9%;
@@ -6003,9 +6003,9 @@ body{
 .cabinetPartReelBack{top:466px;z-index:2;}
 .cabinetPartControls{top:899px;z-index:3;}
 .cabinetPartLower{
-  left:5%;
-  top:1134px;
-  width:90%;
+  left:11%;
+  top:1114px;
+  width:78%;
   z-index:2;
 }
 .cabinetTopSevenOverlay{
@@ -6165,13 +6165,13 @@ body{
   bottom:auto !important;
   width:var(--layout-reels-w) !important;
   height:var(--layout-reels-h) !important;
-  padding-top:10px !important;
-  padding-bottom:2px !important;
+  padding-top:0 !important;
+  padding-bottom:0 !important;
   box-sizing:border-box !important;
-  gap:5.9% !important;
+  gap:3.2% !important;
   z-index:3 !important;
   overflow:hidden !important;
-  border-radius:32px !important;
+  border-radius:6px !important;
   background:#07090b !important;
   filter:drop-shadow(0 4px 5px rgba(0,0,0,.34)) !important;
 }
@@ -6653,10 +6653,10 @@ body{
       <div class="jagCabinetShell" aria-hidden="true">
         <div class="cabinetPartsScene" aria-hidden="true">
           <img class="cabinetPart cabinetPartChassis" src="assets/cabinet/parts/coladoki_part_chassis_v4.png" alt="">
-          <img class="cabinetPart cabinetPartTop" src="assets/cabinet/parts/coladoki_part_top_v2.png" alt="">
-          <img class="cabinetPart cabinetPartReelBack" src="assets/cabinet/parts/coladoki_part_reel_face_v2.png" alt="">
+          <img class="cabinetPart cabinetPartTop" src="assets/cabinet/parts/coladoki_part_top_v3.png" alt="">
+          <img class="cabinetPart cabinetPartReelBack" src="assets/cabinet/parts/coladoki_part_reel_face_v3.png" alt="">
           <img class="cabinetPart cabinetPartControls" src="assets/cabinet/parts/coladoki_part_controls_v3.png" alt="">
-          <img class="cabinetPart cabinetPartLower" src="assets/cabinet/parts/coladoki_part_lower_v2.png" alt="">
+          <img class="cabinetPart cabinetPartLower" src="assets/cabinet/parts/coladoki_part_lower_v3.png" alt="">
         </div>
         <div class="jagSideRail jagSideRailLeft"></div>
         <div class="jagSideRail jagSideRailRight"></div>
@@ -6973,7 +6973,7 @@ body{
           <div class="pushOrderNaviItem" data-push-reel="2"><video class="pushOrderNaviVideo" muted loop playsinline preload="auto" aria-hidden="true"></video></div>
         </div>
         <div class="cabinetFrontParts" aria-hidden="true">
-          <img class="cabinetPart cabinetPartReelFront" src="assets/cabinet/parts/coladoki_part_reel_face_v2.png" alt="">
+          <img class="cabinetPart cabinetPartReelFront" src="assets/cabinet/parts/coladoki_part_reel_face_v3.png" alt="">
         </div>
         <div class="jagBonusDataMeters" aria-label="BONUS GAME DATA">
           <div class="jagBonusDataMeter">
@@ -8139,8 +8139,8 @@ body{
   if(SLOT_DEBUG_ENABLED) document.body.classList.add("debugMode");
   const PAGE_ZOOM_STORAGE_KEY = "jag_unified_page_zoom_v3";
   const PAGE_PAN_STORAGE_KEY = "jag_unified_page_pan_x_v3";
-  const LAYOUT_EDIT_STORAGE_KEY = "coladoki_layout_editor_v5";
-  const LAYOUT_DEFAULT_STORAGE_KEY = "coladoki_layout_default_v5";
+  const LAYOUT_EDIT_STORAGE_KEY = "coladoki_layout_editor_v6";
+  const LAYOUT_DEFAULT_STORAGE_KEY = "coladoki_layout_default_v6";
   const LAYOUT_EDITOR_ENABLED = true;
   const PAGE_STAGE_WIDTH = 1360;
   const PAGE_ZOOM_MIN = 0.75;
@@ -8160,11 +8160,11 @@ body{
   const BG_ORANGE_LOGO_ANCHOR_X = 964;
   const BG_LOGO_LOWER_ANCHOR_Y = 742;
   const LAYOUT_DEFAULTS = Object.freeze({
-    reels:{x:23.4, y:20.3, w:52.9, h:49.0},
-    chance:{x:5.0, y:78.5, w:11.5, h:16.5},
-    credit:{x:30.5, y:9.3, w:11.2, h:8.4},
-    count:{x:44.0, y:9.3, w:11.6, h:8.4},
-    payout:{x:58.3, y:9.3, w:11.2, h:8.4},
+    reels:{x:14.0, y:25.1, w:72.0, h:46.2},
+    chance:{x:16.0, y:79.0, w:11.0, h:12.0},
+    credit:{x:20.5, y:8.7, w:16.8, h:9.0},
+    count:{x:43.2, y:8.7, w:13.6, h:9.0},
+    payout:{x:62.8, y:8.7, w:16.5, h:9.0},
     bonusdata:{x:19.0, y:6.5, w:62.9, h:13.3}
   });
   let pageZoom = 1;
