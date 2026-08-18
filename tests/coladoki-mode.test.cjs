@@ -16,6 +16,20 @@ assert.equal(70 * mode.atGrossPayout("BIG") - 70 * mode.AT_PAYOUT_SPEC.spinCost,
 assert.equal(30 * mode.atGrossPayout("MID", ()=>0) - 30 * mode.AT_PAYOUT_SPEC.spinCost, 60);
 assert.equal(30 * mode.atGrossPayout("MID", ()=>1) - 30 * mode.AT_PAYOUT_SPEC.spinCost, 90);
 assert.equal(mode.AT_PAYOUT_SPEC.pushOrderMissPayout, 2);
+assert.equal(mode.atRolePayout("MISS"), 0);
+assert.equal(mode.atRolePayout("BELL"), 10);
+assert.equal(mode.atRolePayout("REPLAY"), 3);
+for(const [kind, expectedMiss, expectedNet] of [["BIG",0.05,210],["MID",0.10,75]]){
+  const rates = mode.bonusRoleRates(kind);
+  const totalRate = Object.values(rates).reduce((sum,rate)=>sum + rate, 0);
+  const grossPerGame = Object.entries(rates).reduce((sum,[result,rate])=>sum + mode.atRolePayout(result) * rate, 0);
+  assert.ok(Math.abs(totalRate - 1) < 1e-12, `${kind} bonus role rates total 1`);
+  assert.ok(Math.abs(rates.MISS - expectedMiss) < 1e-12, `${kind} miss rate`);
+  assert.ok(Math.abs(mode.bonusGames(kind) * (grossPerGame - mode.AT_PAYOUT_SPEC.spinCost) - expectedNet) < 1e-9, `${kind} expected net payout`);
+}
+assert.notEqual(mode.drawBonusResult("BIG", ()=>0.5), "MISS");
+assert.equal(mode.drawBonusResult("BIG", ()=>0.999999), "MISS");
+assert.equal(mode.drawBonusResult("MID", ()=>0.999999), "MISS");
 assert.equal(mode.PUSH_ORDER_PERMUTATIONS.length, 6);
 assert.equal(new Set(mode.PUSH_ORDER_PERMUTATIONS.map(order=>order.join(""))).size, 6);
 assert.deepEqual(mode.randomPushOrder(()=>0), [0, 1, 2]);

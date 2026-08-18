@@ -172,6 +172,25 @@
     regGrossHigh:6,
     pushOrderMissPayout:2
   });
+  const AT_ROLE_PAYOUTS = Object.freeze({
+    MISS:0,
+    BELL:10,
+    BELL3:3,
+    REPLAY:3,
+    SUICA:3,
+    CHERRY_ANY:5,
+    CHERRY_DOUBLE:5,
+    CHERRY_TRIPLE:5,
+    BAR3:0
+  });
+  const BONUS_MISS_RATES = Object.freeze({BIG:0.05,MID:0.10});
+  const BONUS_RARE_ROLES = Object.freeze([
+    Object.freeze(["CHERRY_TRIPLE", NORMAL_ROLE_PROBABILITIES.middleCherry]),
+    Object.freeze(["CHERRY_DOUBLE", NORMAL_ROLE_PROBABILITIES.confirmedCherry]),
+    Object.freeze(["BAR3", NORMAL_ROLE_PROBABILITIES.confirmedRole]),
+    Object.freeze(["SUICA", NORMAL_ROLE_PROBABILITIES.suika]),
+    Object.freeze(["CHERRY_ANY", NORMAL_ROLE_PROBABILITIES.cherry])
+  ]);
   const PUSH_ORDER_PERMUTATIONS = Object.freeze([
     Object.freeze([0, 1, 2]),
     Object.freeze([0, 2, 1]),
@@ -272,6 +291,41 @@
     if(kind === "MID") return rng() < 0.5 ? AT_PAYOUT_SPEC.regGrossLow : AT_PAYOUT_SPEC.regGrossHigh;
     return AT_PAYOUT_SPEC.bigGrossPerGame;
   }
+  function atRolePayout(result){ return AT_ROLE_PAYOUTS[result] || 0; }
+  function bonusRoleRates(kind){
+    const bonusKind = kind === "MID" ? "MID" : "BIG";
+    const targetGross = bonusKind === "MID"
+      ? (AT_PAYOUT_SPEC.regGrossLow + AT_PAYOUT_SPEC.regGrossHigh) / 2
+      : AT_PAYOUT_SPEC.bigGrossPerGame;
+    const miss = BONUS_MISS_RATES[bonusKind];
+    const rareRate = BONUS_RARE_ROLES.reduce((sum,entry)=>sum + entry[1], 0);
+    const rareGross = BONUS_RARE_ROLES.reduce((sum,entry)=>sum + entry[1] * atRolePayout(entry[0]), 0);
+    const baseRate = Math.max(0, 1 - rareRate - miss);
+    const replayPayout = atRolePayout("REPLAY");
+    const bellPayout = atRolePayout("BELL");
+    const bell = Math.max(0, Math.min(baseRate, (targetGross - rareGross - replayPayout * baseRate) / (bellPayout - replayPayout)));
+    const replay = Math.max(0, baseRate - bell);
+    return Object.freeze({
+      CHERRY_TRIPLE:NORMAL_ROLE_PROBABILITIES.middleCherry,
+      CHERRY_DOUBLE:NORMAL_ROLE_PROBABILITIES.confirmedCherry,
+      BAR3:NORMAL_ROLE_PROBABILITIES.confirmedRole,
+      SUICA:NORMAL_ROLE_PROBABILITIES.suika,
+      CHERRY_ANY:NORMAL_ROLE_PROBABILITIES.cherry,
+      BELL:bell,
+      REPLAY:replay,
+      MISS:miss
+    });
+  }
+  function drawBonusResult(kind, rng=Math.random){
+    const rates = bonusRoleRates(kind);
+    const roll = Math.max(0, Math.min(0.999999999999, Number(rng()) || 0));
+    let cursor = 0;
+    for(const result of ["CHERRY_TRIPLE","CHERRY_DOUBLE","BAR3","SUICA","CHERRY_ANY","BELL","REPLAY"]){
+      cursor += rates[result] || 0;
+      if(roll < cursor) return result;
+    }
+    return "MISS";
+  }
   function expectedBonusNet(kind){
     if(kind === "MID"){
       const averageGross = (AT_PAYOUT_SPEC.regGrossLow + AT_PAYOUT_SPEC.regGrossHigh) / 2;
@@ -314,6 +368,8 @@
     LONG_FREEZE_RATES,
     BONUS_STOCK_RATES,
     AT_PAYOUT_SPEC,
+    AT_ROLE_PAYOUTS,
+    BONUS_MISS_RATES,
     PUSH_ORDER_PERMUTATIONS,
     validMode,
     modeLabel,
@@ -329,6 +385,9 @@
     stockRate,
     bonusGames,
     atGrossPayout,
+    atRolePayout,
+    bonusRoleRates,
+    drawBonusResult,
     expectedBonusNet,
     randomPushOrder,
     isPushOrderCorrect,

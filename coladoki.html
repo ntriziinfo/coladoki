@@ -7180,7 +7180,7 @@ body{
           <input id="bigMulInput" type="number" min="0" max="1000" step="1" value="70" readonly />
         </div>
         <div class="help">
-          BIGは70G・純増3pt/Gで210pt。REGは30G・純増2～3pt/Gで60～90pt（平均75pt）。どちらも消化中に1G連ストックを抽選します。
+          ボーナス中はベル10pt・リプレイ3pt・通常ハズレ0pt。BIGは70G・平均純増3pt/Gで210pt、REGは30G・平均75pt。押し順ミス時のみ不成立で2ptになります。
         </div>
       </div>
 
@@ -11302,22 +11302,7 @@ body{
     }
     if(COLADOKI_MODE && session.active){
       if(pendingForceResult && RESULT[pendingForceResult]) return pendingForceResult;
-      const odds = COLADOKI.NORMAL_ROLE_PROBABILITIES;
-      let roll = Math.random();
-      if(roll < odds.middleCherry) return "CHERRY_TRIPLE";
-      roll -= odds.middleCherry;
-      if(roll < odds.confirmedCherry) return "CHERRY_DOUBLE";
-      roll -= odds.confirmedCherry;
-      if(roll < odds.confirmedRole) return "BAR3";
-      roll -= odds.confirmedRole;
-      if(roll < odds.suika) return "SUICA";
-      roll -= odds.suika;
-      if(roll < odds.cherry) return "CHERRY_ANY";
-      roll -= odds.cherry;
-      if(roll < odds.bell) return "BELL";
-      roll -= odds.bell;
-      if(roll < odds.replay) return "REPLAY";
-      return "MISS";
+      return COLADOKI.drawBonusResult(session.bonusKind);
     }
     if(pendingForceResult && RESULT[pendingForceResult]){
       return atInternalResult(pendingForceResult);
@@ -12759,7 +12744,7 @@ body{
     if(COLADOKI_MODE && session.active){
       const stockRate = COLADOKI.stockRate(result);
       return {
-        reward:COLADOKI.atGrossPayout(session.bonusKind),
+        reward:COLADOKI.atRolePayout(result),
         add:0,
         sets:Math.random() < stockRate ? 1 : 0,
         bigZone:0,
@@ -13567,7 +13552,7 @@ body{
     if($("stInfoViewLegacy")) $("stInfoViewLegacy").textContent = stInfoText;
     if($("adminStInfoView")) $("adminStInfoView").textContent = stInfoText;
     const payoutScaleText = COLADOKI_MODE
-      ? `通常→小役直撃or規定G数 / BIG 70G・純増210pt / REG 30G・純増60～90pt（平均75pt） / ボーナス中は1G連ストック抽選 / 天国以上は32G以内`
+      ? `通常→小役直撃or規定G数 / BONUS中:ベル10pt・リプレイ3pt・ハズレ0pt・押し順ミス2pt / BIG 70G・平均純増210pt / REG 30G・平均75pt / 1G連ストック抽選`
       : A_TYPE_MODE
       ? `Aタイプ:BB純増${A_TYPE_PAYOUTS.BIG}pt/RB純増${A_TYPE_PAYOUTS.MID}pt/ブドウ${A_TYPE_PAYOUTS.GRAPE}pt/ベル${A_TYPE_PAYOUTS.BELL}pt/ゾウリプレイ${A_TYPE_PAYOUTS.REPLAY}pt/宗介特殊役${A_TYPE_PAYOUTS.SMALL}pt/チェリー中段1pt・上下段2pt`
       : `通常:ベル${NORMAL_ROLE_PAYOUTS.BELL}pt/スイカ${NORMAL_ROLE_PAYOUTS.SUICA}pt/チェリー${NORMAL_ROLE_PAYOUTS.CHERRY_ANY}pt/リプレイ${NORMAL_ROLE_PAYOUTS.REPLAY}pt/REG${NORMAL_ROLE_PAYOUTS.MID}pt / 通常小役${Math.round(NORMAL_ROLE_RATE * 100)}% / 高確小役${Math.round(HIGH_ROLE_RATE * 100)}% / ATベル${ROLE_PAYOUTS.BELL}pt/斜めベル${ROLE_PAYOUTS.BELL3}pt / 平均継続${formatRate(averageContinuationRate(settings.setting))}`;
