@@ -7834,6 +7834,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
 <audio id="barBgm" loop preload="auto"></audio>
 <audio id="voiceSound" preload="auto"></audio>
 
+<script src="coladoki-reels.js"></script>
 <script src="coladoki-mode.js"></script>
 <script>
 (function(){
@@ -8015,6 +8016,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   const GRAPE_SYMBOL = "🍇";
   const BELL_SYMBOL = "🔔";
   const BLANK_SYMBOL = "__BLANK__";
+  const SUICA_SYMBOL = "🍋";
   const SUICA_IMAGE_SRC = "assets/symbols/sym_suika.png";
   const CHERRY_IMAGE_SRC = "assets/symbols/sym_cherry.png";
   const BELL_IMAGE_SRC = "assets/symbols/sym_bell.png";
@@ -8078,7 +8080,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     BELL:{name:"ベル", reel:[BELL_SYMBOL,BELL_SYMBOL,BELL_SYMBOL], label:"BELL", cls:"gold", kind:"pay"},
     BELL3:{name:"斜めベル", reel:[BELL_SYMBOL,BELL_SYMBOL,BELL_SYMBOL], label:"", cls:"gold", kind:"pay"},
     REPLAY:{name:"リプレイ", reel:[ELEPHANT_SYMBOL,ELEPHANT_SYMBOL,ELEPHANT_SYMBOL], label:"REPLAY", cls:"blue", kind:"pay"},
-    SUICA:{name:"スイカ揃い", reel:["🍋","🍋","🍋"], label:"SUICA", cls:"green", kind:"pay"},
+    SUICA:{name:"スイカ揃い", reel:[SUICA_SYMBOL,SUICA_SYMBOL,SUICA_SYMBOL], label:"SUICA", cls:"green", kind:"pay"},
     CHERRY_ANY:{name:"チェリー", reel:[CHERRY_SYMBOL,PIERROT_SYMBOL,GRAPE_SYMBOL], label:"CHERRY", cls:"red", kind:"payadd"},
     CHERRY_DOUBLE:{name:"チェリー2連", reel:[CHERRY_SYMBOL,CHERRY_SYMBOL,ELEPHANT_SYMBOL], label:"CHERRY×2", cls:"red", kind:"add"},
     CHERRY_TRIPLE:{name:"チェリー3つ", reel:[CHERRY_SYMBOL,CHERRY_SYMBOL,CHERRY_SYMBOL], label:"CHERRY×3", cls:"red", kind:"payadd"}
@@ -10086,6 +10088,12 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   }
 
   function pushOrderMissColumn(spin, reelIndex, columnSymbols){
+    if(COLADOKI_MODE){
+      if(!Array.isArray(spin?.pushOrderMissGrid)){
+        spin.pushOrderMissGrid = buildPhysicalReelGrid("MISS", 1);
+      }
+      return [0,1,2].map(row=>spin.pushOrderMissGrid[row][reelIndex]);
+    }
     const column = Array.isArray(columnSymbols) ? [...columnSymbols] : ["BAR", GRAPE_SYMBOL, PIERROT_SYMBOL];
     const rawRow = Number(spin && spin.lineRow);
     const row = Number.isFinite(rawRow) ? Math.max(0, Math.min(2, Math.round(rawRow))) : 1;
@@ -14759,12 +14767,18 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     div.innerHTML = cellHtml(symbol, label, cls);
   }
 
-  const REEL_STRIPS = [
-    // Reference rows 21 -> 1, top to bottom.
-    [BELL_SYMBOL,"7",ELEPHANT_SYMBOL,GRAPE_SYMBOL,ELEPHANT_SYMBOL,GRAPE_SYMBOL,"BAR",CHERRY_SYMBOL,GRAPE_SYMBOL,ELEPHANT_SYMBOL,GRAPE_SYMBOL,"7",PIERROT_SYMBOL,GRAPE_SYMBOL,ELEPHANT_SYMBOL,GRAPE_SYMBOL,CHERRY_SYMBOL,"BAR",GRAPE_SYMBOL,ELEPHANT_SYMBOL,GRAPE_SYMBOL],
-    [ELEPHANT_SYMBOL,"7",GRAPE_SYMBOL,CHERRY_SYMBOL,ELEPHANT_SYMBOL,BELL_SYMBOL,GRAPE_SYMBOL,CHERRY_SYMBOL,ELEPHANT_SYMBOL,"BAR",GRAPE_SYMBOL,CHERRY_SYMBOL,ELEPHANT_SYMBOL,BELL_SYMBOL,GRAPE_SYMBOL,CHERRY_SYMBOL,ELEPHANT_SYMBOL,"BAR",GRAPE_SYMBOL,CHERRY_SYMBOL,PIERROT_SYMBOL],
-    [GRAPE_SYMBOL,"7","BAR",BELL_SYMBOL,ELEPHANT_SYMBOL,GRAPE_SYMBOL,PIERROT_SYMBOL,BELL_SYMBOL,ELEPHANT_SYMBOL,"BAR",PIERROT_SYMBOL,BELL_SYMBOL,ELEPHANT_SYMBOL,GRAPE_SYMBOL,PIERROT_SYMBOL,BELL_SYMBOL,ELEPHANT_SYMBOL,GRAPE_SYMBOL,PIERROT_SYMBOL,BELL_SYMBOL,ELEPHANT_SYMBOL]
-  ];
+  const REEL_SYMBOL_VALUES = Object.freeze({
+    CHERRY:CHERRY_SYMBOL,
+    BLANK:BLANK_SYMBOL,
+    SUICA:SUICA_SYMBOL,
+    REPLAY:ELEPHANT_SYMBOL,
+    BELL:BELL_SYMBOL,
+    BAR:"BAR",
+    SEVEN:"7"
+  });
+  const REEL_STRIPS = Object.freeze(
+    ColadokiReels.REEL_STRIPS_20_TO_1.map(strip=>Object.freeze(strip.map(symbol=>REEL_SYMBOL_VALUES[symbol])))
+  );
 
   function mod(n, m){
     return ((n % m) + m) % m;
@@ -14806,6 +14820,11 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
       strip[mod(start + 1, strip.length)],
       strip[mod(start + 2, strip.length)]
     ];
+  }
+
+  function reelGridFromTopIndexes(topIndexes){
+    const columns = [0,1,2].map(reelIndex=>reelWindowFromTopIndex(reelIndex, topIndexes[reelIndex]));
+    return [0,1,2].map(row=>[columns[0][row], columns[1][row], columns[2][row]]);
   }
 
   function manualStopColumnForReel(reelIndex, spin=currentSpin){
@@ -15238,7 +15257,50 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     return displayedResultFromGrid(grid) === displayResultFor(result) && hasOnlyTargetPayline(grid, result, winRow);
   }
 
+  function physicalGridMatchesResult(grid, result, winRow=1){
+    const targetResult = displayResultFor(result);
+    if(targetResult === "MISS"){
+      return displayedResultFromGrid(grid) === "MISS" && !hasBarDiagonal(grid) && !hasReachMeShape(grid);
+    }
+    if(targetResult === "BELL3"){
+      return displayedResultFromGrid(grid) === "BELL3" && hasBellDiagonal(grid);
+    }
+    const targetRow = isMiddleLineOnlyResult(targetResult)
+      ? 1
+      : clamp(Number(winRow) || 0, 0, 2);
+    if(targetResult === "CHERRY_ANY" && grid[targetRow]?.[0] !== CHERRY_SYMBOL) return false;
+    return displayedResultFromGrid(grid) === targetResult && displayedResultFromRow(grid[targetRow]) === targetResult;
+  }
+
+  function buildPhysicalReelGrid(result="MISS", winRow=1){
+    const stripLength = REEL_STRIPS[0].length;
+    const randomTopIndexes = ()=>[0,1,2].map(()=>randomInt(0, stripLength - 1));
+
+    for(let attempt=0; attempt<240; attempt++){
+      const grid = reelGridFromTopIndexes(randomTopIndexes());
+      if(physicalGridMatchesResult(grid, result, winRow)) return grid;
+    }
+
+    // 7・BARのように各リール1個だけの絵柄もあるため、最後は全停止位置を確認する。
+    const starts = randomTopIndexes();
+    for(let leftOffset=0; leftOffset<stripLength; leftOffset++){
+      const left = mod(starts[0] + leftOffset, stripLength);
+      for(let middleOffset=0; middleOffset<stripLength; middleOffset++){
+        const middle = mod(starts[1] + middleOffset, stripLength);
+        for(let rightOffset=0; rightOffset<stripLength; rightOffset++){
+          const right = mod(starts[2] + rightOffset, stripLength);
+          const grid = reelGridFromTopIndexes([left,middle,right]);
+          if(physicalGridMatchesResult(grid, result, winRow)) return grid;
+        }
+      }
+    }
+
+    // 定義済みの成立役なら到達しない。異常時も物理リール外の絵柄は生成しない。
+    return reelGridFromTopIndexes([0,0,0]);
+  }
+
   function buildGrid(result, winRow=1){
+    if(COLADOKI_MODE) return buildPhysicalReelGrid(result, winRow);
   function buildDiagonalBellGrid(winRows){
     const bell = RESULT.BELL.reel[0];
     const down = Array.isArray(winRows) ? winRows[0] === 0 : Math.random() < 0.5;
@@ -15315,6 +15377,13 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
 
   function setMorningBarReels(){
     if(!reels || reels.length < 3) return;
+    if(COLADOKI_MODE){
+      const grid = buildPhysicalReelGrid("BAR3", 1);
+      for(let i=0;i<3;i++){
+        setReelColumn(i, [grid[0][i], grid[1][i], grid[2][i]], "", "", null);
+      }
+      return;
+    }
     const grid = [
       ["7", PIERROT_SYMBOL, ELEPHANT_SYMBOL],
       ["BAR", "BAR", "BAR"],
