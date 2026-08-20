@@ -21,6 +21,7 @@
 <link rel="preload" as="image" href="assets/buttons/btn_speed_half_blue.png">
 <link rel="preload" as="image" href="assets/controls/start_lever_ball.png">
 <link rel="preload" as="image" href="assets/controls/stop_button_red_cut.png">
+<link rel="preload" as="image" href="assets/cabinet/lamps/coladoki_ruby_led_lamp_v1.png">
 <style>
 @font-face{
   font-family:"DSEG7Classic";
@@ -475,7 +476,8 @@ body.layoutEditOpen .jagBonusDataMeters,
 body.layoutEditOpen .jagBonusDataFrame,
 body.layoutEditOpen .cabinetControlPart,
 body.layoutEditOpen .playControls .autoArea,
-body.layoutEditOpen .pushOrderNavi{
+body.layoutEditOpen .pushOrderNavi,
+body.layoutEditOpen .cabinetDynamicLampRail{
   outline:2px dashed rgba(77,231,255,.88);
   outline-offset:3px;
 }
@@ -537,6 +539,15 @@ body.layoutEditOpen .pushOrderNaviItem::after{
 body.layoutEditOpen .pushOrderNaviItem:nth-child(1)::after{content:"1";}
 body.layoutEditOpen .pushOrderNaviItem:nth-child(2)::after{content:"2";}
 body.layoutEditOpen .pushOrderNaviItem:nth-child(3)::after{content:"3";}
+body.layoutEditOpen .cabinetDynamicLampRail{
+  outline-color:rgba(255,51,40,.98);
+  opacity:1;
+}
+body.layoutEditOpen .cabinetDynamicLampRail span{
+  opacity:.92 !important;
+  animation:none !important;
+  filter:brightness(1.08) saturate(1.08) drop-shadow(0 0 7px rgba(255,24,18,.72)) !important;
+}
 @media(max-width:640px){
   .pageZoomControls{
     flex-wrap:wrap;
@@ -6044,6 +6055,14 @@ body{
   --layout-auto-y:61.9%;
   --layout-navi-x:17.5%;
   --layout-navi-y:75.5%;
+  --layout-lamptopleft-x:5.8%;
+  --layout-lamptopleft-y:13%;
+  --layout-lamptopright-x:89.2%;
+  --layout-lamptopright-y:13%;
+  --layout-lampreelleft-x:5.8%;
+  --layout-lampreelleft-y:50.4%;
+  --layout-lampreelright-x:89.2%;
+  --layout-lampreelright-y:50.4%;
 }
 .machine{
   min-height:1670px !important;
@@ -6222,7 +6241,7 @@ body{
   position:absolute;
   z-index:9;
   pointer-events:none;
-  mix-blend-mode:screen;
+  mix-blend-mode:normal;
   opacity:0;
 }
 .cabinetDynamicLampRail span{
@@ -6231,15 +6250,10 @@ body{
   bottom:2%;
   width:78%;
   aspect-ratio:1;
-  border-radius:50%;
   transform:translateX(-50%);
   opacity:.82;
-  background:
-    radial-gradient(circle,#fff 0 10%,#fff5a3 11% 23%,#ff3a20 25% 43%,rgba(255,0,20,.24) 54%,transparent 72%);
-  box-shadow:
-    0 0 5px rgba(255,255,220,.96),
-    0 0 11px rgba(255,43,24,.94),
-    0 0 19px rgba(255,0,22,.66);
+  background:url("assets/cabinet/lamps/coladoki_ruby_led_lamp_v1.png") center / contain no-repeat;
+  filter:brightness(1.04) saturate(1.08) drop-shadow(0 0 6px rgba(255,30,20,.68));
   animation:none;
 }
 .cabinetDynamicLampRail span:nth-child(1){bottom:2%;--lamp-chase-delay:0s;}
@@ -6249,12 +6263,12 @@ body{
 .cabinetDynamicLampRail span:nth-child(5){bottom:62%;--lamp-chase-delay:.42s;}
 .cabinetDynamicLampRail span:nth-child(6){bottom:77%;--lamp-chase-delay:.525s;}
 .cabinetDynamicLampRail span:nth-child(7){bottom:92%;--lamp-chase-delay:.63s;}
-.cabinetTopLampRail{top:13%;width:5%;height:29.5%;}
-.cabinetTopLampRailLeft{left:5.8%;}
-.cabinetTopLampRailRight{right:5.8%;}
-.cabinetReelLampRail{top:50.4%;width:5%;height:28.5%;}
-.cabinetReelLampRailLeft{left:5.8%;}
-.cabinetReelLampRailRight{right:5.8%;}
+.cabinetTopLampRail{width:5%;height:29.5%;}
+.cabinetTopLampRailLeft{left:var(--layout-lamptopleft-x);top:var(--layout-lamptopleft-y);}
+.cabinetTopLampRailRight{left:var(--layout-lamptopright-x);right:auto;top:var(--layout-lamptopright-y);}
+.cabinetReelLampRail{width:5%;height:28.5%;}
+.cabinetReelLampRailLeft{left:var(--layout-lampreelleft-x);top:var(--layout-lampreelleft-y);}
+.cabinetReelLampRailRight{left:var(--layout-lampreelright-x);right:auto;top:var(--layout-lampreelright-y);}
 body.coladokiJackpotLampChase .cabinetDynamicLampRail{
   opacity:1;
 }
@@ -6262,9 +6276,9 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   animation:cabinetLampChase 1.02s linear var(--lamp-chase-delay) infinite;
 }
 @keyframes cabinetLampChase{
-  0%,14%{opacity:1;filter:brightness(1.55) saturate(1.18)}
-  15%,35%{opacity:.42;filter:brightness(1.04)}
-  36%,100%{opacity:.09;filter:brightness(.68)}
+  0%,14%{opacity:1;filter:brightness(1.38) saturate(1.14) drop-shadow(0 0 7px rgba(255,45,26,.92)) drop-shadow(0 0 15px rgba(255,0,12,.58))}
+  15%,35%{opacity:.48;filter:brightness(.92) saturate(1.02) drop-shadow(0 0 5px rgba(255,35,22,.52))}
+  36%,100%{opacity:.10;filter:brightness(.48) saturate(.82)}
 }
 @media (prefers-reduced-motion:reduce){
   body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
@@ -7205,6 +7219,34 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
                 <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="-100" max="100" step="0.1" data-layout-target="hibiscusright" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="hibiscusright-y"></b></label>
                 <label class="layoutEditRow"><span>W</span><input class="layoutEditInput" type="range" min="20" max="200" step="0.1" data-layout-target="hibiscusright" data-layout-prop="w"><b class="layoutEditValue" data-layout-view="hibiscusright-w"></b></label>
                 <label class="layoutEditRow"><span>H</span><input class="layoutEditInput" type="range" min="20" max="200" step="0.1" data-layout-target="hibiscusright" data-layout-prop="h"><b class="layoutEditValue" data-layout-view="hibiscusright-h"></b></label>
+              </div>
+            </div>
+            <div class="layoutEditGroup">
+              <div class="layoutEditGroupTitle">LAMP TOP LEFT</div>
+              <div class="layoutEditRows">
+                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="-5" max="100" step="0.1" data-layout-target="lamptopleft" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="lamptopleft-x"></b></label>
+                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="0" max="100" step="0.1" data-layout-target="lamptopleft" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="lamptopleft-y"></b></label>
+              </div>
+            </div>
+            <div class="layoutEditGroup">
+              <div class="layoutEditGroupTitle">LAMP TOP RIGHT</div>
+              <div class="layoutEditRows">
+                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="-5" max="100" step="0.1" data-layout-target="lamptopright" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="lamptopright-x"></b></label>
+                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="0" max="100" step="0.1" data-layout-target="lamptopright" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="lamptopright-y"></b></label>
+              </div>
+            </div>
+            <div class="layoutEditGroup">
+              <div class="layoutEditGroupTitle">LAMP REEL LEFT</div>
+              <div class="layoutEditRows">
+                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="-5" max="100" step="0.1" data-layout-target="lampreelleft" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="lampreelleft-x"></b></label>
+                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="0" max="100" step="0.1" data-layout-target="lampreelleft" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="lampreelleft-y"></b></label>
+              </div>
+            </div>
+            <div class="layoutEditGroup">
+              <div class="layoutEditGroupTitle">LAMP REEL RIGHT</div>
+              <div class="layoutEditRows">
+                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="-5" max="100" step="0.1" data-layout-target="lampreelright" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="lampreelright-x"></b></label>
+                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="0" max="100" step="0.1" data-layout-target="lampreelright" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="lampreelright-y"></b></label>
               </div>
             </div>
             <div class="layoutEditGroup">
@@ -8650,7 +8692,11 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     stop1:{x:50.4, y:62.4},
     stop2:{x:61.0, y:62.4},
     auto:{x:89.0, y:61.9},
-    navi:{x:17.5, y:75.5}
+    navi:{x:17.5, y:75.5},
+    lamptopleft:{x:5.8, y:13.0},
+    lamptopright:{x:89.2, y:13.0},
+    lampreelleft:{x:5.8, y:50.4},
+    lampreelright:{x:89.2, y:50.4}
   });
   let pageZoom = 1;
   let pagePanX = PAGE_PAN_DEFAULT;
