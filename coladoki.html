@@ -6053,8 +6053,45 @@ body{
     drop-shadow(0 5px 5px rgba(0,0,0,.68))
     drop-shadow(0 0 8px rgba(255,55,16,.28));
 }
-.cabinetTopArtworkLogoLeft{transform:scale(.96);}
-.cabinetTopArtworkLogoRight{transform:scale(.96);}
+.cabinetTopArtworkLamp{
+  width:100%;
+  height:100%;
+  display:grid;
+  place-items:center;
+  isolation:isolate;
+}
+.cabinetTopArtworkLampLeft,
+.cabinetTopArtworkLampRight{transform:scale(.96);}
+.cabinetTopArtworkLamp img{
+  grid-area:1 / 1;
+  transition:none;
+}
+.cabinetTopArtworkLampOn{opacity:0;}
+.cabinetTopArtworkLampOff{opacity:1;}
+.cabinetTopArtworkRow.is-jackpot-blinking .cabinetTopArtworkLampOn{
+  animation:coladokiLampOnBlink .76s steps(1,end) infinite;
+}
+.cabinetTopArtworkRow.is-jackpot-blinking .cabinetTopArtworkLampOff{
+  animation:coladokiLampOffBlink .76s steps(1,end) infinite;
+}
+@keyframes coladokiLampOnBlink{
+  0%,49.99%{opacity:1}
+  50%,100%{opacity:0}
+}
+@keyframes coladokiLampOffBlink{
+  0%,49.99%{opacity:0}
+  50%,100%{opacity:1}
+}
+@media (prefers-reduced-motion:reduce){
+  .cabinetTopArtworkRow.is-jackpot-blinking .cabinetTopArtworkLampOn{
+    animation:none;
+    opacity:1;
+  }
+  .cabinetTopArtworkRow.is-jackpot-blinking .cabinetTopArtworkLampOff{
+    animation:none;
+    opacity:0;
+  }
+}
 .cabinetTopArtworkMascot{
   transform:translateY(-7px) scale(.92);
   filter:
@@ -6780,9 +6817,15 @@ body{
           <img class="cabinetPart cabinetPartControls" src="assets/cabinet/parts/coladoki_part_controls_v5.png" alt="">
           <img class="cabinetPart cabinetPartLower" src="assets/cabinet/parts/coladoki_part_lower_v4.png" alt="">
           <div class="cabinetTopArtworkRow">
-            <img class="cabinetTopArtworkLogo cabinetTopArtworkLogoLeft" src="assets/cabinet/artwork/coladoki_hibiscus_logo_user_v1.png" alt="">
+            <span class="cabinetTopArtworkLamp cabinetTopArtworkLampLeft">
+              <img class="cabinetTopArtworkLogo cabinetTopArtworkLampOff" src="assets/cabinet/artwork/coladoki_lamp_off_user_v1.png" alt="">
+              <img class="cabinetTopArtworkLogo cabinetTopArtworkLampOn" src="assets/cabinet/artwork/coladoki_lamp_on_user_v1.png" alt="">
+            </span>
             <img class="cabinetTopArtworkMascot" src="assets/cabinet/artwork/coladoki_mascot_user_v1.png" alt="">
-            <img class="cabinetTopArtworkLogo cabinetTopArtworkLogoRight" src="assets/cabinet/artwork/coladoki_hibiscus_logo_user_v1.png" alt="">
+            <span class="cabinetTopArtworkLamp cabinetTopArtworkLampRight">
+              <img class="cabinetTopArtworkLogo cabinetTopArtworkLampOff" src="assets/cabinet/artwork/coladoki_lamp_off_user_v1.png" alt="">
+              <img class="cabinetTopArtworkLogo cabinetTopArtworkLampOn" src="assets/cabinet/artwork/coladoki_lamp_on_user_v1.png" alt="">
+            </span>
           </div>
         </div>
         <div class="jagSideRail jagSideRailLeft"></div>
@@ -13745,6 +13788,8 @@ body{
     const stLampOn = !!($("stLamp") && $("stLamp").classList.contains("on"));
     const jagChanceLit = !!(active || normalState.bonusPending || jagChanceHold || stLampOn || bonusConfirmBgmHold);
     if(reelArea) reelArea.classList.toggle("jagChanceLit", jagChanceLit);
+    const cabinetTopArtworkRow = document.querySelector(".cabinetTopArtworkRow");
+    if(cabinetTopArtworkRow) cabinetTopArtworkRow.classList.toggle("is-jackpot-blinking", jagChanceLit);
     const gogoChance = $("jagGogoChance");
     if(gogoChance){
       const premiumBonusActive = !!(isATypeBonusActive() && (session.premiumBonus || session.oneGameRenBonus));
