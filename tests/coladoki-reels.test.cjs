@@ -63,5 +63,10 @@ removedAssets.forEach(asset=>{
 assert.doesNotMatch(html, /\bSMALL:\{name:/, "特殊役の出目定義を残さない");
 assert.doesNotMatch(html, /\bGRAPE:\{name:/, "ブドウの出目定義を残さない");
 assert.match(html, /id="roleCounterSuikaCount"/, "役カウンターはスイカを表示する");
+assert.match(
+  html,
+  /roleCounterBigCount[\s\S]*roleCounterRegCount[\s\S]*roleCounterPremiumBigCount/,
+  "全役カウンターはBIG、REG、ロングフリーズBIGの順に表示する"
+);
 
 console.log("coladoki reel strip tests passed");
