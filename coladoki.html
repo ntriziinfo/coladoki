@@ -468,6 +468,7 @@ h1{
 }
 body.layoutEditOpen .reels,
 body.layoutEditOpen .cabinetPartUpperReelUnified,
+body.layoutEditOpen .cabinetTopArtworkLamp,
 body.layoutEditOpen .jagGogoChance,
 body.layoutEditOpen .jagPayoutMeter,
 body.layoutEditOpen .jagBonusDataMeters,
@@ -489,6 +490,9 @@ body.layoutEditOpen .jagBonusDataFrame{
 }
 body.layoutEditOpen .cabinetPartUpperReelUnified{
   outline-color:rgba(255,205,64,.96);
+}
+body.layoutEditOpen .cabinetTopArtworkLamp{
+  outline-color:rgba(255,76,55,.96);
 }
 @media(max-width:640px){
   .pageZoomControls{
@@ -5953,6 +5957,14 @@ body{
   --layout-mascot-y:-3%;
   --layout-mascot-w:92%;
   --layout-mascot-h:92%;
+  --layout-hibiscusleft-x:0%;
+  --layout-hibiscusleft-y:0%;
+  --layout-hibiscusleft-w:96%;
+  --layout-hibiscusleft-h:96%;
+  --layout-hibiscusright-x:0%;
+  --layout-hibiscusright-y:0%;
+  --layout-hibiscusright-w:96%;
+  --layout-hibiscusright-h:96%;
   --layout-chance-x:16%;
   --layout-chance-y:79%;
   --layout-chance-w:11%;
@@ -6088,8 +6100,20 @@ body{
   place-items:center;
   isolation:isolate;
 }
-.cabinetTopArtworkLampLeft,
-.cabinetTopArtworkLampRight{transform:scale(.96);}
+.cabinetTopArtworkLampLeft{
+  position:relative;
+  left:var(--layout-hibiscusleft-x);
+  top:var(--layout-hibiscusleft-y);
+  width:var(--layout-hibiscusleft-w);
+  height:var(--layout-hibiscusleft-h);
+}
+.cabinetTopArtworkLampRight{
+  position:relative;
+  left:var(--layout-hibiscusright-x);
+  top:var(--layout-hibiscusright-y);
+  width:var(--layout-hibiscusright-w);
+  height:var(--layout-hibiscusright-h);
+}
 .cabinetTopArtworkLamp img{
   grid-area:1 / 1;
   transition:none;
@@ -7067,6 +7091,24 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
                 <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="-50" max="50" step="0.1" data-layout-target="mascot" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="mascot-y"></b></label>
                 <label class="layoutEditRow"><span>W</span><input class="layoutEditInput" type="range" min="40" max="180" step="0.1" data-layout-target="mascot" data-layout-prop="w"><b class="layoutEditValue" data-layout-view="mascot-w"></b></label>
                 <label class="layoutEditRow"><span>H</span><input class="layoutEditInput" type="range" min="40" max="180" step="0.1" data-layout-target="mascot" data-layout-prop="h"><b class="layoutEditValue" data-layout-view="mascot-h"></b></label>
+              </div>
+            </div>
+            <div class="layoutEditGroup">
+              <div class="layoutEditGroupTitle">HIBISCUS LEFT</div>
+              <div class="layoutEditRows">
+                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="-100" max="100" step="0.1" data-layout-target="hibiscusleft" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="hibiscusleft-x"></b></label>
+                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="-100" max="100" step="0.1" data-layout-target="hibiscusleft" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="hibiscusleft-y"></b></label>
+                <label class="layoutEditRow"><span>W</span><input class="layoutEditInput" type="range" min="20" max="200" step="0.1" data-layout-target="hibiscusleft" data-layout-prop="w"><b class="layoutEditValue" data-layout-view="hibiscusleft-w"></b></label>
+                <label class="layoutEditRow"><span>H</span><input class="layoutEditInput" type="range" min="20" max="200" step="0.1" data-layout-target="hibiscusleft" data-layout-prop="h"><b class="layoutEditValue" data-layout-view="hibiscusleft-h"></b></label>
+              </div>
+            </div>
+            <div class="layoutEditGroup">
+              <div class="layoutEditGroupTitle">HIBISCUS RIGHT</div>
+              <div class="layoutEditRows">
+                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="-100" max="100" step="0.1" data-layout-target="hibiscusright" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="hibiscusright-x"></b></label>
+                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="-100" max="100" step="0.1" data-layout-target="hibiscusright" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="hibiscusright-y"></b></label>
+                <label class="layoutEditRow"><span>W</span><input class="layoutEditInput" type="range" min="20" max="200" step="0.1" data-layout-target="hibiscusright" data-layout-prop="w"><b class="layoutEditValue" data-layout-view="hibiscusright-w"></b></label>
+                <label class="layoutEditRow"><span>H</span><input class="layoutEditInput" type="range" min="20" max="200" step="0.1" data-layout-target="hibiscusright" data-layout-prop="h"><b class="layoutEditValue" data-layout-view="hibiscusright-h"></b></label>
               </div>
             </div>
             <div class="layoutEditGroup">
@@ -8499,6 +8541,8 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     reels:{x:17.5, y:0.0, w:64.7, h:49.0},
     frame:{x:0.0, y:0.0, w:100.0, h:100.0},
     mascot:{x:0.0, y:-3.0, w:92.0, h:92.0},
+    hibiscusleft:{x:0.0, y:0.0, w:96.0, h:96.0},
+    hibiscusright:{x:0.0, y:0.0, w:96.0, h:96.0},
     chance:{x:16.0, y:79.0, w:11.0, h:12.0},
     credit:{x:31.5, y:79.2, w:6.8, h:13.4},
     count:{x:55.5, y:79.2, w:13.7, h:13.4},
