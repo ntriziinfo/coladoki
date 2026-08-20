@@ -5,16 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>COLADOKI</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23030005'/%3E%3Cpath d='M9 39 32 7l23 32H40l-8 18-8-18H9z' fill='%23ff2334' stroke='%23ffd761' stroke-width='4'/%3E%3C/svg%3E">
-<link rel="preload" as="image" href="assets/symbols/sym_hourglass.png">
 <link rel="preload" as="image" href="assets/symbols/sym_cherry.png">
 <link rel="preload" as="image" href="assets/symbols/sym_bell.png">
 <link rel="preload" as="image" href="assets/symbols/sym_suika.png">
-<link rel="preload" as="image" href="assets/symbols/sym_coin.webp">
-<link rel="preload" as="image" href="assets/symbols/sym_grape.png">
 <link rel="preload" as="image" href="assets/symbols/sym_seven_coladoki.png">
 <link rel="preload" as="image" href="assets/symbols/sym_bar.png">
 <link rel="preload" as="image" href="assets/symbols/sym_replay.png">
-<link rel="preload" as="image" href="assets/cabinet/edit_parts/piero.png">
 <link rel="preload" as="image" href="assets/logo/rising_logo.svg">
 <link rel="preload" as="image" href="assets/frames/rising_reel_frame_on.svg">
 <link rel="preload" as="image" href="assets/buttons/btn_auto_gold_transparent.png">
@@ -1559,18 +1555,6 @@ body.layoutEditOpen .cabinetDynamicLampRail span{
   object-fit:contain;
   filter:drop-shadow(0 6px 10px rgba(0,0,0,.35));
 }
-.missSymImg{
-  width:92%;
-  height:92%;
-  object-fit:contain;
-  filter:drop-shadow(0 4px 8px rgba(0,0,0,.35));
-}
-.grapeSymImg{
-  width:104%;
-  height:104%;
-  object-fit:contain;
-  filter:drop-shadow(0 4px 8px rgba(0,0,0,.30));
-}
 .cherrySymImg{
   width:106%;
   height:106%;
@@ -1580,12 +1564,6 @@ body.layoutEditOpen .cabinetDynamicLampRail span{
 .bellSymImg{
   width:102%;
   height:102%;
-  object-fit:contain;
-  filter:drop-shadow(0 4px 8px rgba(0,0,0,.30));
-}
-.pieroSymImg{
-  width:108%;
-  height:108%;
   object-fit:contain;
   filter:drop-shadow(0 4px 8px rgba(0,0,0,.30));
 }
@@ -2604,7 +2582,7 @@ body::after{
 .reel{height:320px !important;border-radius:12px !important;background:linear-gradient(180deg,#313747,#0e1018 48%,#202430) !important;border:1px solid rgba(255,255,255,.22) !important;box-shadow:inset 0 14px 24px rgba(255,255,255,.08),inset 0 -22px 34px rgba(0,0,0,.72) !important;}
 .window{gap:8px !important;}
 .cell{border-radius:8px !important;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(0,0,0,.12)) !important;}
-.symImg,.barSymImg,.sevenSymImg,.missSymImg,.grapeSymImg,.cherrySymImg,.bellSymImg,.pieroSymImg,.replaySymImg,.suikaSymImg{max-width:112% !important;max-height:112% !important;object-fit:contain !important;}
+.symImg,.barSymImg,.sevenSymImg,.cherrySymImg,.bellSymImg,.replaySymImg,.suikaSymImg{max-width:112% !important;max-height:112% !important;object-fit:contain !important;}
 .barSymImg{width:108% !important;height:auto !important;}
 .buttonRow{position:relative;z-index:10;margin-top:20px !important;}
 .betBtn,.centerStopBtns button,.autoArea .autoInlineBtn,.autoArea .speedInlineBtn{background-size:100% 100% !important;background-repeat:no-repeat !important;background-position:center !important;color:transparent !important;text-shadow:none !important;border:none !important;box-shadow:none !important;filter:drop-shadow(0 0 12px rgba(255,255,255,.28));}
@@ -4140,20 +4118,14 @@ body{
 .symImg,
 .barSymImg,
 .sevenSymImg,
-.missSymImg,
-.grapeSymImg,
 .cherrySymImg,
 .bellSymImg,
-.pieroSymImg,
 .replaySymImg,
 .suikaSymImg{
   filter:drop-shadow(0 2px 2px rgba(255,255,255,.72)) drop-shadow(0 3px 4px rgba(90,0,0,.24)) !important;
 }
-.missSymImg,
-.grapeSymImg,
 .cherrySymImg,
 .bellSymImg,
-.pieroSymImg,
 .replaySymImg,
 .suikaSymImg{
   width:70% !important;
@@ -7351,10 +7323,9 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
               <tr><td>BIG</td><td id="roleCounterBigCount">0</td><td id="roleCounterBigOdds">-</td></tr>
               <tr><td>ロングフリーズBIG</td><td id="roleCounterPremiumBigCount">0</td><td id="roleCounterPremiumBigOdds">-</td></tr>
               <tr><td>REG</td><td id="roleCounterRegCount">0</td><td id="roleCounterRegOdds">-</td></tr>
-              <tr><td>ブドウ</td><td id="roleCounterGrapeCount">0</td><td id="roleCounterGrapeOdds">-</td></tr>
+              <tr><td>スイカ</td><td id="roleCounterSuikaCount">0</td><td id="roleCounterSuikaOdds">-</td></tr>
               <tr><td>リプレイ</td><td id="roleCounterReplayCount">0</td><td id="roleCounterReplayOdds">-</td></tr>
               <tr><td>ベル</td><td id="roleCounterBellCount">0</td><td id="roleCounterBellOdds">-</td></tr>
-              <tr><td>宗介</td><td id="roleCounterPieroCount">0</td><td id="roleCounterPieroOdds">-</td></tr>
               <tr><td>チェリー</td><td id="roleCounterCherryCount">0</td><td id="roleCounterCherryOdds">-</td></tr>
             </table>
           </div>
@@ -7437,7 +7408,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
           <div class="stat"><div class="k">回転数</div><div class="v" id="totalSpinsView">0</div></div>
           <div class="stat"><div class="k">BIG</div><div class="v" id="bigCountView">0</div></div>
           <div class="stat"><div class="k">REG</div><div class="v" id="midCountView">0</div></div>
-          <div class="stat"><div class="k">ブドウ</div><div class="v" id="grapeCountView">0</div></div>
+          <div class="stat"><div class="k">スイカ</div><div class="v" id="suikaCountView">0</div></div>
           <div class="stat"><div class="k">損益</div><div class="v" id="totalProfitView">0</div></div>
         </div>
       </div>
@@ -7477,25 +7448,25 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
             <div><span>TYPE</span><b id="wdCounterSt">A</b></div>
             <div><span>BIG</span><b id="wdCounterBig">0</b></div>
             <div><span>REG</span><b id="wdCounterReg">0</b></div>
-            <div><span>ブドウ</span><b id="wdCounterGrape">0</b></div>
+            <div><span>スイカ</span><b id="wdCounterSuika">0</b></div>
           </div>
         </div>
         <div class="payline"></div>
         <div class="reels">
           <div class="reel" data-reel="0"><div class="window">
-            <div class="cell"><img class="symImg barSymImg" src="assets/symbols/sym_bar.png" alt="BAR symbol" loading="eager" decoding="sync" draggable="false"></div>
-            <div class="cell center"><img class="symImg sevenSymImg" src="assets/symbols/sym_seven_coladoki.png" alt="7 symbol" loading="eager" decoding="sync" draggable="false"></div>
-            <div class="cell"><img class="symImg grapeSymImg" src="assets/symbols/sym_grape.png" alt="grape symbol" loading="eager" decoding="sync" draggable="false"></div>
+            <div class="cell"><img class="symImg cherrySymImg" src="assets/symbols/sym_cherry.png" alt="cherry symbol" loading="eager" decoding="sync" draggable="false"></div>
+            <div class="cell center"><img class="symImg suikaSymImg" src="assets/symbols/sym_suika.png" alt="suika symbol" loading="eager" decoding="sync" draggable="false"></div>
+            <div class="cell"><img class="symImg replaySymImg" src="assets/symbols/sym_replay.png" alt="replay symbol" loading="eager" decoding="sync" draggable="false"></div>
           </div></div>
           <div class="reel" data-reel="1"><div class="window">
-            <div class="cell"><div class="sym">🐘</div></div>
-            <div class="cell center"><img class="symImg grapeSymImg" src="assets/symbols/sym_grape.png" alt="grape symbol" loading="eager" decoding="sync" draggable="false"></div>
-            <div class="cell"><div class="sym">🤡</div></div>
+            <div class="cell"><div class="sym blankSym" aria-label="blank"></div></div>
+            <div class="cell center"><img class="symImg cherrySymImg" src="assets/symbols/sym_cherry.png" alt="cherry symbol" loading="eager" decoding="sync" draggable="false"></div>
+            <div class="cell"><img class="symImg bellSymImg" src="assets/symbols/sym_bell.png" alt="bell symbol" loading="eager" decoding="sync" draggable="false"></div>
           </div></div>
           <div class="reel" data-reel="2"><div class="window">
-            <div class="cell"><img class="symImg cherrySymImg" src="assets/symbols/sym_cherry.png" alt="cherry symbol" loading="eager" decoding="sync" draggable="false"></div>
-            <div class="cell center"><img class="symImg barSymImg" src="assets/symbols/sym_bar.png" alt="BAR symbol" loading="eager" decoding="sync" draggable="false"></div>
-            <div class="cell"><div class="sym">🐘</div></div>
+            <div class="cell"><img class="symImg suikaSymImg" src="assets/symbols/sym_suika.png" alt="suika symbol" loading="eager" decoding="sync" draggable="false"></div>
+            <div class="cell center"><div class="sym blankSym" aria-label="blank"></div></div>
+            <div class="cell"><img class="symImg bellSymImg" src="assets/symbols/sym_bell.png" alt="bell symbol" loading="eager" decoding="sync" draggable="false"></div>
           </div></div>
         </div>
         <div class="pushOrderNavi" id="pushOrderNavi" aria-hidden="true">
@@ -7759,7 +7730,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
           <div class="row" style="margin-top:8px">
             <button class="subBtn" id="debugMidBtn">即REG</button>
             <button class="subBtn" id="debugBigBtn">即BIG</button>
-            <button class="subBtn" id="debugGrapeBtn">即スイカ</button>
+            <button class="subBtn" id="debugSuikaBtn">即スイカ</button>
             <button class="subBtn" id="debugMissBtn">即ハズレ</button>
           </div>
         </div>
@@ -7829,7 +7800,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
 
 <audio id="bgm" loop preload="auto"></audio>
 <audio id="koatariSound" preload="auto"></audio>
-<audio id="bigSound" preload="auto"></audio>
 <audio id="payoutSound" preload="auto"></audio>
 <audio id="barBgm" loop preload="auto"></audio>
 <audio id="voiceSound" preload="auto"></audio>
@@ -7863,15 +7833,11 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   const PREMIUM_BIG_FIRST_BGM_SRC = "assets/media/jag/premium_big_first.mp3" + BGM_ASSET_VERSION;
   const PREMIUM_BIG_SECOND_BGM_SRC = "assets/media/jag/premium_big_second.wav" + BGM_ASSET_VERSION;
 
-  const BIG_SOUND_SRC = "assets/media/jag/big_confirm.mp3";
-
   const KOATARI_SOUND_SRC = "";
   const PAYOUT_SOUND_SRC = "assets/media/jag/bell.wav";
   const PAYOUT_3PT_BELL_SOUND_SRC = "assets/media/jag/bell.wav";
   const REPLAY_SOUND_SRC = "assets/media/jag/replay.wav";
   const CHERRY_SOUND_SRC = "assets/media/jag/cherry.wav";
-  const SPECIAL_SYMBOL_SOUND_SRC = "assets/media/jag/special_symbol.wav";
-  const PREMIUM_PIERO_SYMBOL_SOUND_SRC = "assets/media/jag/premium_piero_symbol.wav";
   const SPIN_SOUND_SRC = "assets/media/jag/start.wav";
   const STOP_SOUND_SRC = "assets/media/jag/stop.wav";
   const BONUS_STOP_SOUND_SRCS = Object.freeze([
@@ -7888,9 +7854,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   ]);
   const PEKA_BIG_ATSU_SOUND_SRC = "assets/media/jag/peka_atsu.wav";
   const PEKA_BIG_ATSU_RATE = 0.1;
-  const SEVEN_CONFIRM_SOUND_SRC = "assets/media/jag/big_kakutei.wav";
-  const REG_CONFIRM_SOUND_SRC = "assets/media/jag/reg_kakutei.wav";
-  const BONUS_CONFIRM_SOUND_SRC = "assets/media/jag/big_confirm.mp3";
   const BONUS_END_BGM_SRC = "assets/media/jag/bonus_end.wav" + BGM_ASSET_VERSION;
   const PREMIUM_BONUS_END_VOICE_SRC = "assets/media/jag/premium_bonus_end_voice.wav";
   const PREMIUM_BIG_FIRST_THIRD_STOP_VOICE_SRC = "assets/media/jag/premium_bb2_bgm.mp3";
@@ -8009,7 +7972,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   const A_TYPE_BONUS_MAIN_RESULT = "SMALL";
   const A_TYPE_RESULT_SET = new Set(["MISS", "BIG", "MID", "MID_CHERRY", "SMALL", "GRAPE", "BELL", "REPLAY", "CHERRY_ANY", "CHERRY_DOUBLE", "CHERRY_TRIPLE", "BAR3"]);
 
-  const USER_FACE = "__USER_FACE__";
   const ELEPHANT_SYMBOL = "🐘";
   const PIERROT_SYMBOL = "🤡";
   const CHERRY_SYMBOL = "🍒";
@@ -8021,11 +7983,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   const CHERRY_IMAGE_SRC = "assets/symbols/sym_cherry.png";
   const BELL_IMAGE_SRC = "assets/symbols/sym_bell.png";
   const SEVEN_IMAGE_SRC = "assets/symbols/sym_seven_coladoki.png";
-  const MISS_IMAGE_SRC = "assets/symbols/sym_coin.webp";
-  const GRAPE_IMAGE_SRC = "assets/symbols/sym_grape.png";
   const BAR_IMAGE_SRC = "assets/symbols/sym_bar.png";
-  const PIERROT_IMAGE_SRC = "assets/cabinet/edit_parts/piero.png";
-  const USER_FACE_SRC = "assets/symbols/sym_hourglass.png";
   const REPLAY_IMAGE_SRC = "assets/symbols/sym_replay.png";
   const AT_NAVI_VIDEO_SRCS = Object.freeze({
     bell:[
@@ -8044,11 +8002,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     CHERRY_IMAGE_SRC,
     BELL_IMAGE_SRC,
     SEVEN_IMAGE_SRC,
-    MISS_IMAGE_SRC,
-    GRAPE_IMAGE_SRC,
     BAR_IMAGE_SRC,
-    PIERROT_IMAGE_SRC,
-    USER_FACE_SRC,
     REPLAY_IMAGE_SRC
   ]);
   const symbolImagePreloads = new Map();
@@ -8068,11 +8022,9 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   preloadSymbolImages();
 
   const RESULT = {
-    MISS:{name:"ハズレ", reel:[ELEPHANT_SYMBOL,PIERROT_SYMBOL,GRAPE_SYMBOL], label:"MISS", cls:"", kind:"miss"},
-    SMALL:{name:"特殊役", reel:[PIERROT_SYMBOL,PIERROT_SYMBOL,PIERROT_SYMBOL], label:"SPECIAL", cls:"blue", kind:"payadd"},
+    MISS:{name:"ハズレ", reel:[BLANK_SYMBOL,ELEPHANT_SYMBOL,SUICA_SYMBOL], label:"MISS", cls:"", kind:"miss"},
     MID:{name:"REG", reel:["7","7","BAR"], label:"REG", cls:"purple", kind:"payadd"},
     MID_CHERRY:{name:"REG（チェリー同時）", reel:["7","7","BAR"], label:"REG", cls:"purple", kind:"payadd"},
-    GRAPE:{name:"ブドウ", reel:[GRAPE_SYMBOL,GRAPE_SYMBOL,GRAPE_SYMBOL], label:"ブドウ", cls:"green", kind:"pay"},
     BAR3:{name:"BAR揃い", reel:["BAR","BAR","BAR"], label:"BAR", cls:"purple", kind:"add"},
     BIG:{name:"BIG", reel:["7","7","7"], label:"BIG", cls:"red", kind:"payadd"},
     DEVIL_ZONE:{name:"DEVIL ZONE", reel:["7","7","BAR"], label:"DZ", cls:"purple", kind:"payadd"},
@@ -8081,7 +8033,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     BELL3:{name:"斜めベル", reel:[BELL_SYMBOL,BELL_SYMBOL,BELL_SYMBOL], label:"", cls:"gold", kind:"pay"},
     REPLAY:{name:"リプレイ", reel:[ELEPHANT_SYMBOL,ELEPHANT_SYMBOL,ELEPHANT_SYMBOL], label:"REPLAY", cls:"blue", kind:"pay"},
     SUICA:{name:"スイカ揃い", reel:[SUICA_SYMBOL,SUICA_SYMBOL,SUICA_SYMBOL], label:"SUICA", cls:"green", kind:"pay"},
-    CHERRY_ANY:{name:"チェリー", reel:[CHERRY_SYMBOL,PIERROT_SYMBOL,GRAPE_SYMBOL], label:"CHERRY", cls:"red", kind:"payadd"},
+    CHERRY_ANY:{name:"チェリー", reel:[CHERRY_SYMBOL,BLANK_SYMBOL,SUICA_SYMBOL], label:"CHERRY", cls:"red", kind:"payadd"},
     CHERRY_DOUBLE:{name:"チェリー2連", reel:[CHERRY_SYMBOL,CHERRY_SYMBOL,ELEPHANT_SYMBOL], label:"CHERRY×2", cls:"red", kind:"add"},
     CHERRY_TRIPLE:{name:"チェリー3つ", reel:[CHERRY_SYMBOL,CHERRY_SYMBOL,CHERRY_SYMBOL], label:"CHERRY×3", cls:"red", kind:"payadd"}
   };
@@ -8105,7 +8057,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     6:{weights:[{result:"SMALL",w:4},{result:"MID",w:3},{result:"BIG",w:0.397},{result:"BELL",w:300},{result:"BELL3",w:70},{result:"REPLAY",w:366},{result:"SUICA",w:3},{result:"CHERRY_DOUBLE",w:2},{result:"CHERRY_TRIPLE",w:1}]}
   });
 
-  const symbols = ["7","BAR",ELEPHANT_SYMBOL,GRAPE_SYMBOL,CHERRY_SYMBOL,PIERROT_SYMBOL,BELL_SYMBOL];
+  const symbols = ["7","BAR",ELEPHANT_SYMBOL,CHERRY_SYMBOL,BELL_SYMBOL,SUICA_SYMBOL,BLANK_SYMBOL];
   const AUDIO_BALANCE_VERSION = 9;
   const ROLE_STAT_COUNTER_VERSION = 3;
   const DEFAULT_MASTER_VOLUME = 0.70;
@@ -8123,8 +8075,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   const SETTING_VOICE_OUTPUT_SCALE = 1;
   const PREMIUM_VOICE_OUTPUT_SCALE = 1.15;
   const CONFIRM_SOUND_OUTPUT_SCALE = NORMALIZED_AUDIO_OUTPUT_SCALE;
-  const LINEUP_CONFIRM_SOUND_OUTPUT_SCALE = 2.0;
-  const BONUS_CONFIRM_SOUND_OUTPUT_SCALE = NORMALIZED_AUDIO_OUTPUT_SCALE;
   const PAYOUT_UI_50_TO_33_SCALE = 33 / 50;
   const PAYOUT_SOUND_OUTPUT_SCALE = PAYOUT_UI_50_TO_33_SCALE;
   const BELL_PAYOUT_SOUND_OUTPUT_SCALE = PAYOUT_UI_50_TO_33_SCALE;
@@ -8147,8 +8097,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     [PAYOUT_SOUND_SRC]: dbToGain(-0.5),
     [REPLAY_SOUND_SRC]: dbToGain(0),
     [CHERRY_SOUND_SRC]: dbToGain(1),
-    [SPECIAL_SYMBOL_SOUND_SRC]: dbToGain(-1.5),
-    [PREMIUM_PIERO_SYMBOL_SOUND_SRC]: dbToGain(-2),
     [SPIN_SOUND_SRC]: dbToGain(-1),
     [STOP_SOUND_SRC]: dbToGain(-1),
     [BONUS_STOP_SOUND_SRCS[0]]: dbToGain(2),
@@ -8159,9 +8107,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     ["assets/media/jag/peka_atari.wav"]: dbToGain(3),
     ["assets/media/jag/peka_kyuin_triple.wav"]: dbToGain(2),
     [PEKA_BIG_ATSU_SOUND_SRC]: dbToGain(3),
-    [SEVEN_CONFIRM_SOUND_SRC]: dbToGain(-1),
-    [REG_CONFIRM_SOUND_SRC]: dbToGain(0),
-    [BONUS_CONFIRM_SOUND_SRC]: dbToGain(-8),
     [BAR_AIM_VOICE_SRC]: dbToGain(4),
     [SETTING_BONUS_END_VOICE_SRCS[2]]: dbToGain(3),
     [SETTING_BONUS_END_VOICE_SRCS[4]]: dbToGain(3),
@@ -8237,8 +8182,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     bigCount:0,
     midCount:0,
     premiumBigCount:0,
-    grapeCount:0,
-    smallCount:0,
     bellCount:0,
     diagonalBellCount:0,
     replayCount:0,
@@ -8522,7 +8465,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   let pendingBonusStartOptions = null;
   let devilZoneConfirmIntroPending = false;
   let pendingDevilRushEntryEffect = "";
-  let audioCtx = null;
   let spinIntervals = [];
   let reelSpinOffsets = [0, 0, 0];
   let rogiBlackoutTimer = null;
@@ -8542,7 +8484,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   const stopBtns = [0,1,2].map(i => $("stop"+i));
   const bgm = $("bgm");
   const koatariSound = $("koatariSound");
-  const bigSound = $("bigSound");
   const payoutSound = $("payoutSound");
   const barBgm = $("barBgm");
   const battleBgm = $("battleBgm");
@@ -9276,7 +9217,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   function applyAudioOutputVolumes(){
     applyBgmOutputVolumes();
     if(koatariSound) koatariSound.volume = sfxOutputVolumeForSource(SFX_OUTPUT_SCALE, KOATARI_SOUND_SRC);
-    if(bigSound) bigSound.volume = sfxOutputVolumeForSource(SFX_OUTPUT_SCALE, BIG_SOUND_SRC);
     if(payoutSound) payoutSound.volume = payoutOutputVolumeForSource(PAYOUT_SOUND_OUTPUT_SCALE, payoutSound.getAttribute("src") || PAYOUT_SOUND_SRC);
     if(voiceSound) voiceSound.volume = voiceOutputVolume();
     if(gekiatsuVideo) gekiatsuVideo.volume = currentGekiatsuVideoOutputVolume();
@@ -10087,19 +10027,11 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     return true;
   }
 
-  function pushOrderMissColumn(spin, reelIndex, columnSymbols){
-    if(COLADOKI_MODE){
-      if(!Array.isArray(spin?.pushOrderMissGrid)){
-        spin.pushOrderMissGrid = buildPhysicalReelGrid("MISS", 1);
-      }
-      return [0,1,2].map(row=>spin.pushOrderMissGrid[row][reelIndex]);
+  function pushOrderMissColumn(spin, reelIndex){
+    if(!Array.isArray(spin?.pushOrderMissGrid)){
+      spin.pushOrderMissGrid = buildPhysicalReelGrid("MISS", 1);
     }
-    const column = Array.isArray(columnSymbols) ? [...columnSymbols] : ["BAR", GRAPE_SYMBOL, PIERROT_SYMBOL];
-    const rawRow = Number(spin && spin.lineRow);
-    const row = Number.isFinite(rawRow) ? Math.max(0, Math.min(2, Math.round(rawRow))) : 1;
-    const missSymbols = [GRAPE_SYMBOL, PIERROT_SYMBOL, "BAR"];
-    column[row] = missSymbols[reelIndex] || "BAR";
-    return column;
+    return [0,1,2].map(row=>spin.pushOrderMissGrid[row][reelIndex]);
   }
 
   function finalizePushOrderOutcome(spin=currentSpin){
@@ -11429,10 +11361,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
       }
     }else if(includeBonus && (result === "MID" || result === "MID_CHERRY")){
       stats.midCount++;
-    }else if(result === "GRAPE"){
-      stats.grapeCount = (Number(stats.grapeCount) || 0) + 1;
-    }else if(result === "SMALL"){
-      stats.smallCount++;
     }else if(result === "BELL"){
       stats.bellCount++;
     }else if(result === "BELL3"){
@@ -12281,8 +12209,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
         stats.highSpins = 0;
         stats.bigCount = 0;
         stats.midCount = 0;
-        stats.grapeCount = 0;
-        stats.smallCount = 0;
         stats.bellCount = 0;
         stats.premiumBigCount = 0;
         stats.diagonalBellCount = 0;
@@ -12481,8 +12407,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
       profit:totalPaid - totalFee,
       totalSpins:Math.max(0, Number(source && source.totalSpins) || 0),
       bigCount:Math.max(0, Number(source && source.bigCount) || 0),
-      midCount:Math.max(0, Number(source && source.midCount) || 0),
-      grapeCount:Math.max(0, Number(source && source.grapeCount) || 0)
+      midCount:Math.max(0, Number(source && source.midCount) || 0)
     };
   }
 
@@ -12765,10 +12690,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     if(koatariSound){
       koatariSound.src = KOATARI_SOUND_SRC;
       koatariSound.volume = sfxOutputVolumeForSource(SFX_OUTPUT_SCALE, KOATARI_SOUND_SRC);
-    }
-    if(bigSound){
-      bigSound.src = BIG_SOUND_SRC;
-      bigSound.volume = sfxOutputVolumeForSource(SFX_OUTPUT_SCALE, BIG_SOUND_SRC);
     }
     if(payoutSound){
       const activePayoutSrc = payoutSound.getAttribute("src") || PAYOUT_SOUND_SRC;
@@ -14140,8 +14061,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     if($("bigCountView")) $("bigCountView").textContent = stats.bigCount || 0;
     if($("midCountView")) $("midCountView").textContent = stats.midCount || 0;
     const normalRoleDenominator = normalRoleStatDenominator();
-    if($("grapeCountView")) $("grapeCountView").textContent = countOddsText(stats.grapeCount, normalRoleDenominator);
-    if($("smallCountView")) $("smallCountView").textContent = countOddsText(stats.smallCount, normalRoleDenominator);
     if($("bellCountView")) $("bellCountView").textContent = countOddsText(stats.bellCount, normalRoleDenominator);
     if($("diagonalBellCountView")) $("diagonalBellCountView").textContent = countOddsText(stats.diagonalBellCount, normalRoleDenominator);
     if($("replayCountView")) $("replayCountView").textContent = countOddsText(stats.replayCount, normalRoleDenominator);
@@ -14227,8 +14146,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     setText("wdCounterSt", A_TYPE_MODE ? "A" : atCountText);
     setText("wdCounterBig", stats.bigCount || 0);
     setText("wdCounterReg", stats.midCount || 0);
-    setText("wdCounterGrape", stats.grapeCount || 0);
-    setText("wdCounterSmall", stats.smallCount || 0);
     setText("wdCounterBell", stats.bellCount || 0);
     setText("wdCounterDiagonalBell", stats.diagonalBellCount || 0);
     setText("wdCounterSuika", stats.suikaCount || 0);
@@ -14247,14 +14164,12 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     setText("roleCounterPremiumBigOdds", roleCounterOddsText(stats.premiumBigCount));
     setText("roleCounterRegCount", stats.midCount || 0);
     setText("roleCounterRegOdds", roleCounterOddsText(stats.midCount));
-    setText("roleCounterGrapeCount", stats.grapeCount || 0);
-    setText("roleCounterGrapeOdds", roleCounterOddsText(stats.grapeCount));
+    setText("roleCounterSuikaCount", stats.suikaCount || 0);
+    setText("roleCounterSuikaOdds", roleCounterOddsText(stats.suikaCount));
     setText("roleCounterReplayCount", stats.replayCount || 0);
     setText("roleCounterReplayOdds", roleCounterOddsText(stats.replayCount));
     setText("roleCounterBellCount", stats.bellCount || 0);
     setText("roleCounterBellOdds", roleCounterOddsText(stats.bellCount));
-    setText("roleCounterPieroCount", stats.smallCount || 0);
-    setText("roleCounterPieroOdds", roleCounterOddsText(stats.smallCount));
     setText("roleCounterCherryCount", stats.cherryCount || 0);
     setText("roleCounterCherryOdds", roleCounterOddsText(stats.cherryCount));
     const setMirrorCell = (valueId, label, value)=>{
@@ -14537,7 +14452,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     reels.forEach(r=>r.classList.remove("spinning"));
     isSpinning = false;
     currentSpin = null;
-    stats = {totalSessions:0,totalFee:0,totalPaid:0,totalSpins:0,normalSpins:0,highSpins:0,roleStatVersion:ROLE_STAT_COUNTER_VERSION,bigCount:0,midCount:0,premiumBigCount:0,grapeCount:0,smallCount:0,bellCount:0,diagonalBellCount:0,replayCount:0,suikaCount:0,cherryCount:0,slumpHigh:0,slumpLow:0,slumpHistory:[{spin:0, profit:0}]};
+    stats = {totalSessions:0,totalFee:0,totalPaid:0,totalSpins:0,normalSpins:0,highSpins:0,roleStatVersion:ROLE_STAT_COUNTER_VERSION,bigCount:0,midCount:0,premiumBigCount:0,bellCount:0,diagonalBellCount:0,replayCount:0,suikaCount:0,cherryCount:0,slumpHigh:0,slumpLow:0,slumpHistory:[{spin:0, profit:0}]};
     slumpView = {xZoom:1,yZoom:1,seekStart:0,followEnd:true};
     bonusConfirmBgmHold = false;
     normalState = {mode:"normalA",ceilingTarget:999,nextMode:"normalA",transitionTrigger:"other",longFreeze:false,stockReleasePending:false,stockedBonuses:0,highRemain:0,sinceBonus:0,bonusPending:false,bonusKind:"",bonusSource:"",premiumBonus:false,oneGameRenBonus:false,bonusWaitGames:0,bonusHitGamesSince:0,reachMePending:false,reachMeBonusKind:"",reachMeBonusSource:"",reachMeHitGamesSince:0,pendingSettingVoiceSrc:"",pendingPremiumVoiceSrc:"",morningCeilingActive:false};
@@ -14594,7 +14509,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     reels.forEach(r=>r.classList.remove("spinning"));
     isSpinning = false;
     currentSpin = null;
-    stats = {totalSessions:0,totalFee:0,totalPaid:0,totalSpins:0,normalSpins:0,highSpins:0,roleStatVersion:ROLE_STAT_COUNTER_VERSION,bigCount:0,midCount:0,premiumBigCount:0,grapeCount:0,smallCount:0,bellCount:0,diagonalBellCount:0,replayCount:0,suikaCount:0,cherryCount:0,slumpHigh:0,slumpLow:0,slumpHistory:[{spin:0, profit:0}]};
+    stats = {totalSessions:0,totalFee:0,totalPaid:0,totalSpins:0,normalSpins:0,highSpins:0,roleStatVersion:ROLE_STAT_COUNTER_VERSION,bigCount:0,midCount:0,premiumBigCount:0,bellCount:0,diagonalBellCount:0,replayCount:0,suikaCount:0,cherryCount:0,slumpHigh:0,slumpLow:0,slumpHistory:[{spin:0, profit:0}]};
     slumpView = {xZoom:1,yZoom:1,seekStart:0,followEnd:true};
     bonusConfirmBgmHold = false;
     normalState = {mode:"normalA",ceilingTarget:999,nextMode:"normalA",transitionTrigger:"other",longFreeze:false,stockReleasePending:false,stockedBonuses:0,highRemain:0,sinceBonus:0,bonusPending:false,bonusKind:"",bonusSource:"",premiumBonus:false,oneGameRenBonus:false,bonusWaitGames:0,bonusHitGamesSince:0,reachMePending:false,reachMeBonusKind:"",reachMeBonusSource:"",reachMeHitGamesSince:0,pendingSettingVoiceSrc:"",pendingPremiumVoiceSrc:"",morningCeilingActive:false};
@@ -14709,33 +14624,24 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   }
 
   function cellHtml(symbol, label, cls){
-    const inner =
-      (typeof USER_FACE !== "undefined" && symbol === USER_FACE)
-        ? `<img class="symImg" src="${USER_FACE_SRC}" alt="small hit symbol" loading="eager" decoding="sync" draggable="false">`
-        : (symbol === CHERRY_SYMBOL)
-          ? `<img class="symImg cherrySymImg" src="${CHERRY_IMAGE_SRC}" alt="cherry symbol" loading="eager" decoding="sync" draggable="false">`
-          : (symbol === BELL_SYMBOL)
-            ? `<img class="symImg bellSymImg" src="${BELL_IMAGE_SRC}" alt="bell symbol" loading="eager" decoding="sync" draggable="false">`
-            : (symbol === PIERROT_SYMBOL)
-              ? `<img class="symImg pieroSymImg" src="${PIERROT_IMAGE_SRC}" alt="piero symbol" loading="eager" decoding="sync" draggable="false">`
-              : (symbol === ELEPHANT_SYMBOL)
-                ? `<img class="symImg replaySymImg" src="${REPLAY_IMAGE_SRC}" alt="replay elephant symbol" loading="eager" decoding="sync" draggable="false">`
-            : (symbol === BLANK_SYMBOL)
-              ? `<div class="sym blankSym" aria-label="blank"></div>`
-              : (symbol === "REPLAY")
-                ? `<img class="symImg replaySymImg" src="${REPLAY_IMAGE_SRC}" alt="replay symbol" loading="eager" decoding="sync" draggable="false">`
-                : (symbol === "🍋")
-                  ? `<img class="symImg suikaSymImg" src="${SUICA_IMAGE_SRC}" alt="suika symbol" loading="eager" decoding="sync" draggable="false">`
-                  : (symbol === "⭐")
-                    ? `<img class="symImg missSymImg" src="${MISS_IMAGE_SRC}" alt="miss symbol" loading="eager" decoding="sync" draggable="false">`
-                    : (symbol === GRAPE_SYMBOL)
-                      ? `<img class="symImg grapeSymImg" src="${GRAPE_IMAGE_SRC}" alt="grape symbol" loading="eager" decoding="sync" draggable="false">`
-                      : (symbol === "BAR")
-                        ? `<img class="symImg barSymImg" src="${BAR_IMAGE_SRC}" alt="BAR symbol" loading="eager" decoding="sync" draggable="false">`
-                        : (symbol === "7")
-                          ? `<img class="symImg sevenSymImg" src="${SEVEN_IMAGE_SRC}" alt="7 symbol" loading="eager" decoding="sync" draggable="false">`
-                          : `<div class="sym ${cls || ""}">${escapeHtml(symbol)}</div>`;
-    return `${inner}`;
+    if(symbol === BLANK_SYMBOL) return `<div class="sym blankSym" aria-label="blank"></div>`;
+    const image = symbol === CHERRY_SYMBOL
+      ? ["cherrySymImg",CHERRY_IMAGE_SRC,"cherry symbol"]
+      : symbol === BELL_SYMBOL
+        ? ["bellSymImg",BELL_IMAGE_SRC,"bell symbol"]
+        : symbol === ELEPHANT_SYMBOL || symbol === "REPLAY"
+          ? ["replaySymImg",REPLAY_IMAGE_SRC,"replay symbol"]
+          : symbol === SUICA_SYMBOL
+            ? ["suikaSymImg",SUICA_IMAGE_SRC,"suika symbol"]
+            : symbol === "BAR"
+              ? ["barSymImg",BAR_IMAGE_SRC,"BAR symbol"]
+              : symbol === "7"
+                ? ["sevenSymImg",SEVEN_IMAGE_SRC,"7 symbol"]
+                : null;
+    if(image){
+      return `<img class="symImg ${image[0]}" src="${image[1]}" alt="${image[2]}" loading="eager" decoding="sync" draggable="false">`;
+    }
+    return `<div class="sym ${cls || ""}">${escapeHtml(symbol)}</div>`;
   }
 
   function ensureReelCells(index){
@@ -15078,11 +14984,9 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     if(middle[0] === "7" && middle[1] === "7" && middle[2] === "7") return "BIG";
     if(middle[0] === "7" && middle[1] === "7" && middle[2] === "BAR") return "MID";
     if(middle[0] === "BAR" && middle[1] === "BAR" && middle[2] === "BAR") return "BAR3";
-    if(rowMatches(RESULT.SMALL.reel)) return "SMALL";
     if(rowMatches(RESULT.BELL.reel)) return "BELL";
     if(hasBellDiagonal(rows)) return "BELL3";
     if(rowMatches(RESULT.REPLAY.reel)) return "REPLAY";
-    if(rowMatches(RESULT.GRAPE.reel)) return "GRAPE";
     if(rowMatches(RESULT.SUICA.reel)) return "SUICA";
     const cherryResult = cherryResultFromRows(rows);
     if(cherryResult) return cherryResult;
@@ -15111,7 +15015,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
 
   function displayedResultFromRow(row){
     if(!Array.isArray(row) || row.length < 3) return "MISS";
-    const exactResults = ["BIG","MID","BAR3","SMALL","BELL","REPLAY","GRAPE","SUICA","CHERRY_TRIPLE"];
+    const exactResults = ["BIG","MID","BAR3","BELL","REPLAY","SUICA","CHERRY_TRIPLE"];
 
     for(const result of exactResults){
       const reel = RESULT[result].reel;
@@ -16665,28 +16569,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     return true;
   }
 
-  function getAudio(){
-    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    return audioCtx;
-  }
-
-  function beep(freq=440,dur=.12,type="sine",gain=.18,delay=0){
-    const vol = sfxOutputVolume();
-    if(vol <= 0) return;
-    const ctx = getAudio();
-    const o = ctx.createOscillator();
-    const g = ctx.createGain();
-    o.type = type;
-    o.frequency.setValueAtTime(freq, ctx.currentTime + delay);
-    g.gain.setValueAtTime(.0001, ctx.currentTime + delay);
-    g.gain.exponentialRampToValueAtTime(Math.max(.0001,gain*vol), ctx.currentTime+delay+.02);
-    g.gain.exponentialRampToValueAtTime(.0001, ctx.currentTime+delay+dur);
-    o.connect(g);
-    g.connect(ctx.destination);
-    o.start(ctx.currentTime+delay);
-    o.stop(ctx.currentTime+delay+dur+.04);
-  }
-
   function playOneShotSound(src, volume=sfxOutputVolume(), options={}){
     if(debugFastSpinActive || speedToBonusActive) return;
     if(premiumBigConfirmSilence && !options.allowDuringPremiumConfirm) return;
@@ -16729,12 +16611,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
       try{
         bonusConfirmSoundAudio.pause();
         bonusConfirmSoundAudio.currentTime = 0;
-      }catch(e){}
-    }
-    if(bigSound){
-      try{
-        bigSound.pause();
-        bigSound.currentTime = 0;
       }catch(e){}
     }
     clearBonusConfirmSoundLock();
@@ -16819,11 +16695,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   function playLockedBonusConfirmSound(src, volume=sfxOutputVolume(CONFIRM_SOUND_OUTPUT_SCALE)){
     if(debugFastSpinActive || speedToBonusActive) return;
     if(!src) return;
-    if(src === SEVEN_CONFIRM_SOUND_SRC && isPremiumBigConfirmSoundContext(currentSpin)){
-      src = premiumBigThirdStopVoiceSrc(currentSpin);
-      volume = voiceOutputVolume(PREMIUM_VOICE_OUTPUT_SCALE);
-      log(`PBB通常BIG確定音を差し替え：${src.split("/").pop()}`);
-    }
     if(premiumBigConfirmSilence && !isPremiumBigDedicatedVoiceSrc(src)) return;
     try{
       clearBonusConfirmSoundLock();
@@ -16857,15 +16728,9 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     }
   }
 
-  function playSevenConfirmSound(){
-    if(isPremiumBigConfirmSoundContext(currentSpin)){
-      playPremiumBigConfirmVoice("PBB通常BIG確定音差し替え", premiumBigThirdStopVoiceSrc(currentSpin));
-      return;
-    }
-    playLockedBonusConfirmSound(SEVEN_CONFIRM_SOUND_SRC, voiceOutputVolume(LINEUP_CONFIRM_SOUND_OUTPUT_SCALE));
-  }
-  function playRegConfirmSound(){ playLockedBonusConfirmSound(REG_CONFIRM_SOUND_SRC, voiceOutputVolume(LINEUP_CONFIRM_SOUND_OUTPUT_SCALE)); }
-  function playBonusConfirmSound(){ playLockedBonusConfirmSound(BONUS_CONFIRM_SOUND_SRC, sfxOutputVolume(BONUS_CONFIRM_SOUND_OUTPUT_SCALE)); }
+  // 役成立時は専用音を鳴らさない。告知音・回転音・停止音・払い出し音は別系統で維持する。
+  function playSevenConfirmSound(){}
+  function playRegConfirmSound(){}
   function playPekaSound(isBig=false){
     const src = isBig && Math.random() < PEKA_BIG_ATSU_RATE
       ? PEKA_BIG_ATSU_SOUND_SRC
@@ -16884,44 +16749,14 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     }catch(e){}
   }
 
-  function playBigSound(){
-    if(!bigSound) return;
-    try{
-      bigSound.pause();
-      bigSound.currentTime = 0;
-      bigSound.volume = sfxOutputVolumeForSource(SFX_OUTPUT_SCALE, BIG_SOUND_SRC);
-      const p = bigSound.play();
-      if(p && typeof p.catch === "function") p.catch(()=>{});
-    }catch(e){}
-  }
-
-  function isPremiumBigBonusActiveForSound(){
-    return !!(
-      isATypeBonusActive() &&
-      normalizeATypeBonusKind(session.bonusKind) === "BIG" &&
-      (session.premiumBonus || session.oneGameRenBonus)
-    );
-  }
-
-  function isPremiumBigBonusPieroSound(result="", spin=currentSpin){
-    return !!(
-      result === A_TYPE_BONUS_MAIN_RESULT &&
-      isPremiumBigBonusActiveForSound() &&
-      (!spin || spin.aTypeBonusActiveAtStart || isATypeBonusActive())
-    );
-  }
-
   function payoutSoundSrcFor(result, reward=0, spin=currentSpin){
-    if(isPremiumBigBonusPieroSound(result, spin)) return PREMIUM_PIERO_SYMBOL_SOUND_SRC;
     if(result === "REPLAY") return REPLAY_SOUND_SRC;
     if(result === "CHERRY_ANY" || result === "CHERRY_DOUBLE" || result === "CHERRY_TRIPLE" || result === "MID_CHERRY") return CHERRY_SOUND_SRC;
-    if(result === "MID" || result === "BAR3" || result === "SMALL" || result === "DEVIL_ZONE" || result === "SUPER_DEVIL_ZONE") return SPECIAL_SYMBOL_SOUND_SRC;
-    if(result === "GRAPE" || result === "BELL" || result === "BELL3") return PAYOUT_3PT_BELL_SOUND_SRC;
+    if(result === "BELL" || result === "BELL3") return PAYOUT_3PT_BELL_SOUND_SRC;
     return PAYOUT_SOUND_SRC;
   }
 
   function payoutSoundScaleFor(result="", reward=0, spin=currentSpin){
-    if(isPremiumBigBonusPieroSound(result, spin)) return PAYOUT_SOUND_OUTPUT_SCALE;
     return result === "BELL" ? BELL_PAYOUT_SOUND_OUTPUT_SCALE : PAYOUT_SOUND_OUTPUT_SCALE;
   }
 
@@ -16959,16 +16794,8 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
       : STOP_SOUND_SRC;
     playOneShotSound(src);
   }
-  function playWinSound(big){
-    if(debugFastSpinActive || speedToBonusActive) return;
-    const notes = big ? [523,659,784,1046,1318] : [440,554,659,880];
-    notes.forEach((n,i)=>beep(n,.16,"triangle",.17,i*.11));
-  }
-  function playGodSound(){
-    if(debugFastSpinActive || speedToBonusActive) return;
-    [262,330,392,523,659,784,1046].forEach((n,i)=>beep(n,.18,"triangle",.13,i*.13));
-  }
-  function playLoseSound(){ if(debugFastSpinActive || speedToBonusActive) return; beep(190,.13,"sawtooth",.055); }
+  function playWinSound(){}
+  function playLoseSound(){}
 
   function showOverlay(text){
     if(debugFastSpinActive || speedToBonusActive) return;
@@ -17376,7 +17203,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     onClick("debugMidBtn", ()=>direct("MID"));
     onClick("debugBar3Btn", ()=>direct("BAR3"));
     onClick("debugBigBtn", ()=>direct("BIG"));
-    onClick("debugGrapeBtn", ()=>direct(COLADOKI_MODE ? "SUICA" : "GRAPE"));
     onClick("debugBellPayBtn", ()=>direct("BELL"));
     onClick("debugBell3Btn", ()=>direct("BELL3"));
     onClick("debugReplayBtn", ()=>direct("REPLAY"));
