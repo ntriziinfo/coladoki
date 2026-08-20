@@ -5999,62 +5999,62 @@ body{
   --jag-cabinet-height:1610px;
   --jag-reel-top:454px;
   --jag-reel-height:478px;
-  --layout-reels-x:12%;
+  --layout-reels-x:17.5%;
   --layout-reels-y:0%;
-  --layout-reels-w:76.3%;
-  --layout-reels-h:64%;
-  --layout-frame-x:0%;
+  --layout-reels-w:64.7%;
+  --layout-reels-h:49%;
+  --layout-frame-x:.1%;
   --layout-frame-y:0%;
   --layout-frame-w:100%;
   --layout-frame-h:100%;
-  --layout-mascot-x:0%;
-  --layout-mascot-y:-3%;
-  --layout-mascot-w:92%;
-  --layout-mascot-h:92%;
-  --layout-hibiscusleft-x:0%;
-  --layout-hibiscusleft-y:0%;
-  --layout-hibiscusleft-w:96%;
-  --layout-hibiscusleft-h:96%;
-  --layout-hibiscusright-x:0%;
-  --layout-hibiscusright-y:0%;
-  --layout-hibiscusright-w:96%;
-  --layout-hibiscusright-h:96%;
-  --layout-chance-x:16%;
+  --layout-mascot-x:-5.9%;
+  --layout-mascot-y:-13.6%;
+  --layout-mascot-w:143.4%;
+  --layout-mascot-h:180%;
+  --layout-hibiscusleft-x:10.8%;
+  --layout-hibiscusleft-y:17.9%;
+  --layout-hibiscusleft-w:84.6%;
+  --layout-hibiscusleft-h:61.5%;
+  --layout-hibiscusright-x:-11.8%;
+  --layout-hibiscusright-y:17.9%;
+  --layout-hibiscusright-w:84.6%;
+  --layout-hibiscusright-h:61.5%;
+  --layout-chance-x:16.6%;
   --layout-chance-y:79%;
   --layout-chance-w:11%;
   --layout-chance-h:12%;
-  --layout-credit-x:31.5%;
-  --layout-credit-y:79.2%;
-  --layout-credit-w:6.8%;
-  --layout-credit-h:13.4%;
+  --layout-credit-x:33.1%;
+  --layout-credit-y:66.7%;
+  --layout-credit-w:10.7%;
+  --layout-credit-h:10.5%;
   --layout-count-x:55.5%;
-  --layout-count-y:79.2%;
-  --layout-count-w:13.7%;
-  --layout-count-h:13.4%;
-  --layout-payout-x:38.8%;
-  --layout-payout-y:79.2%;
-  --layout-payout-w:6.8%;
-  --layout-payout-h:13.4%;
+  --layout-count-y:58%;
+  --layout-count-w:11%;
+  --layout-count-h:12.9%;
+  --layout-payout-x:55.5%;
+  --layout-payout-y:72.6%;
+  --layout-payout-w:11%;
+  --layout-payout-h:10.2%;
   --layout-bonuscontent-x:4.5%;
   --layout-bonuscontent-y:17%;
-  --layout-bonuscontent-w:91%;
+  --layout-bonuscontent-w:90.5%;
   --layout-bonuscontent-h:66%;
-  --layout-bonusframe-x:11.5%;
-  --layout-bonusframe-y:-32%;
-  --layout-bonusframe-w:77%;
-  --layout-bonusframe-h:27%;
-  --layout-lever-x:22.9%;
-  --layout-lever-y:61.9%;
-  --layout-stop0-x:39.8%;
-  --layout-stop0-y:62.4%;
+  --layout-bonusframe-x:11.7%;
+  --layout-bonusframe-y:-83.1%;
+  --layout-bonusframe-w:77.4%;
+  --layout-bonusframe-h:19%;
+  --layout-lever-x:22.6%;
+  --layout-lever-y:61.2%;
+  --layout-stop0-x:40%;
+  --layout-stop0-y:60.6%;
   --layout-stop1-x:50.4%;
-  --layout-stop1-y:62.4%;
+  --layout-stop1-y:60.6%;
   --layout-stop2-x:61%;
-  --layout-stop2-y:62.4%;
-  --layout-auto-x:89%;
-  --layout-auto-y:61.9%;
+  --layout-stop2-y:60.6%;
+  --layout-auto-x:81%;
+  --layout-auto-y:61.2%;
   --layout-navi-x:17.5%;
-  --layout-navi-y:75.5%;
+  --layout-navi-y:59.2%;
   --layout-lamptopleft-x:6.3%;
   --layout-lamptopleft-y:13%;
   --layout-lamptopright-x:88.3%;
@@ -8668,22 +8668,23 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   const PLAY_SESSION_BASELINE_STORAGE_KEY = PLAY_SESSION_ID ? `jag_play_session_baseline_${PLAY_SESSION_ID}` : "";
   let playSessionStartStats = null;
   if(SLOT_DEBUG_ENABLED) document.body.classList.add("debugMode", "debugOpen");
-  const PAGE_ZOOM_STORAGE_KEY = "jag_unified_page_zoom_v3";
-  const PAGE_PAN_STORAGE_KEY = "jag_unified_page_pan_x_v3";
-  const LAYOUT_EDIT_STORAGE_KEY = "coladoki_layout_editor_v8";
-  const LAYOUT_DEFAULT_STORAGE_KEY = "coladoki_layout_default_v8";
+  const PAGE_ZOOM_STORAGE_KEY = "jag_unified_page_zoom_v4";
+  const PAGE_PAN_STORAGE_KEY = "jag_unified_page_pan_x_v4";
+  const LAYOUT_EDIT_STORAGE_KEY = "coladoki_layout_editor_v9";
+  const LAYOUT_DEFAULT_STORAGE_KEY = "coladoki_layout_default_v9";
   const LAYOUT_EDITOR_ENABLED = true;
   const PAGE_STAGE_WIDTH = 1360;
   const PAGE_ZOOM_MIN = 0.75;
   const PAGE_ZOOM_MAX = 1.30;
   const PAGE_ZOOM_STEP = 0.05;
+  const PAGE_ZOOM_DEFAULT = 0.75;
   const PAGE_PAN_MIN = -260;
   const PAGE_PAN_MAX = 260;
   const PAGE_ZOOM_BASE = 1.00;
   const CABINET_X_OFFSET_AT_75 = 0;
   const CABINET_X_OFFSET_AT_100 = 0;
   const CABINET_X_OFFSET_AT_130 = 0;
-  const PAGE_PAN_DEFAULT = -190;
+  const PAGE_PAN_DEFAULT = -139;
   const SLOT_ZOOM_ANCHOR_X = 680;
   const SLOT_ZOOM_ANCHOR_Y = 500;
   const BG_IMAGE_WIDTH = 1881;
@@ -8692,28 +8693,28 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   const BG_LOGO_LOWER_ANCHOR_Y = 742;
   const LAYOUT_DEFAULTS = Object.freeze({
     reels:{x:17.5, y:0.0, w:64.7, h:49.0},
-    frame:{x:0.0, y:0.0, w:100.0, h:100.0},
-    mascot:{x:0.0, y:-3.0, w:92.0, h:92.0},
-    hibiscusleft:{x:0.0, y:0.0, w:96.0, h:96.0},
-    hibiscusright:{x:0.0, y:0.0, w:96.0, h:96.0},
-    chance:{x:16.0, y:79.0, w:11.0, h:12.0},
-    credit:{x:31.5, y:79.2, w:6.8, h:13.4},
-    count:{x:55.5, y:79.2, w:13.7, h:13.4},
-    payout:{x:38.8, y:79.2, w:6.8, h:13.4},
-    bonuscontent:{x:4.5, y:17.0, w:91.0, h:66.0},
-    bonusframe:{x:11.5, y:-32.0, w:77.0, h:27.0},
-    lever:{x:22.9, y:61.9},
-    stop0:{x:39.8, y:62.4},
-    stop1:{x:50.4, y:62.4},
-    stop2:{x:61.0, y:62.4},
-    auto:{x:89.0, y:61.9},
-    navi:{x:17.5, y:75.5},
+    frame:{x:0.1, y:0.0, w:100.0, h:100.0},
+    mascot:{x:-5.9, y:-13.6, w:143.4, h:180.0},
+    hibiscusleft:{x:10.8, y:17.9, w:84.6, h:61.5},
+    hibiscusright:{x:-11.8, y:17.9, w:84.6, h:61.5},
+    chance:{x:16.6, y:79.0, w:11.0, h:12.0},
+    credit:{x:33.1, y:66.7, w:10.7, h:10.5},
+    count:{x:55.5, y:58.0, w:11.0, h:12.9},
+    payout:{x:55.5, y:72.6, w:11.0, h:10.2},
+    bonuscontent:{x:4.5, y:17.0, w:90.5, h:66.0},
+    bonusframe:{x:11.7, y:-83.1, w:77.4, h:19.0},
+    lever:{x:22.6, y:61.2},
+    stop0:{x:40.0, y:60.6},
+    stop1:{x:50.4, y:60.6},
+    stop2:{x:61.0, y:60.6},
+    auto:{x:81.0, y:61.2},
+    navi:{x:17.5, y:59.2},
     lamptopleft:{x:6.3, y:13.0},
     lamptopright:{x:88.3, y:13.0},
     lampreelleft:{x:6.1, y:50.4},
     lampreelright:{x:88.6, y:50.4}
   });
-  let pageZoom = 1;
+  let pageZoom = PAGE_ZOOM_DEFAULT;
   let pagePanX = PAGE_PAN_DEFAULT;
   let layoutEditOpen = false;
   let layoutDefaultState = JSON.parse(JSON.stringify(LAYOUT_DEFAULTS));
