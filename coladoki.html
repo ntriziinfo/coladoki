@@ -5945,6 +5945,10 @@ body{
   --layout-frame-y:0%;
   --layout-frame-w:100%;
   --layout-frame-h:100%;
+  --layout-mascot-x:0%;
+  --layout-mascot-y:-3%;
+  --layout-mascot-w:92%;
+  --layout-mascot-h:92%;
   --layout-chance-x:16%;
   --layout-chance-y:79%;
   --layout-chance-w:11%;
@@ -6093,11 +6097,13 @@ body{
   }
 }
 .cabinetTopArtworkMascot{
-  width:100%;
-  height:100%;
+  position:relative;
+  left:var(--layout-mascot-x);
+  top:var(--layout-mascot-y);
+  width:var(--layout-mascot-w);
+  height:var(--layout-mascot-h);
   display:grid;
   place-items:center;
-  transform:translateY(-7px) scale(.92);
   filter:
     drop-shadow(0 7px 5px rgba(0,0,0,.74))
     drop-shadow(0 0 9px rgba(255,211,81,.22));
@@ -6109,6 +6115,69 @@ body{
 .cabinetTopArtworkMascotOff{opacity:1;}
 .cabinetTopArtworkRow.is-jackpot-blinking .cabinetTopArtworkMascotOn{opacity:1;}
 .cabinetTopArtworkRow.is-jackpot-blinking .cabinetTopArtworkMascotOff{opacity:0;}
+.cabinetDynamicLampRail{
+  position:absolute;
+  z-index:9;
+  pointer-events:none;
+  mix-blend-mode:screen;
+}
+.cabinetDynamicLampRail span{
+  --lamp-i:0;
+  --lamp-duration:1.31s;
+  --lamp-delay:-.17s;
+  position:absolute;
+  left:50%;
+  bottom:2%;
+  width:78%;
+  aspect-ratio:1;
+  border-radius:50%;
+  transform:translateX(-50%);
+  opacity:.12;
+  background:
+    radial-gradient(circle,#fff 0 10%,#fff5a3 11% 23%,#ff3a20 25% 43%,rgba(255,0,20,.24) 54%,transparent 72%);
+  box-shadow:
+    0 0 5px rgba(255,255,220,.96),
+    0 0 11px rgba(255,43,24,.94),
+    0 0 19px rgba(255,0,22,.66);
+  animation:cabinetLampRandom var(--lamp-duration) steps(1,end) var(--lamp-delay) infinite;
+}
+.cabinetDynamicLampRail span:nth-child(1){bottom:2%;--lamp-duration:1.17s;--lamp-delay:-.81s;--lamp-chase-delay:0s;}
+.cabinetDynamicLampRail span:nth-child(2){bottom:17%;--lamp-duration:1.43s;--lamp-delay:-.23s;--lamp-chase-delay:.105s;}
+.cabinetDynamicLampRail span:nth-child(3){bottom:32%;--lamp-duration:.97s;--lamp-delay:-.56s;--lamp-chase-delay:.21s;}
+.cabinetDynamicLampRail span:nth-child(4){bottom:47%;--lamp-duration:1.61s;--lamp-delay:-1.08s;--lamp-chase-delay:.315s;}
+.cabinetDynamicLampRail span:nth-child(5){bottom:62%;--lamp-duration:1.29s;--lamp-delay:-.35s;--lamp-chase-delay:.42s;}
+.cabinetDynamicLampRail span:nth-child(6){bottom:77%;--lamp-duration:1.73s;--lamp-delay:-1.42s;--lamp-chase-delay:.525s;}
+.cabinetDynamicLampRail span:nth-child(7){bottom:92%;--lamp-duration:1.09s;--lamp-delay:-.68s;--lamp-chase-delay:.63s;}
+.cabinetTopLampRail{top:21%;width:4.7%;height:66%;}
+.cabinetTopLampRailLeft{left:4.15%;}
+.cabinetTopLampRailRight{right:4.15%;}
+.cabinetReelLampRail{top:8.5%;width:4.7%;height:51.5%;}
+.cabinetReelLampRailLeft{left:3.05%;}
+.cabinetReelLampRailRight{right:3.05%;}
+@keyframes cabinetLampRandom{
+  0%,13%{opacity:.13;filter:brightness(.72)}
+  14%,28%{opacity:1;filter:brightness(1.35)}
+  29%,63%{opacity:.2;filter:brightness(.84)}
+  64%,74%{opacity:.88;filter:brightness(1.2)}
+  75%,100%{opacity:.1;filter:brightness(.68)}
+}
+body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
+  animation-name:cabinetLampChase;
+  animation-duration:1.02s;
+  animation-timing-function:linear;
+  animation-delay:var(--lamp-chase-delay);
+}
+@keyframes cabinetLampChase{
+  0%,14%{opacity:1;filter:brightness(1.55) saturate(1.18)}
+  15%,35%{opacity:.42;filter:brightness(1.04)}
+  36%,100%{opacity:.09;filter:brightness(.68)}
+}
+@media (prefers-reduced-motion:reduce){
+  .cabinetDynamicLampRail span{
+    animation:none !important;
+    opacity:.54;
+  }
+}
 .cabinetTopSevenOverlay{
   position:absolute;
   left:18.8%;
@@ -6220,11 +6289,17 @@ body{
   z-index:14;
   pointer-events:none;
 }
-.cabinetFrontParts .cabinetPartReelFront{
+.cabinetReelFrameAdjustable{
+  position:absolute;
   left:var(--layout-frame-x);
   top:var(--layout-frame-y);
   width:var(--layout-frame-w);
   height:var(--layout-frame-h);
+}
+.cabinetFrontParts .cabinetPartReelFront{
+  inset:0;
+  width:100%;
+  height:100%;
   object-fit:fill;
 }
 .reelCenterBandLayer{
@@ -6841,6 +6916,8 @@ body{
               <img class="cabinetTopArtworkLogo cabinetTopArtworkLampOn" src="assets/cabinet/artwork/coladoki_lamp_on_user_v1.png" alt="">
             </span>
           </div>
+          <div class="cabinetDynamicLampRail cabinetTopLampRail cabinetTopLampRailLeft"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="cabinetDynamicLampRail cabinetTopLampRail cabinetTopLampRailRight"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         </div>
         <div class="jagSideRail jagSideRailLeft"></div>
         <div class="jagSideRail jagSideRailRight"></div>
@@ -6933,6 +7010,15 @@ body{
                 <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="-20" max="20" step="0.1" data-layout-target="frame" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="frame-y"></b></label>
                 <label class="layoutEditRow"><span>W</span><input class="layoutEditInput" type="range" min="80" max="120" step="0.1" data-layout-target="frame" data-layout-prop="w"><b class="layoutEditValue" data-layout-view="frame-w"></b></label>
                 <label class="layoutEditRow"><span>H</span><input class="layoutEditInput" type="range" min="80" max="120" step="0.1" data-layout-target="frame" data-layout-prop="h"><b class="layoutEditValue" data-layout-view="frame-h"></b></label>
+              </div>
+            </div>
+            <div class="layoutEditGroup">
+              <div class="layoutEditGroupTitle">MASCOT IMAGE</div>
+              <div class="layoutEditRows">
+                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="-50" max="50" step="0.1" data-layout-target="mascot" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="mascot-x"></b></label>
+                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="-50" max="50" step="0.1" data-layout-target="mascot" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="mascot-y"></b></label>
+                <label class="layoutEditRow"><span>W</span><input class="layoutEditInput" type="range" min="40" max="180" step="0.1" data-layout-target="mascot" data-layout-prop="w"><b class="layoutEditValue" data-layout-view="mascot-w"></b></label>
+                <label class="layoutEditRow"><span>H</span><input class="layoutEditInput" type="range" min="40" max="180" step="0.1" data-layout-target="mascot" data-layout-prop="h"><b class="layoutEditValue" data-layout-view="mascot-h"></b></label>
               </div>
             </div>
             <div class="layoutEditGroup">
@@ -7166,7 +7252,11 @@ body{
           <div class="pushOrderNaviItem" data-push-reel="2"><video class="pushOrderNaviVideo" muted loop playsinline preload="auto" aria-hidden="true"></video></div>
         </div>
         <div class="cabinetFrontParts" aria-hidden="true">
-          <img class="cabinetPart cabinetPartReelFront" src="assets/cabinet/parts/coladoki_part_reel_face_v6.png" alt="">
+          <div class="cabinetReelFrameAdjustable">
+            <img class="cabinetPart cabinetPartReelFront" src="assets/cabinet/parts/coladoki_part_reel_face_v6.png" alt="">
+            <div class="cabinetDynamicLampRail cabinetReelLampRail cabinetReelLampRailLeft"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="cabinetDynamicLampRail cabinetReelLampRail cabinetReelLampRailRight"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
         </div>
         <div class="jagBonusDataMeters" aria-label="BONUS GAME DATA">
           <div class="jagBonusDataMeter">
@@ -8355,6 +8445,7 @@ body{
   const LAYOUT_DEFAULTS = Object.freeze({
     reels:{x:12.0, y:0.0, w:76.3, h:64.0},
     frame:{x:0.0, y:0.0, w:100.0, h:100.0},
+    mascot:{x:0.0, y:-3.0, w:92.0, h:92.0},
     chance:{x:16.0, y:79.0, w:11.0, h:12.0},
     credit:{x:31.5, y:79.2, w:6.8, h:13.4},
     count:{x:55.5, y:79.2, w:13.7, h:13.4},
@@ -13804,6 +13895,7 @@ body{
     if(reelArea) reelArea.classList.toggle("jagChanceLit", jagChanceLit);
     const cabinetTopArtworkRow = document.querySelector(".cabinetTopArtworkRow");
     if(cabinetTopArtworkRow) cabinetTopArtworkRow.classList.toggle("is-jackpot-blinking", jagChanceLit);
+    document.body.classList.toggle("coladokiJackpotLampChase", jagChanceLit);
     const gogoChance = $("jagGogoChance");
     if(gogoChance){
       const premiumBonusActive = !!(isATypeBonusActive() && (session.premiumBonus || session.oneGameRenBonus));
