@@ -467,7 +467,7 @@ h1{
   font-variant-numeric:tabular-nums;
 }
 body.layoutEditOpen .reels,
-body.layoutEditOpen .cabinetPartReelFront,
+body.layoutEditOpen .cabinetPartUpperReelUnified,
 body.layoutEditOpen .jagGogoChance,
 body.layoutEditOpen .jagPayoutMeter,
 body.layoutEditOpen .jagBonusDataMeters{
@@ -483,7 +483,7 @@ body.layoutEditOpen .jagPayoutMeter{
 body.layoutEditOpen .jagBonusDataMeters{
   outline-color:rgba(170,111,255,.94);
 }
-body.layoutEditOpen .cabinetPartReelFront{
+body.layoutEditOpen .cabinetPartUpperReelUnified{
   outline-color:rgba(255,205,64,.96);
 }
 @media(max-width:640px){
@@ -6011,13 +6011,29 @@ body{
   z-index:0;
   filter:saturate(.82) contrast(1.02);
 }
-.cabinetPartTop{
+.cabinetUnifiedUpperReelStage{
+  position:absolute;
+  left:0;
   top:0;
-  height:466px;
-  object-fit:fill;
+  width:100%;
+  height:920px;
   z-index:2;
+  pointer-events:none;
 }
-.cabinetPartReelBack{display:none;}
+.cabinetUnifiedUpperReelAdjustable{
+  position:absolute;
+  left:var(--layout-frame-x);
+  top:var(--layout-frame-y);
+  width:var(--layout-frame-w);
+  height:var(--layout-frame-h);
+}
+.cabinetPartUpperReelUnified{
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:fill;
+  z-index:0;
+}
 .cabinetPartControls{top:899px;z-index:3;}
 .cabinetPartLower{
   left:0;
@@ -6120,11 +6136,9 @@ body{
   z-index:9;
   pointer-events:none;
   mix-blend-mode:screen;
+  opacity:0;
 }
 .cabinetDynamicLampRail span{
-  --lamp-i:0;
-  --lamp-duration:1.31s;
-  --lamp-delay:-.17s;
   position:absolute;
   left:50%;
   bottom:2%;
@@ -6139,33 +6153,26 @@ body{
     0 0 5px rgba(255,255,220,.96),
     0 0 11px rgba(255,43,24,.94),
     0 0 19px rgba(255,0,22,.66);
-  animation:cabinetLampRandom var(--lamp-duration) steps(1,end) var(--lamp-delay) infinite;
+  animation:none;
 }
-.cabinetDynamicLampRail span:nth-child(1){bottom:2%;--lamp-duration:1.17s;--lamp-delay:-.81s;--lamp-chase-delay:0s;}
-.cabinetDynamicLampRail span:nth-child(2){bottom:17%;--lamp-duration:1.43s;--lamp-delay:-.23s;--lamp-chase-delay:.105s;}
-.cabinetDynamicLampRail span:nth-child(3){bottom:32%;--lamp-duration:.97s;--lamp-delay:-.56s;--lamp-chase-delay:.21s;}
-.cabinetDynamicLampRail span:nth-child(4){bottom:47%;--lamp-duration:1.61s;--lamp-delay:-1.08s;--lamp-chase-delay:.315s;}
-.cabinetDynamicLampRail span:nth-child(5){bottom:62%;--lamp-duration:1.29s;--lamp-delay:-.35s;--lamp-chase-delay:.42s;}
-.cabinetDynamicLampRail span:nth-child(6){bottom:77%;--lamp-duration:1.73s;--lamp-delay:-1.42s;--lamp-chase-delay:.525s;}
-.cabinetDynamicLampRail span:nth-child(7){bottom:92%;--lamp-duration:1.09s;--lamp-delay:-.68s;--lamp-chase-delay:.63s;}
-.cabinetTopLampRail{top:21%;width:4.7%;height:66%;}
-.cabinetTopLampRailLeft{left:4.15%;}
-.cabinetTopLampRailRight{right:4.15%;}
-.cabinetReelLampRail{top:8.5%;width:4.7%;height:51.5%;}
-.cabinetReelLampRailLeft{left:3.05%;}
-.cabinetReelLampRailRight{right:3.05%;}
-@keyframes cabinetLampRandom{
-  0%,13%{opacity:.13;filter:brightness(.72)}
-  14%,28%{opacity:1;filter:brightness(1.35)}
-  29%,63%{opacity:.2;filter:brightness(.84)}
-  64%,74%{opacity:.88;filter:brightness(1.2)}
-  75%,100%{opacity:.1;filter:brightness(.68)}
+.cabinetDynamicLampRail span:nth-child(1){bottom:2%;--lamp-chase-delay:0s;}
+.cabinetDynamicLampRail span:nth-child(2){bottom:17%;--lamp-chase-delay:.105s;}
+.cabinetDynamicLampRail span:nth-child(3){bottom:32%;--lamp-chase-delay:.21s;}
+.cabinetDynamicLampRail span:nth-child(4){bottom:47%;--lamp-chase-delay:.315s;}
+.cabinetDynamicLampRail span:nth-child(5){bottom:62%;--lamp-chase-delay:.42s;}
+.cabinetDynamicLampRail span:nth-child(6){bottom:77%;--lamp-chase-delay:.525s;}
+.cabinetDynamicLampRail span:nth-child(7){bottom:92%;--lamp-chase-delay:.63s;}
+.cabinetTopLampRail{top:13%;width:5%;height:29.5%;}
+.cabinetTopLampRailLeft{left:5.8%;}
+.cabinetTopLampRailRight{right:5.8%;}
+.cabinetReelLampRail{top:50.4%;width:5%;height:28.5%;}
+.cabinetReelLampRailLeft{left:5.8%;}
+.cabinetReelLampRailRight{right:5.8%;}
+body.coladokiJackpotLampChase .cabinetDynamicLampRail{
+  opacity:1;
 }
 body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
-  animation-name:cabinetLampChase;
-  animation-duration:1.02s;
-  animation-timing-function:linear;
-  animation-delay:var(--lamp-chase-delay);
+  animation:cabinetLampChase 1.02s linear var(--lamp-chase-delay) infinite;
 }
 @keyframes cabinetLampChase{
   0%,14%{opacity:1;filter:brightness(1.55) saturate(1.18)}
@@ -6173,7 +6180,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   36%,100%{opacity:.09;filter:brightness(.68)}
 }
 @media (prefers-reduced-motion:reduce){
-  .cabinetDynamicLampRail span{
+  body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     animation:none !important;
     opacity:.54;
   }
@@ -6282,25 +6289,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   .jagBonusDataMeter b.is-bonus-held{
     animation:none;
   }
-}
-.cabinetFrontParts{
-  position:absolute;
-  inset:0;
-  z-index:14;
-  pointer-events:none;
-}
-.cabinetReelFrameAdjustable{
-  position:absolute;
-  left:var(--layout-frame-x);
-  top:var(--layout-frame-y);
-  width:var(--layout-frame-w);
-  height:var(--layout-frame-h);
-}
-.cabinetFrontParts .cabinetPartReelFront{
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:fill;
 }
 .reelCenterBandLayer{
   position:absolute;
@@ -6898,8 +6886,15 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
       <div class="jagCabinetShell" aria-hidden="true">
         <div class="cabinetPartsScene" aria-hidden="true">
           <img class="cabinetPart cabinetPartChassis" src="assets/cabinet/parts/coladoki_part_chassis_v5.png" alt="">
-          <img class="cabinetPart cabinetPartTop" src="assets/cabinet/parts/coladoki_part_top_v5.png" alt="">
-          <img class="cabinetPart cabinetPartReelBack" src="assets/cabinet/parts/coladoki_part_reel_face_v6.png" alt="">
+          <div class="cabinetUnifiedUpperReelStage">
+            <div class="cabinetUnifiedUpperReelAdjustable">
+              <img class="cabinetPart cabinetPartUpperReelUnified" src="assets/cabinet/parts/coladoki_part_upper_reel_unified_v1.png" alt="">
+              <div class="cabinetDynamicLampRail cabinetTopLampRail cabinetTopLampRailLeft"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="cabinetDynamicLampRail cabinetTopLampRail cabinetTopLampRailRight"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="cabinetDynamicLampRail cabinetReelLampRail cabinetReelLampRailLeft"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="cabinetDynamicLampRail cabinetReelLampRail cabinetReelLampRailRight"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            </div>
+          </div>
           <img class="cabinetPart cabinetPartControls" src="assets/cabinet/parts/coladoki_part_controls_v5.png" alt="">
           <img class="cabinetPart cabinetPartLower" src="assets/cabinet/parts/coladoki_part_lower_v4.png" alt="">
           <div class="cabinetTopArtworkRow">
@@ -6916,8 +6911,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
               <img class="cabinetTopArtworkLogo cabinetTopArtworkLampOn" src="assets/cabinet/artwork/coladoki_lamp_on_user_v1.png" alt="">
             </span>
           </div>
-          <div class="cabinetDynamicLampRail cabinetTopLampRail cabinetTopLampRailLeft"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-          <div class="cabinetDynamicLampRail cabinetTopLampRail cabinetTopLampRailRight"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         </div>
         <div class="jagSideRail jagSideRailLeft"></div>
         <div class="jagSideRail jagSideRailRight"></div>
@@ -7004,7 +6997,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
               </div>
             </div>
             <div class="layoutEditGroup">
-              <div class="layoutEditGroupTitle">FRAME IMAGE</div>
+              <div class="layoutEditGroupTitle">UNIFIED IMAGE</div>
               <div class="layoutEditRows">
                 <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="-20" max="20" step="0.1" data-layout-target="frame" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="frame-x"></b></label>
                 <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="-20" max="20" step="0.1" data-layout-target="frame" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="frame-y"></b></label>
@@ -7250,13 +7243,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
           <div class="pushOrderNaviItem" data-push-reel="0"><video class="pushOrderNaviVideo" muted loop playsinline preload="auto" aria-hidden="true"></video></div>
           <div class="pushOrderNaviItem" data-push-reel="1"><video class="pushOrderNaviVideo" muted loop playsinline preload="auto" aria-hidden="true"></video></div>
           <div class="pushOrderNaviItem" data-push-reel="2"><video class="pushOrderNaviVideo" muted loop playsinline preload="auto" aria-hidden="true"></video></div>
-        </div>
-        <div class="cabinetFrontParts" aria-hidden="true">
-          <div class="cabinetReelFrameAdjustable">
-            <img class="cabinetPart cabinetPartReelFront" src="assets/cabinet/parts/coladoki_part_reel_face_v6.png" alt="">
-            <div class="cabinetDynamicLampRail cabinetReelLampRail cabinetReelLampRailLeft"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="cabinetDynamicLampRail cabinetReelLampRail cabinetReelLampRailRight"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-          </div>
         </div>
         <div class="jagBonusDataMeters" aria-label="BONUS GAME DATA">
           <div class="jagBonusDataMeter">
@@ -8422,8 +8408,8 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   if(SLOT_DEBUG_ENABLED) document.body.classList.add("debugMode", "debugOpen");
   const PAGE_ZOOM_STORAGE_KEY = "jag_unified_page_zoom_v3";
   const PAGE_PAN_STORAGE_KEY = "jag_unified_page_pan_x_v3";
-  const LAYOUT_EDIT_STORAGE_KEY = "coladoki_layout_editor_v7";
-  const LAYOUT_DEFAULT_STORAGE_KEY = "coladoki_layout_default_v7";
+  const LAYOUT_EDIT_STORAGE_KEY = "coladoki_layout_editor_v8";
+  const LAYOUT_DEFAULT_STORAGE_KEY = "coladoki_layout_default_v8";
   const LAYOUT_EDITOR_ENABLED = true;
   const PAGE_STAGE_WIDTH = 1360;
   const PAGE_ZOOM_MIN = 0.75;
@@ -8443,7 +8429,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   const BG_ORANGE_LOGO_ANCHOR_X = 964;
   const BG_LOGO_LOWER_ANCHOR_Y = 742;
   const LAYOUT_DEFAULTS = Object.freeze({
-    reels:{x:12.0, y:0.0, w:76.3, h:64.0},
+    reels:{x:17.5, y:0.0, w:64.7, h:49.0},
     frame:{x:0.0, y:0.0, w:100.0, h:100.0},
     mascot:{x:0.0, y:-3.0, w:92.0, h:92.0},
     chance:{x:16.0, y:79.0, w:11.0, h:12.0},
