@@ -8,6 +8,8 @@
 <link rel="preload" as="image" href="assets/symbols/sym_cherry.png">
 <link rel="preload" as="image" href="assets/symbols/sym_bell.png">
 <link rel="preload" as="image" href="assets/symbols/sym_suika.png">
+<link rel="preload" as="image" href="assets/symbols/sym_blank_cola_boy.png">
+<link rel="preload" as="image" href="assets/symbols/sym_blank_reindeer.png">
 <link rel="preload" as="image" href="assets/symbols/sym_seven_coladoki.png">
 <link rel="preload" as="image" href="assets/symbols/sym_bar.png">
 <link rel="preload" as="image" href="assets/symbols/sym_replay.png">
@@ -1579,6 +1581,12 @@ body.layoutEditOpen .cabinetDynamicLampRail span{
   object-fit:contain;
   filter:drop-shadow(0 4px 8px rgba(0,0,0,.30));
 }
+.blankSymImg{
+  width:78%;
+  height:78%;
+  object-fit:contain;
+  filter:drop-shadow(0 3px 5px rgba(0,0,0,.30));
+}
 
 .sym.red{color:#ff365d;text-shadow:0 0 15px rgba(255,54,93,.85)}
 .sym.blue{color:#4de7ff;text-shadow:0 0 15px rgba(77,231,255,.85)}
@@ -2582,7 +2590,7 @@ body::after{
 .reel{height:320px !important;border-radius:12px !important;background:linear-gradient(180deg,#313747,#0e1018 48%,#202430) !important;border:1px solid rgba(255,255,255,.22) !important;box-shadow:inset 0 14px 24px rgba(255,255,255,.08),inset 0 -22px 34px rgba(0,0,0,.72) !important;}
 .window{gap:8px !important;}
 .cell{border-radius:8px !important;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(0,0,0,.12)) !important;}
-.symImg,.barSymImg,.sevenSymImg,.cherrySymImg,.bellSymImg,.replaySymImg,.suikaSymImg{max-width:112% !important;max-height:112% !important;object-fit:contain !important;}
+.symImg,.barSymImg,.sevenSymImg,.cherrySymImg,.bellSymImg,.replaySymImg,.suikaSymImg,.blankSymImg{max-width:112% !important;max-height:112% !important;object-fit:contain !important;}
 .barSymImg{width:108% !important;height:auto !important;}
 .buttonRow{position:relative;z-index:10;margin-top:20px !important;}
 .betBtn,.centerStopBtns button,.autoArea .autoInlineBtn,.autoArea .speedInlineBtn{background-size:100% 100% !important;background-repeat:no-repeat !important;background-position:center !important;color:transparent !important;text-shadow:none !important;border:none !important;box-shadow:none !important;filter:drop-shadow(0 0 12px rgba(255,255,255,.28));}
@@ -4121,7 +4129,8 @@ body{
 .cherrySymImg,
 .bellSymImg,
 .replaySymImg,
-.suikaSymImg{
+.suikaSymImg,
+.blankSymImg{
   filter:drop-shadow(0 2px 2px rgba(255,255,255,.72)) drop-shadow(0 3px 4px rgba(90,0,0,.24)) !important;
 }
 .cherrySymImg,
@@ -4132,6 +4141,12 @@ body{
   height:70% !important;
   max-width:70% !important;
   max-height:70% !important;
+}
+.blankSymImg{
+  width:78% !important;
+  height:78% !important;
+  max-width:78% !important;
+  max-height:78% !important;
 }
 .sym,
 .barText{
@@ -7979,6 +7994,10 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   const BELL_SYMBOL = "🔔";
   const BLANK_SYMBOL = "__BLANK__";
   const SUICA_SYMBOL = "🍋";
+  const BLANK_IMAGE_SRCS = Object.freeze([
+    "assets/symbols/sym_blank_cola_boy.png",
+    "assets/symbols/sym_blank_reindeer.png"
+  ]);
   const SUICA_IMAGE_SRC = "assets/symbols/sym_suika.png";
   const CHERRY_IMAGE_SRC = "assets/symbols/sym_cherry.png";
   const BELL_IMAGE_SRC = "assets/symbols/sym_bell.png";
@@ -8003,7 +8022,8 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     BELL_IMAGE_SRC,
     SEVEN_IMAGE_SRC,
     BAR_IMAGE_SRC,
-    REPLAY_IMAGE_SRC
+    REPLAY_IMAGE_SRC,
+    ...BLANK_IMAGE_SRCS
   ]);
   const symbolImagePreloads = new Map();
 
@@ -14623,8 +14643,11 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     }
   }
 
-  function cellHtml(symbol, label, cls){
-    if(symbol === BLANK_SYMBOL) return `<div class="sym blankSym" aria-label="blank"></div>`;
+  function cellHtml(symbol, label, cls, variant=0){
+    if(symbol === BLANK_SYMBOL){
+      const blankSrc = BLANK_IMAGE_SRCS[mod(variant, BLANK_IMAGE_SRCS.length)];
+      return `<img class="symImg blankSymImg" src="${blankSrc}" alt="blank symbol" loading="eager" decoding="sync" draggable="false">`;
+    }
     const image = symbol === CHERRY_SYMBOL
       ? ["cherrySymImg",CHERRY_IMAGE_SRC,"cherry symbol"]
       : symbol === BELL_SYMBOL
@@ -14667,10 +14690,11 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
         : "";
     const className = "cell" + (isCenter ? " center" : "") + (isWin ? " winline" : "") + aimClass;
     if(div.className !== className) div.className = className;
-    const key = [symbol, label || "", cls || "", isWin ? "1" : "0"].join("|");
+    const variant = symbol === BLANK_SYMBOL ? randomInt(0, BLANK_IMAGE_SRCS.length - 1) : 0;
+    const key = [symbol, label || "", cls || "", isWin ? "1" : "0", variant].join("|");
     if(div.dataset.cellKey === key) return;
     div.dataset.cellKey = key;
-    div.innerHTML = cellHtml(symbol, label, cls);
+    div.innerHTML = cellHtml(symbol, label, cls, variant);
   }
 
   const REEL_SYMBOL_VALUES = Object.freeze({

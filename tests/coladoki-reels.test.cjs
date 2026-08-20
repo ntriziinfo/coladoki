@@ -63,6 +63,11 @@ removedAssets.forEach(asset=>{
 assert.doesNotMatch(html, /\bSMALL:\{name:/, "特殊役の出目定義を残さない");
 assert.doesNotMatch(html, /\bGRAPE:\{name:/, "ブドウの出目定義を残さない");
 assert.match(html, /id="roleCounterSuikaCount"/, "役カウンターはスイカを表示する");
+for(const blankAsset of ["assets/symbols/sym_blank_cola_boy.png","assets/symbols/sym_blank_reindeer.png"]){
+  assert.equal(fs.existsSync(path.join(root, blankAsset)), true, `${blankAsset} をブランク図柄として配置する`);
+  assert.equal(html.includes(blankAsset), true, `${blankAsset} をHTMLから読み込む`);
+}
+assert.match(html, /const variant = symbol === BLANK_SYMBOL \? randomInt\(0, BLANK_IMAGE_SRCS\.length - 1\)/, "ブランク図柄は2種類からランダム選択する");
 assert.match(
   html,
   /roleCounterBigCount[\s\S]*roleCounterRegCount[\s\S]*roleCounterPremiumBigCount/,
