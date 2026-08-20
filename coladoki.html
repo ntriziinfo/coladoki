@@ -5986,9 +5986,9 @@ body{
   --jag-cabinet-height:1610px;
   --jag-reel-top:454px;
   --jag-reel-height:478px;
-  --layout-reels-x:17.5%;
+  --layout-reels-x:7.5%;
   --layout-reels-y:0%;
-  --layout-reels-w:64.7%;
+  --layout-reels-w:64%;
   --layout-reels-h:49%;
   --layout-frame-x:.1%;
   --layout-frame-y:0%;
@@ -6006,10 +6006,10 @@ body{
   --layout-hibiscusright-y:17.9%;
   --layout-hibiscusright-w:84.6%;
   --layout-hibiscusright-h:61.5%;
-  --layout-chance-x:16.6%;
-  --layout-chance-y:79%;
-  --layout-chance-w:11%;
-  --layout-chance-h:12%;
+  --layout-chance-x:75.5%;
+  --layout-chance-y:0%;
+  --layout-chance-w:21%;
+  --layout-chance-h:49%;
   --layout-credit-x:33.1%;
   --layout-credit-y:66.7%;
   --layout-credit-w:10.7%;
@@ -6046,10 +6046,6 @@ body{
   --layout-lamptopleft-y:13%;
   --layout-lamptopright-x:88.3%;
   --layout-lamptopright-y:13%;
-  --layout-lampreelleft-x:6.1%;
-  --layout-lampreelleft-y:50.4%;
-  --layout-lampreelright-x:88.6%;
-  --layout-lampreelright-y:50.4%;
 }
 .machine{
   min-height:1670px !important;
@@ -6108,12 +6104,21 @@ body{
   width:var(--layout-frame-w);
   height:var(--layout-frame-h);
 }
+.cabinetPartUpperReelBacking{
+  left:2%;
+  top:2%;
+  width:96%;
+  height:96%;
+  object-fit:fill;
+  z-index:0;
+  filter:saturate(.92) brightness(.82) contrast(1.08);
+}
 .cabinetPartUpperReelUnified{
   inset:0;
   width:100%;
   height:100%;
   object-fit:fill;
-  z-index:0;
+  z-index:1;
 }
 .cabinetPartControls{top:899px;z-index:3;}
 .cabinetPartLower{
@@ -6253,24 +6258,21 @@ body{
 .cabinetTopLampRailRight span:nth-child(3){top:50.8%;--lamp-chase-delay:.21s;}
 .cabinetTopLampRailRight span:nth-child(4){top:67.3%;--lamp-chase-delay:.105s;}
 .cabinetTopLampRailRight span:nth-child(5){top:85.1%;--lamp-chase-delay:0s;}
-.cabinetReelLampRailLeft span:nth-child(1){top:5.0%;--lamp-chase-delay:.525s;}
-.cabinetReelLampRailLeft span:nth-child(2){top:21.3%;--lamp-chase-delay:.42s;}
-.cabinetReelLampRailLeft span:nth-child(3){top:37.2%;--lamp-chase-delay:.315s;}
-.cabinetReelLampRailLeft span:nth-child(4){top:55.4%;--lamp-chase-delay:.21s;}
-.cabinetReelLampRailLeft span:nth-child(5){top:70.5%;--lamp-chase-delay:.105s;}
-.cabinetReelLampRailLeft span:nth-child(6){top:87.9%;--lamp-chase-delay:0s;}
-.cabinetReelLampRailRight span:nth-child(1){top:4.8%;--lamp-chase-delay:.525s;}
-.cabinetReelLampRailRight span:nth-child(2){top:21.8%;--lamp-chase-delay:.42s;}
-.cabinetReelLampRailRight span:nth-child(3){top:37.8%;--lamp-chase-delay:.315s;}
-.cabinetReelLampRailRight span:nth-child(4){top:55.7%;--lamp-chase-delay:.21s;}
-.cabinetReelLampRailRight span:nth-child(5){top:70.8%;--lamp-chase-delay:.105s;}
-.cabinetReelLampRailRight span:nth-child(6){top:87.9%;--lamp-chase-delay:0s;}
 .cabinetTopLampRail{width:5%;height:29.5%;}
 .cabinetTopLampRailLeft{left:var(--layout-lamptopleft-x);top:var(--layout-lamptopleft-y);}
 .cabinetTopLampRailRight{left:var(--layout-lamptopright-x);right:auto;top:var(--layout-lamptopright-y);}
-.cabinetReelLampRail{width:5%;height:28.5%;}
-.cabinetReelLampRailLeft{left:var(--layout-lampreelleft-x);top:var(--layout-lampreelleft-y);}
-.cabinetReelLampRailRight{left:var(--layout-lampreelright-x);right:auto;top:var(--layout-lampreelright-y);}
+.cabinetHorizontalLampRail{left:14%;top:4.4%;width:72%;height:5.2%;}
+.cabinetHorizontalLampRail span{
+  top:50%;
+  width:8.5%;
+}
+.cabinetHorizontalLampRail span:nth-child(1){left:7.5%;--lamp-chase-delay:.315s;}
+.cabinetHorizontalLampRail span:nth-child(2){left:21.7%;--lamp-chase-delay:.2625s;}
+.cabinetHorizontalLampRail span:nth-child(3){left:35.9%;--lamp-chase-delay:.21s;}
+.cabinetHorizontalLampRail span:nth-child(4){left:50%;--lamp-chase-delay:.1575s;}
+.cabinetHorizontalLampRail span:nth-child(5){left:64.1%;--lamp-chase-delay:.105s;}
+.cabinetHorizontalLampRail span:nth-child(6){left:78.3%;--lamp-chase-delay:.0525s;}
+.cabinetHorizontalLampRail span:nth-child(7){left:92.5%;--lamp-chase-delay:0s;}
 body.coladokiJackpotLampChase .cabinetDynamicLampRail{
   opacity:1;
 }
@@ -6560,8 +6562,9 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     radial-gradient(ellipse at 50% 94%,rgba(0,0,0,.16),transparent 45%) !important;
 }
 .payline{
-  left:20.7% !important;
-  right:21.7% !important;
+  left:calc(var(--layout-reels-x) + 3.2%) !important;
+  right:auto !important;
+  width:calc(var(--layout-reels-w) - 7.1%) !important;
   top:44.6% !important;
   height:16.0% !important;
   opacity:.34 !important;
@@ -6671,13 +6674,62 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   font-size:min(19cqh, 8.8cqw) !important;
 }
 .jagGogoChance{
-  display:none !important;
+  display:grid !important;
   left:var(--layout-chance-x) !important;
   top:var(--layout-chance-y) !important;
   width:var(--layout-chance-w) !important;
   height:var(--layout-chance-h) !important;
   opacity:1 !important;
   z-index:42 !important;
+  place-items:center !important;
+  transform:none !important;
+  border-radius:0 !important;
+  isolation:isolate;
+}
+.cabinetTopArtworkMascot{
+  display:none !important;
+}
+.jagGogoChance::after{
+  display:none !important;
+}
+.jagGogoChanceBack{
+  display:none !important;
+}
+.jagGogoChance::before{
+  display:none !important;
+}
+.jagGogoChance .coladokiCharacterLampImage{
+  position:relative !important;
+  left:auto !important;
+  top:auto !important;
+  z-index:5 !important;
+  display:block !important;
+  width:94% !important;
+  height:94% !important;
+  max-width:100% !important;
+  max-height:100% !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  opacity:1 !important;
+  filter:grayscale(.82) brightness(.48) contrast(1.1) drop-shadow(0 5px 7px rgba(0,0,0,.8)) !important;
+  transform:none !important;
+}
+.jagGogoChanceText,
+.jagGogoChanceBar,
+.jagGogoChanceLabel{
+  display:none !important;
+}
+.reelArea.jagChanceLit .jagGogoChance{
+  transform:none !important;
+}
+.reelArea.jagChanceLit .jagGogoChance::after{
+  display:none !important;
+}
+.reelArea.jagChanceLit .jagGogoChanceBack{
+  display:none !important;
+}
+.reelArea.jagChanceLit .jagGogoChance .coladokiCharacterLampImage{
+  filter:saturate(1.16) brightness(1.12) contrast(1.06) drop-shadow(0 0 12px rgba(255,226,106,.9)) drop-shadow(0 0 24px rgba(255,54,20,.62)) !important;
 }
 .playControls{
   top:0 !important;
@@ -7037,11 +7089,11 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
           <img class="cabinetPart cabinetPartChassis" src="assets/cabinet/parts/coladoki_part_chassis_v5.png" alt="">
           <div class="cabinetUnifiedUpperReelStage">
             <div class="cabinetUnifiedUpperReelAdjustable">
-              <img class="cabinetPart cabinetPartUpperReelUnified" src="assets/cabinet/parts/coladoki_part_upper_reel_unified_v2.png" alt="">
+              <img class="cabinetPart cabinetPartUpperReelBacking" src="assets/cabinet/parts/coladoki_inner_backing_generated_v1.png" alt="">
+              <img class="cabinetPart cabinetPartUpperReelUnified" src="assets/cabinet/parts/coladoki_part_upper_reel_unified_generated_v4.png" alt="">
+              <div class="cabinetDynamicLampRail cabinetHorizontalLampRail"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
               <div class="cabinetDynamicLampRail cabinetTopLampRail cabinetTopLampRailLeft"><span></span><span></span><span></span><span></span><span></span></div>
               <div class="cabinetDynamicLampRail cabinetTopLampRail cabinetTopLampRailRight"><span></span><span></span><span></span><span></span><span></span></div>
-              <div class="cabinetDynamicLampRail cabinetReelLampRail cabinetReelLampRailLeft"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-              <div class="cabinetDynamicLampRail cabinetReelLampRail cabinetReelLampRailRight"><span></span><span></span><span></span><span></span><span></span><span></span></div>
             </div>
           </div>
           <img class="cabinetPart cabinetPartControls" src="assets/cabinet/parts/coladoki_part_controls_v5.png" alt="">
@@ -7199,10 +7251,10 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
             <div class="layoutEditGroup">
               <div class="layoutEditGroupTitle">MASCOT IMAGE</div>
               <div class="layoutEditRows">
-                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="-50" max="50" step="0.1" data-layout-target="mascot" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="mascot-x"></b></label>
-                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="-50" max="50" step="0.1" data-layout-target="mascot" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="mascot-y"></b></label>
-                <label class="layoutEditRow"><span>W</span><input class="layoutEditInput" type="range" min="40" max="180" step="0.1" data-layout-target="mascot" data-layout-prop="w"><b class="layoutEditValue" data-layout-view="mascot-w"></b></label>
-                <label class="layoutEditRow"><span>H</span><input class="layoutEditInput" type="range" min="40" max="180" step="0.1" data-layout-target="mascot" data-layout-prop="h"><b class="layoutEditValue" data-layout-view="mascot-h"></b></label>
+                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="0" max="90" step="0.1" data-layout-target="chance" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="chance-x"></b></label>
+                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="0" max="95" step="0.1" data-layout-target="chance" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="chance-y"></b></label>
+                <label class="layoutEditRow"><span>W</span><input class="layoutEditInput" type="range" min="4" max="40" step="0.1" data-layout-target="chance" data-layout-prop="w"><b class="layoutEditValue" data-layout-view="chance-w"></b></label>
+                <label class="layoutEditRow"><span>H</span><input class="layoutEditInput" type="range" min="4" max="60" step="0.1" data-layout-target="chance" data-layout-prop="h"><b class="layoutEditValue" data-layout-view="chance-h"></b></label>
               </div>
             </div>
             <div class="layoutEditGroup">
@@ -7235,29 +7287,6 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
               <div class="layoutEditRows">
                 <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="-5" max="100" step="0.1" data-layout-target="lamptopright" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="lamptopright-x"></b></label>
                 <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="0" max="100" step="0.1" data-layout-target="lamptopright" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="lamptopright-y"></b></label>
-              </div>
-            </div>
-            <div class="layoutEditGroup">
-              <div class="layoutEditGroupTitle">LAMP REEL LEFT</div>
-              <div class="layoutEditRows">
-                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="-5" max="100" step="0.1" data-layout-target="lampreelleft" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="lampreelleft-x"></b></label>
-                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="0" max="100" step="0.1" data-layout-target="lampreelleft" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="lampreelleft-y"></b></label>
-              </div>
-            </div>
-            <div class="layoutEditGroup">
-              <div class="layoutEditGroupTitle">LAMP REEL RIGHT</div>
-              <div class="layoutEditRows">
-                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="-5" max="100" step="0.1" data-layout-target="lampreelright" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="lampreelright-x"></b></label>
-                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="0" max="100" step="0.1" data-layout-target="lampreelright" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="lampreelright-y"></b></label>
-              </div>
-            </div>
-            <div class="layoutEditGroup">
-              <div class="layoutEditGroupTitle">COLADOKI CHANCE</div>
-              <div class="layoutEditRows">
-                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="0" max="90" step="0.1" data-layout-target="chance" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="chance-x"></b></label>
-                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="0" max="95" step="0.1" data-layout-target="chance" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="chance-y"></b></label>
-                <label class="layoutEditRow"><span>W</span><input class="layoutEditInput" type="range" min="4" max="40" step="0.1" data-layout-target="chance" data-layout-prop="w"><b class="layoutEditValue" data-layout-view="chance-w"></b></label>
-                <label class="layoutEditRow"><span>H</span><input class="layoutEditInput" type="range" min="4" max="45" step="0.1" data-layout-target="chance" data-layout-prop="h"><b class="layoutEditValue" data-layout-view="chance-h"></b></label>
               </div>
             </div>
             <div class="layoutEditGroup">
@@ -7512,6 +7541,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
         </div>
         <div class="jagGogoChance" id="jagGogoChance" aria-label="COLADOKI CHANCE">
           <span class="jagGogoChanceBack" aria-hidden="true"></span>
+          <img class="coladokiCharacterLampImage" src="assets/cabinet/lamps/coladoki_reindeer_character_lamp_user_v1.webp" alt="" aria-hidden="true" loading="eager" decoding="async" draggable="false">
           <span class="jagGogoChanceText coladokiChanceText" aria-hidden="true">COLADOKI!</span>
           <span class="jagGogoChanceBar coladokiChanceBar" aria-hidden="true">COLADOKI!</span>
           <span class="jagGogoChanceLabel">CHANCE</span>
@@ -8635,8 +8665,8 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   if(SLOT_DEBUG_ENABLED) document.body.classList.add("debugMode", "debugOpen");
   const PAGE_ZOOM_STORAGE_KEY = "jag_unified_page_zoom_v4";
   const PAGE_PAN_STORAGE_KEY = "jag_unified_page_pan_x_v4";
-  const LAYOUT_EDIT_STORAGE_KEY = "coladoki_layout_editor_v9";
-  const LAYOUT_DEFAULT_STORAGE_KEY = "coladoki_layout_default_v9";
+  const LAYOUT_EDIT_STORAGE_KEY = "coladoki_layout_editor_v10";
+  const LAYOUT_DEFAULT_STORAGE_KEY = "coladoki_layout_default_v10";
   const LAYOUT_EDITOR_ENABLED = true;
   const PAGE_STAGE_WIDTH = 1360;
   const PAGE_ZOOM_MIN = 0.75;
@@ -8657,12 +8687,12 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   const BG_ORANGE_LOGO_ANCHOR_X = 964;
   const BG_LOGO_LOWER_ANCHOR_Y = 742;
   const LAYOUT_DEFAULTS = Object.freeze({
-    reels:{x:17.5, y:0.0, w:64.7, h:49.0},
+    reels:{x:7.5, y:0.0, w:64.0, h:49.0},
     frame:{x:0.1, y:0.0, w:100.0, h:100.0},
     mascot:{x:-5.9, y:-13.6, w:143.4, h:180.0},
     hibiscusleft:{x:10.8, y:17.9, w:84.6, h:61.5},
     hibiscusright:{x:-11.8, y:17.9, w:84.6, h:61.5},
-    chance:{x:16.6, y:79.0, w:11.0, h:12.0},
+    chance:{x:75.5, y:0.0, w:21.0, h:49.0},
     credit:{x:33.1, y:66.7, w:10.7, h:10.5},
     count:{x:55.5, y:58.0, w:11.0, h:12.9},
     payout:{x:55.5, y:72.6, w:11.0, h:10.2},
@@ -8673,11 +8703,9 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     stop1:{x:50.4, y:60.6},
     stop2:{x:61.0, y:60.6},
     auto:{x:81.0, y:61.2},
-    navi:{x:17.5, y:59.2},
+    navi:{x:7.5, y:59.2},
     lamptopleft:{x:6.3, y:13.0},
-    lamptopright:{x:88.3, y:13.0},
-    lampreelleft:{x:6.1, y:50.4},
-    lampreelright:{x:88.6, y:50.4}
+    lamptopright:{x:88.3, y:13.0}
   });
   let pageZoom = PAGE_ZOOM_DEFAULT;
   let pagePanX = PAGE_PAN_DEFAULT;
@@ -8943,9 +8971,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     const next = {...raw};
     const migrations = {
       lamptopleft:{from:{x:5.8, y:13.0}, to:{x:6.3, y:13.0}},
-      lamptopright:{from:{x:89.2, y:13.0}, to:{x:88.3, y:13.0}},
-      lampreelleft:{from:{x:5.8, y:50.4}, to:{x:6.1, y:50.4}},
-      lampreelright:{from:{x:89.2, y:50.4}, to:{x:88.6, y:50.4}}
+      lamptopright:{from:{x:89.2, y:13.0}, to:{x:88.3, y:13.0}}
     };
     Object.entries(migrations).forEach(([target, migration])=>{
       const value = raw[target];
