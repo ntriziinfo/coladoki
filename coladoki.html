@@ -5969,10 +5969,10 @@ body{
   --layout-payout-y:79.2%;
   --layout-payout-w:6.8%;
   --layout-payout-h:13.4%;
-  --layout-bonusdata-x:15%;
-  --layout-bonusdata-y:-27.5%;
-  --layout-bonusdata-w:70%;
-  --layout-bonusdata-h:17.8%;
+  --layout-bonuscontent-x:4.5%;
+  --layout-bonuscontent-y:17%;
+  --layout-bonuscontent-w:91%;
+  --layout-bonuscontent-h:66%;
   --layout-bonusframe-x:11.5%;
   --layout-bonusframe-y:-32%;
   --layout-bonusframe-w:77%;
@@ -6232,13 +6232,22 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     drop-shadow(0 4px 3px rgba(0,0,0,.76))
     drop-shadow(0 0 8px rgba(255,222,70,.70));
 }
+.jagBonusDataCluster{
+  position:absolute;
+  left:var(--layout-bonusframe-x);
+  top:var(--layout-bonusframe-y);
+  width:var(--layout-bonusframe-w);
+  height:var(--layout-bonusframe-h);
+  z-index:43;
+  pointer-events:none;
+}
 .jagBonusDataMeters{
   position:absolute;
-  left:var(--layout-bonusdata-x);
-  top:var(--layout-bonusdata-y);
-  width:var(--layout-bonusdata-w);
-  height:var(--layout-bonusdata-h);
-  z-index:47;
+  left:var(--layout-bonuscontent-x);
+  top:var(--layout-bonuscontent-y);
+  width:var(--layout-bonuscontent-w);
+  height:var(--layout-bonuscontent-h);
+  z-index:2;
   display:grid;
   grid-template-columns:1.2fr 1.2fr .82fr .82fr;
   gap:15px;
@@ -6252,11 +6261,10 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
 }
 .jagBonusDataFrame{
   position:absolute;
-  left:var(--layout-bonusframe-x);
-  top:var(--layout-bonusframe-y);
-  width:var(--layout-bonusframe-w);
-  height:var(--layout-bonusframe-h);
-  z-index:43;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:1;
   box-sizing:border-box;
   pointer-events:none;
   border:4px solid #b57a18;
@@ -7098,19 +7106,19 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
               </div>
             </div>
             <div class="layoutEditGroup">
-              <div class="layoutEditGroupTitle">BONUS DATA</div>
+              <div class="layoutEditGroupTitle">BONUS DATA (IN FRAME)</div>
               <div class="layoutEditRows">
-                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="0" max="95" step="0.1" data-layout-target="bonusdata" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="bonusdata-x"></b></label>
-                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="-40" max="40" step="0.1" data-layout-target="bonusdata" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="bonusdata-y"></b></label>
-                <label class="layoutEditRow"><span>W</span><input class="layoutEditInput" type="range" min="20" max="95" step="0.1" data-layout-target="bonusdata" data-layout-prop="w"><b class="layoutEditValue" data-layout-view="bonusdata-w"></b></label>
-                <label class="layoutEditRow"><span>H</span><input class="layoutEditInput" type="range" min="4" max="24" step="0.1" data-layout-target="bonusdata" data-layout-prop="h"><b class="layoutEditValue" data-layout-view="bonusdata-h"></b></label>
+                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="0" max="50" step="0.1" data-layout-target="bonuscontent" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="bonuscontent-x"></b></label>
+                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="0" max="80" step="0.1" data-layout-target="bonuscontent" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="bonuscontent-y"></b></label>
+                <label class="layoutEditRow"><span>W</span><input class="layoutEditInput" type="range" min="40" max="100" step="0.1" data-layout-target="bonuscontent" data-layout-prop="w"><b class="layoutEditValue" data-layout-view="bonuscontent-w"></b></label>
+                <label class="layoutEditRow"><span>H</span><input class="layoutEditInput" type="range" min="20" max="100" step="0.1" data-layout-target="bonuscontent" data-layout-prop="h"><b class="layoutEditValue" data-layout-view="bonuscontent-h"></b></label>
               </div>
             </div>
             <div class="layoutEditGroup">
               <div class="layoutEditGroupTitle">BONUS DATA FRAME</div>
               <div class="layoutEditRows">
                 <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="0" max="95" step="0.1" data-layout-target="bonusframe" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="bonusframe-x"></b></label>
-                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="-50" max="40" step="0.1" data-layout-target="bonusframe" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="bonusframe-y"></b></label>
+                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="-120" max="40" step="0.1" data-layout-target="bonusframe" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="bonusframe-y"></b></label>
                 <label class="layoutEditRow"><span>W</span><input class="layoutEditInput" type="range" min="20" max="100" step="0.1" data-layout-target="bonusframe" data-layout-prop="w"><b class="layoutEditValue" data-layout-view="bonusframe-w"></b></label>
                 <label class="layoutEditRow"><span>H</span><input class="layoutEditInput" type="range" min="8" max="40" step="0.1" data-layout-target="bonusframe" data-layout-prop="h"><b class="layoutEditValue" data-layout-view="bonusframe-h"></b></label>
               </div>
@@ -7300,23 +7308,25 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
           <div class="pushOrderNaviItem" data-push-reel="1"><video class="pushOrderNaviVideo" muted loop playsinline preload="auto" aria-hidden="true"></video></div>
           <div class="pushOrderNaviItem" data-push-reel="2"><video class="pushOrderNaviVideo" muted loop playsinline preload="auto" aria-hidden="true"></video></div>
         </div>
-        <div class="jagBonusDataFrame" aria-hidden="true"></div>
-        <div class="jagBonusDataMeters" aria-label="BONUS GAME DATA">
-          <div class="jagBonusDataMeter">
-            <span>総回転</span>
-            <b id="jagTotalGameDataMeter">00000</b>
-          </div>
-          <div class="jagBonusDataMeter">
-            <span>ボーナス後</span>
-            <b id="jagAfterBonusDataMeter">0000</b>
-          </div>
-          <div class="jagBonusDataMeter">
-            <span>BIG</span>
-            <b id="jagBigDataMeter">000</b>
-          </div>
-          <div class="jagBonusDataMeter">
-            <span>REG</span>
-            <b id="jagRegDataMeter">000</b>
+        <div class="jagBonusDataCluster">
+          <div class="jagBonusDataFrame" aria-hidden="true"></div>
+          <div class="jagBonusDataMeters" aria-label="BONUS GAME DATA">
+            <div class="jagBonusDataMeter">
+              <span>総回転</span>
+              <b id="jagTotalGameDataMeter">00000</b>
+            </div>
+            <div class="jagBonusDataMeter">
+              <span>ボーナス後</span>
+              <b id="jagAfterBonusDataMeter">0000</b>
+            </div>
+            <div class="jagBonusDataMeter">
+              <span>BIG</span>
+              <b id="jagBigDataMeter">000</b>
+            </div>
+            <div class="jagBonusDataMeter">
+              <span>REG</span>
+              <b id="jagRegDataMeter">000</b>
+            </div>
           </div>
         </div>
         <div class="jagGogoChance" id="jagGogoChance" aria-label="COLADOKI CHANCE">
@@ -8493,7 +8503,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     credit:{x:31.5, y:79.2, w:6.8, h:13.4},
     count:{x:55.5, y:79.2, w:13.7, h:13.4},
     payout:{x:38.8, y:79.2, w:6.8, h:13.4},
-    bonusdata:{x:15.0, y:-27.5, w:70.0, h:17.8},
+    bonuscontent:{x:4.5, y:17.0, w:91.0, h:66.0},
     bonusframe:{x:11.5, y:-32.0, w:77.0, h:27.0}
   });
   let pageZoom = 1;
