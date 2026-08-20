@@ -127,36 +127,71 @@
 
   const NORMAL_BIG_ODDS = Object.freeze([394.1,377.0,362.4,347.6,334.7,322.6]);
   const NORMAL_REG_ODDS = Object.freeze([632.1,584.8,546.2,510.5,479.6,452.1]);
+  const NORMAL_OTHER_HIT_RATES = Object.freeze([0.34,0.35,0.37,0.39,0.41,0.43]);
+  const CHANCE_OTHER_HIT_RATES = Object.freeze([1.0,1.1,1.1,1.2,1.2,1.3]);
   const SUICA_HIT_RATES = Object.freeze({
     normal:Object.freeze([3.66,3.96,4.28,4.58,4.88,5.18]),
     return:Object.freeze([9.16,9.92,10.68,11.44,12.20,12.96]),
+    chance:Object.freeze([11.0,11.9,12.8,13.7,14.7,15.6]),
     special:Object.freeze([25.00,26.52,28.06,29.58,31.10,32.62])
   });
   const CHERRY_HIT_RATES = Object.freeze({
     normal:Object.freeze([0.92,1.07,1.22,1.37,1.53,1.68]),
     return:Object.freeze([2.29,2.67,3.05,3.43,3.81,4.20]),
+    chance:Object.freeze([2.8,3.2,3.7,4.1,4.6,5.0]),
     special:Object.freeze([6.25,6.63,7.01,7.39,7.78,8.16])
   });
   const RETURN_OTHER_RATES = Object.freeze({
     big:Object.freeze([0.48,0.48,0.50,0.52,0.54,0.54]),
     reg:Object.freeze([0.36,0.40,0.42,0.46,0.48,0.52])
   });
+  const NON_RARE_BIG_SHARES = Object.freeze({
+    normal:Object.freeze([55.9,57.1,54.1,53.8,51.2,51.2]),
+    return:Object.freeze([56.0,55.1,53.8,53.1,52.0,51.4]),
+    chance:Object.freeze([56.4,55.7,53.6,53.0,52.0,51.6]),
+    special:Object.freeze([69.9,69.9,69.9,69.9,69.9,69.9])
+  });
+  const COMMON_BELL_ODDS = Object.freeze([168.04,158.30,149.63,141.85,134.85,128.50]);
+  const TARGET_MACHINE_RATES = Object.freeze([97.0,99.7,101.7,103.9,106.2,107.9]);
+  // 公開解析値では不明な通常時の押し順ベルこぼしを、
+  // 上記の設定別機械割に合うよう12億ゲーム試算で補正した確率。
+  const NORMAL_PUSH_ORDER_MISS_RATES = Object.freeze([
+    0.245659188280,
+    0.272601898106,
+    0.275469085434,
+    0.267496731153,
+    0.277689401170,
+    0.273123857447
+  ]);
+  const NORMAL_BASE_GAMES_PER_50 = 23;
+  const NORMAL_ROLE_PAYOUTS = Object.freeze({
+    MISS:0,
+    BELL_MISS:1,
+    BELL:7,
+    REPLAY:3,
+    SUICA:4,
+    CHERRY_ANY:1,
+    CHERRY_DOUBLE:1,
+    CHERRY_TRIPLE:1,
+    BAR3:0
+  });
   const NORMAL_ROLE_PROBABILITIES = Object.freeze({
     confirmedRole:1/8192,
     confirmedCherry:1/10922.7,
     middleCherry:1/32768,
     suika:1/128,
-    cherry:1/32.1,
-    replay:1/7.3,
-    bell:1/6.5
+    cherry:1/32.13,
+    replay:1/5.05,
+    bell:1/COMMON_BELL_ODDS[0],
+    pushOrderMiss:NORMAL_PUSH_ORDER_MISS_RATES[0]
   });
   const LONG_FREEZE_RATES = Object.freeze({
     middleCherry:0.50,
     confirmed:0.05,
-    suika:0.015,
-    cherry:0.015,
+    suika:0.016,
+    cherry:0.016,
     ceiling:0.0003,
-    other:0.0006
+    other:0.001
   });
   const BONUS_STOCK_RATES = Object.freeze({
     CHERRY_ANY:0.012,
@@ -168,7 +203,7 @@
   const AT_PAYOUT_SPEC = Object.freeze({
     spinCost:3,
     bigGrossPerGame:6,
-    regGrossLow:5,
+    regGrossLow:6,
     regGrossHigh:6,
     pushOrderMissPayout:2
   });
@@ -245,22 +280,22 @@
   function modeRateBand(mode){
     const modeId = validMode(mode);
     if(SPECIAL_MODES.includes(modeId)) return "special";
-    if(modeId === "return" || modeId === "chance") return "return";
+    if(modeId === "chance") return "chance";
+    if(modeId === "return") return "return";
     return "normal";
   }
-  function calibratedNormalOtherRates(setting){
+  function normalRoleProbabilities(setting=1){
     const index = Math.max(0, Math.min(5, Number(setting) - 1));
-    const odds = NORMAL_ROLE_PROBABILITIES;
-    const guaranteed = odds.confirmedRole + odds.confirmedCherry + odds.middleCherry;
-    const suikaRate = SUICA_HIT_RATES.normal[index] / 100;
-    const cherryRate = CHERRY_HIT_RATES.normal[index] / 100;
-    const rareBig = guaranteed + (odds.suika * suikaRate * 0.5) + (odds.cherry * cherryRate);
-    const rareReg = odds.suika * suikaRate * 0.5;
-    const otherShare = 1 - odds.confirmedRole - odds.confirmedCherry - odds.middleCherry - odds.suika - odds.cherry;
-    return {
-      big:Math.max(0, ((1 / NORMAL_BIG_ODDS[index]) - rareBig) / otherShare),
-      reg:Math.max(0, ((1 / NORMAL_REG_ODDS[index]) - rareReg) / otherShare)
-    };
+    return Object.freeze({
+      ...NORMAL_ROLE_PROBABILITIES,
+      bell:1 / COMMON_BELL_ODDS[index],
+      pushOrderMiss:NORMAL_PUSH_ORDER_MISS_RATES[index]
+    });
+  }
+  function splitNonRareRate(band, total, setting){
+    const index = Math.max(0, Math.min(5, Number(setting) - 1));
+    const bigShare = (NON_RARE_BIG_SHARES[band] || NON_RARE_BIG_SHARES.normal)[index] / 100;
+    return {big:total * bigShare,reg:total * (1 - bigShare)};
   }
   function directBonusRates(mode, result, setting=1){
     const index = Math.max(0, Math.min(5, Number(setting) - 1));
@@ -272,9 +307,10 @@
       return {big:total / 2,reg:total / 2,trigger};
     }
     if(trigger === "cherry") return {big:CHERRY_HIT_RATES[band][index] / 100,reg:0,trigger};
-    if(band === "special") return {big:0.0854,reg:0.0366,trigger};
+    if(band === "special") return {...splitNonRareRate(band, 0.122, setting),trigger};
+    if(band === "chance") return {...splitNonRareRate(band, CHANCE_OTHER_HIT_RATES[index] / 100, setting),trigger};
     if(band === "return") return {big:RETURN_OTHER_RATES.big[index] / 100,reg:RETURN_OTHER_RATES.reg[index] / 100,trigger};
-    return {...calibratedNormalOtherRates(setting),trigger};
+    return {...splitNonRareRate(band, NORMAL_OTHER_HIT_RATES[index] / 100, setting),trigger};
   }
   function longFreezeRate(trigger, ceiling=false){
     return LONG_FREEZE_RATES[ceiling ? "ceiling" : trigger] ?? LONG_FREEZE_RATES.other;
@@ -292,6 +328,23 @@
     return AT_PAYOUT_SPEC.bigGrossPerGame;
   }
   function atRolePayout(result){ return AT_ROLE_PAYOUTS[result] || 0; }
+  function normalRolePayout(result){ return NORMAL_ROLE_PAYOUTS[result] || 0; }
+  function expectedNormalGross(setting=1){
+    const rates = normalRoleProbabilities(setting);
+    return (
+      rates.confirmedRole * normalRolePayout("BAR3") +
+      rates.confirmedCherry * normalRolePayout("CHERRY_DOUBLE") +
+      rates.middleCherry * normalRolePayout("CHERRY_TRIPLE") +
+      rates.suika * normalRolePayout("SUICA") +
+      rates.cherry * normalRolePayout("CHERRY_ANY") +
+      rates.bell * normalRolePayout("BELL") +
+      rates.pushOrderMiss * normalRolePayout("BELL_MISS") +
+      rates.replay * normalRolePayout("REPLAY")
+    );
+  }
+  function expectedNormalGamesPer50(setting=1){
+    return 50 / (AT_PAYOUT_SPEC.spinCost - expectedNormalGross(setting));
+  }
   function bonusRoleRates(kind){
     const bonusKind = kind === "MID" ? "MID" : "BIG";
     const targetGross = bonusKind === "MID"
@@ -364,6 +417,19 @@
     SPECIAL_MODES,
     RESET_MODE_WEIGHTS,
     TRANSITIONS,
+    NORMAL_BIG_ODDS,
+    NORMAL_REG_ODDS,
+    NORMAL_OTHER_HIT_RATES,
+    CHANCE_OTHER_HIT_RATES,
+    SUICA_HIT_RATES,
+    CHERRY_HIT_RATES,
+    RETURN_OTHER_RATES,
+    NON_RARE_BIG_SHARES,
+    COMMON_BELL_ODDS,
+    TARGET_MACHINE_RATES,
+    NORMAL_PUSH_ORDER_MISS_RATES,
+    NORMAL_BASE_GAMES_PER_50,
+    NORMAL_ROLE_PAYOUTS,
     NORMAL_ROLE_PROBABILITIES,
     LONG_FREEZE_RATES,
     BONUS_STOCK_RATES,
@@ -379,6 +445,8 @@
     pickResetMode,
     pickCeiling,
     triggerForResult,
+    modeRateBand,
+    normalRoleProbabilities,
     directBonusRates,
     longFreezeRate,
     pickBonusKind,
@@ -386,6 +454,9 @@
     bonusGames,
     atGrossPayout,
     atRolePayout,
+    normalRolePayout,
+    expectedNormalGross,
+    expectedNormalGamesPer50,
     bonusRoleRates,
     drawBonusResult,
     expectedBonusNet,

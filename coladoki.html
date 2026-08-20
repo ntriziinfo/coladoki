@@ -7697,7 +7697,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
           <input id="bigMulInput" type="number" min="0" max="1000" step="1" value="70" readonly />
         </div>
         <div class="help">
-          ボーナス中はベル10pt・リプレイ3pt・通常ハズレ0pt。BIGは70G・平均純増3pt/Gで210pt、REGは30G・平均75pt。押し順ミス時のみ不成立で2ptになります。
+          ボーナス中はベル10pt・リプレイ3pt・通常ハズレ0pt。BIGは70G・平均210pt、REGは30G・平均90pt。押し順ミス時のみ不成立で2ptになります。
         </div>
       </div>
 
@@ -8049,6 +8049,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     BIG:{name:"BIG", reel:["7","7","7"], label:"BIG", cls:"red", kind:"payadd"},
     DEVIL_ZONE:{name:"DEVIL ZONE", reel:["7","7","BAR"], label:"DZ", cls:"purple", kind:"payadd"},
     SUPER_DEVIL_ZONE:{name:"SUPER DEVIL ZONE", reel:["7","7","7"], label:"SUPER DZ", cls:"red", kind:"payadd"},
+    BELL_MISS:{name:"押し順ベルこぼし", reel:[BLANK_SYMBOL,ELEPHANT_SYMBOL,SUICA_SYMBOL], label:"", cls:"", kind:"pay"},
     BELL:{name:"ベル", reel:[BELL_SYMBOL,BELL_SYMBOL,BELL_SYMBOL], label:"BELL", cls:"gold", kind:"pay"},
     BELL3:{name:"斜めベル", reel:[BELL_SYMBOL,BELL_SYMBOL,BELL_SYMBOL], label:"", cls:"gold", kind:"pay"},
     REPLAY:{name:"リプレイ", reel:[ELEPHANT_SYMBOL,ELEPHANT_SYMBOL,ELEPHANT_SYMBOL], label:"REPLAY", cls:"blue", kind:"pay"},
@@ -8317,12 +8318,13 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     BIG:0,
     MID:50,
     BAR3:0,
-    BELL:10,
+    BELL_MISS:COLADOKI.NORMAL_ROLE_PAYOUTS.BELL_MISS,
+    BELL:COLADOKI.NORMAL_ROLE_PAYOUTS.BELL,
     REPLAY:3,
-    SUICA:3,
-    CHERRY_ANY:3,
-    CHERRY_DOUBLE:3,
-    CHERRY_TRIPLE:3
+    SUICA:COLADOKI.NORMAL_ROLE_PAYOUTS.SUICA,
+    CHERRY_ANY:COLADOKI.NORMAL_ROLE_PAYOUTS.CHERRY_ANY,
+    CHERRY_DOUBLE:COLADOKI.NORMAL_ROLE_PAYOUTS.CHERRY_DOUBLE,
+    CHERRY_TRIPLE:COLADOKI.NORMAL_ROLE_PAYOUTS.CHERRY_TRIPLE
   });
   const NORMAL_BELL_PAYOUT = NORMAL_ROLE_PAYOUTS.BELL;
   const NORMAL_CEILING_GAMES = 300;
@@ -9584,6 +9586,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   }
 
   function displayResultFor(result){
+    if(result === "BELL_MISS") return "MISS";
     if(result === "MID_CHERRY") return "MID";
     if(result === "DEVIL_ZONE") return "MID";
     if(result === "SUPER_DEVIL_ZONE") return "BIG";
@@ -11928,7 +11931,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
         return normalState.bonusKind === "MID" ? "MID" : "BIG";
       }
       if(pendingForceResult && RESULT[pendingForceResult]) return pendingForceResult;
-      const odds = COLADOKI.NORMAL_ROLE_PROBABILITIES;
+      const odds = COLADOKI.normalRoleProbabilities(settings.setting);
       let roll = Math.random();
       if(roll < odds.middleCherry) return "CHERRY_TRIPLE";
       roll -= odds.middleCherry;
@@ -11942,6 +11945,8 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
       roll -= odds.cherry;
       if(roll < odds.bell) return "BELL";
       roll -= odds.bell;
+      if(roll < odds.pushOrderMiss) return "BELL_MISS";
+      roll -= odds.pushOrderMiss;
       if(roll < odds.replay) return "REPLAY";
       return "MISS";
     }
@@ -12047,7 +12052,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
         else if(roll < directBigRate + directRegRate) directKind = "MID";
       }
       const isNewBonusHit = !!(directKind || ceilingHit);
-      const bonusKind = bonusPending
+      let bonusKind = bonusPending
         ? (normalState.bonusKind || "BIG")
         : forcedReady
           ? result
@@ -12071,7 +12076,8 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
       const freezeTrigger = ceilingHit ? "ceiling" : trigger;
       const longFreeze = bonusPending
         ? !!normalState.longFreeze
-        : !!(isNewBonusHit && bonusKind === "BIG" && Math.random() < COLADOKI.longFreezeRate(freezeTrigger, ceilingHit));
+        : !!(isNewBonusHit && Math.random() < COLADOKI.longFreezeRate(freezeTrigger, ceilingHit));
+      if(longFreeze) bonusKind = "BIG";
       const stockRelease = bonusPending && !!normalState.stockReleasePending;
       const nextMode = bonusPending
         ? COLADOKI.validMode(normalState.nextMode || currentMode)
@@ -12917,7 +12923,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
         $("spinBtn").textContent = "BET";
         const label = longFreeze ? "ロングフリーズ BIG" : bonusKind === "MID" ? "REG" : "BIG";
         const expectedNet = COLADOKI.expectedBonusNet(bonusKind);
-        const netLabel = bonusKind === "MID" ? "純増2～3pt/G・平均75pt" : "純増3pt/G・平均210pt";
+        const netLabel = bonusKind === "MID" ? "純増約3pt/G・平均90pt" : "純増約3pt/G・平均210pt";
         showMessage(`${label} BONUS`, `${bonusGames}G AT / ${netLabel} / 1G連ストック抽選`);
         log(`${label}開始：${bonusGames}G AT / 期待純増${expectedNet}pt / 次回${COLADOKI.modeLabel(nextMode)} / 設定${settings.setting}`);
         updateDisplay();
@@ -13611,7 +13617,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   function applyNormalResult(result, resolved, lineRow=1){
     const info = RESULT[result] || RESULT.MISS;
     const modeAtStart = COLADOKI_MODE ? COLADOKI.modeLabel(normalState.mode) : (resolved.highAtStart ? "高確" : "通常");
-    const lineText = result !== "MISS" ? `${lineName(lineRow)}ライン` : "";
+    const lineText = displayResultFor(result) !== "MISS" ? `${lineName(lineRow)}ライン` : "";
     const normalReward = Number(resolved.reward) || 0;
     const normalRewardText = normalReward > 0 ? ` / +${normalReward}pt` : "";
     jagLastGamePayout = normalReward;
@@ -14068,7 +14074,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     if($("stInfoViewLegacy")) $("stInfoViewLegacy").textContent = stInfoText;
     if($("adminStInfoView")) $("adminStInfoView").textContent = stInfoText;
     const payoutScaleText = COLADOKI_MODE
-      ? `通常→小役直撃or規定G数 / BONUS中:ベル10pt・リプレイ3pt・ハズレ0pt・押し順ミス2pt / BIG 70G・平均純増210pt / REG 30G・平均75pt / 1G連ストック抽選`
+      ? `通常→小役直撃or規定G数 / 通常ベース約${COLADOKI.expectedNormalGamesPer50(settings.setting).toFixed(1)}G/50pt / 目標機械割${COLADOKI.TARGET_MACHINE_RATES[settings.setting - 1].toFixed(1)}% / BONUS中:ベル10pt・リプレイ3pt・ハズレ0pt・押し順ミス2pt / BIG 70G・平均210pt / REG 30G・平均90pt / 1G連ストック抽選`
       : A_TYPE_MODE
       ? `Aタイプ:BB純増${A_TYPE_PAYOUTS.BIG}pt/RB純増${A_TYPE_PAYOUTS.MID}pt/ブドウ${A_TYPE_PAYOUTS.GRAPE}pt/ベル${A_TYPE_PAYOUTS.BELL}pt/ゾウリプレイ${A_TYPE_PAYOUTS.REPLAY}pt/宗介特殊役${A_TYPE_PAYOUTS.SMALL}pt/チェリー中段1pt・上下段2pt`
       : `通常:ベル${NORMAL_ROLE_PAYOUTS.BELL}pt/スイカ${NORMAL_ROLE_PAYOUTS.SUICA}pt/チェリー${NORMAL_ROLE_PAYOUTS.CHERRY_ANY}pt/リプレイ${NORMAL_ROLE_PAYOUTS.REPLAY}pt/REG${NORMAL_ROLE_PAYOUTS.MID}pt / 通常小役${Math.round(NORMAL_ROLE_RATE * 100)}% / 高確小役${Math.round(HIGH_ROLE_RATE * 100)}% / ATベル${ROLE_PAYOUTS.BELL}pt/斜めベル${ROLE_PAYOUTS.BELL3}pt / 平均継続${formatRate(averageContinuationRate(settings.setting))}`;
@@ -15813,7 +15819,7 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     const stGameAdd = (resolved.add || 0) + (resolved.zoneStGames || 0);
     const stockAdd = (resolved.sets || 0) + (resolved.zoneSets || 0);
     const zoneGameAdd = resolved.zoneGameAdd || 0;
-    const lineText = result !== "MISS" ? ` / ${lineName(lineRow)}ライン` : "";
+    const lineText = displayResultFor(result) !== "MISS" ? ` / ${lineName(lineRow)}ライン` : "";
     const zoneRemainAfterSpin = resolved.zoneGame ? Math.max(0, session.bigZone - 1, resolved.bigZone || 0) + zoneGameAdd : null;
     const zoneText = resolved.zoneGame
       ? goraiZoneRemainText(zoneRemainAfterSpin, currentSpin?.zoneType || session.bigZoneType)
