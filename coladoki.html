@@ -5931,7 +5931,7 @@ body{
 :root{
   --jag-cabinet-width:960px;
   --jag-cabinet-height:1610px;
-  --jag-reel-top:466px;
+  --jag-reel-top:454px;
   --jag-reel-height:478px;
   --layout-reels-x:14%;
   --layout-reels-y:25.1%;
@@ -5941,22 +5941,22 @@ body{
   --layout-chance-y:79%;
   --layout-chance-w:11%;
   --layout-chance-h:12%;
-  --layout-credit-x:20.5%;
-  --layout-credit-y:8.7%;
-  --layout-credit-w:16.8%;
-  --layout-credit-h:9%;
-  --layout-count-x:43.2%;
-  --layout-count-y:8.7%;
-  --layout-count-w:13.6%;
-  --layout-count-h:9%;
-  --layout-payout-x:62.8%;
-  --layout-payout-y:8.7%;
-  --layout-payout-w:16.5%;
-  --layout-payout-h:9%;
-  --layout-bonusdata-x:19%;
-  --layout-bonusdata-y:6.5%;
-  --layout-bonusdata-w:62.9%;
-  --layout-bonusdata-h:13.3%;
+  --layout-credit-x:31.5%;
+  --layout-credit-y:79.2%;
+  --layout-credit-w:6.8%;
+  --layout-credit-h:13.4%;
+  --layout-count-x:55.5%;
+  --layout-count-y:79.2%;
+  --layout-count-w:13.7%;
+  --layout-count-h:13.4%;
+  --layout-payout-x:38.8%;
+  --layout-payout-y:79.2%;
+  --layout-payout-w:6.8%;
+  --layout-payout-h:13.4%;
+  --layout-bonusdata-x:15%;
+  --layout-bonusdata-y:-27.5%;
+  --layout-bonusdata-w:70%;
+  --layout-bonusdata-h:17.8%;
 }
 .machine{
   min-height:1670px !important;
@@ -5999,14 +5999,59 @@ body{
   z-index:0;
   filter:saturate(.82) contrast(1.02);
 }
-.cabinetPartTop{top:0;z-index:2;}
-.cabinetPartReelBack{top:466px;z-index:2;}
+.cabinetPartTop{
+  top:0;
+  height:466px;
+  object-fit:fill;
+  z-index:2;
+}
+.cabinetPartReelBack{top:454px;z-index:2;}
 .cabinetPartControls{top:899px;z-index:3;}
 .cabinetPartLower{
   left:0;
   top:1042px;
   width:100%;
   z-index:2;
+}
+.cabinetTopArtworkRow{
+  position:absolute;
+  left:11.5%;
+  top:88px;
+  width:77%;
+  height:226px;
+  z-index:7;
+  display:grid;
+  grid-template-columns:29% 42% 29%;
+  align-items:center;
+  justify-items:center;
+  pointer-events:none;
+}
+.cabinetTopArtworkRow img{
+  display:block;
+  width:auto;
+  height:auto;
+  min-width:0;
+  min-height:0;
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  user-select:none;
+}
+.cabinetTopArtworkLogo{
+  mix-blend-mode:screen;
+  filter:
+    saturate(1.08)
+    contrast(1.04)
+    drop-shadow(0 5px 5px rgba(0,0,0,.68))
+    drop-shadow(0 0 8px rgba(255,55,16,.28));
+}
+.cabinetTopArtworkLogoLeft{transform:scale(.96);}
+.cabinetTopArtworkLogoRight{transform:scale(.96);}
+.cabinetTopArtworkMascot{
+  transform:translateY(-7px) scale(.92);
+  filter:
+    drop-shadow(0 7px 5px rgba(0,0,0,.74))
+    drop-shadow(0 0 9px rgba(255,211,81,.22));
 }
 .cabinetTopSevenOverlay{
   position:absolute;
@@ -6054,32 +6099,27 @@ body{
   width:var(--layout-bonusdata-w);
   height:var(--layout-bonusdata-h);
   z-index:47;
-  display:none;
+  display:grid;
   grid-template-columns:1.2fr 1.2fr .82fr .82fr;
-  gap:7px;
-  padding:5px 8px;
+  gap:15px;
+  padding:5px 18px 7px;
   box-sizing:border-box;
-  border-radius:999px;
+  border-radius:0;
   pointer-events:none;
-  background:
-    linear-gradient(180deg,rgba(22,0,6,.98),rgba(67,0,10,.98) 48%,rgba(16,0,4,.99)),
-    radial-gradient(ellipse at 50% 18%,rgba(255,58,42,.22),transparent 68%);
-  border:2px solid rgba(255,204,58,.88);
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.12),
-    inset 0 0 14px rgba(255,198,48,.20),
-    0 3px 8px rgba(0,0,0,.42);
+  background:transparent;
+  border:0;
+  box-shadow:none;
 }
 .jagBonusDataMeter{
   min-width:0;
   display:grid;
-  grid-template-rows:12px 1fr;
+  grid-template-rows:18px 1fr;
   align-items:center;
 }
 .jagBonusDataMeter span{
   overflow:hidden;
   color:#ffe279;
-  font-size:10px;
+  font-size:13px;
   font-weight:1000;
   line-height:1;
   text-align:center;
@@ -6092,7 +6132,7 @@ body{
   overflow:hidden;
   color:#ff1d28;
   font-family:"DSEG7Classic","Courier New",monospace;
-  font-size:22px;
+  font-size:32px;
   font-weight:400;
   line-height:1;
   letter-spacing:0;
@@ -6104,7 +6144,7 @@ body{
     1px 1px 0 #220000;
 }
 .jagBonusDataMeter:nth-child(n+3) b{
-  font-size:23px;
+  font-size:34px;
 }
 .jagBonusDataMeter b.is-bonus-held{
   animation:jagBonusHeldBlink .72s steps(2,end) infinite;
@@ -6252,9 +6292,17 @@ body{
 .jagPayoutMeter{
   position:absolute !important;
   display:grid !important;
-  place-items:center !important;
-  padding:0 !important;
+  grid-template-rows:18px 1fr !important;
+  place-items:stretch center !important;
+  padding:2px 3px 3px !important;
+  box-sizing:border-box !important;
   container-type:size !important;
+  border-radius:5px !important;
+  background:
+    linear-gradient(180deg,rgba(6,6,6,.92),rgba(19,0,3,.96)),
+    radial-gradient(ellipse at 50% 35%,rgba(255,33,25,.16),transparent 72%) !important;
+  border:1px solid rgba(255,190,48,.44) !important;
+  box-shadow:inset 0 0 8px rgba(255,0,17,.15) !important;
 }
 .jagPayoutMeterCredit{
   left:var(--layout-credit-x) !important;
@@ -6275,28 +6323,45 @@ body{
   height:var(--layout-payout-h) !important;
 }
 .jagPayoutMeter::before,
-.jagPayoutMeter::after,
-.jagPayoutMeter span{
+.jagPayoutMeter::after{
   display:none !important;
 }
+.jagPayoutMeter span{
+  position:relative !important;
+  grid-row:1 !important;
+  z-index:3 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  margin:0 !important;
+  color:#ffe66e !important;
+  font-size:min(20cqh, 13cqw) !important;
+  font-weight:1000 !important;
+  line-height:1 !important;
+  letter-spacing:.02em !important;
+  text-align:center !important;
+  white-space:nowrap !important;
+  text-shadow:0 0 5px rgba(255,198,38,.5),1px 1px 0 #290000 !important;
+}
 .jagPayoutMeter b{
-  position:absolute !important;
-  left:8% !important;
-  right:8% !important;
-  top:38% !important;
-  bottom:4% !important;
-  width:auto !important;
-  height:auto !important;
+  position:relative !important;
+  grid-row:2 !important;
+  left:auto !important;
+  right:auto !important;
+  top:auto !important;
+  bottom:auto !important;
+  width:100% !important;
+  height:100% !important;
   z-index:2 !important;
   display:flex !important;
   align-items:center !important;
-  justify-content:flex-end !important;
+  justify-content:center !important;
   font-family:"DSEG7Classic","Courier New",monospace !important;
-  font-size:min(56cqh, 23cqw) !important;
+  font-size:min(55cqh, 43cqw) !important;
   font-weight:400 !important;
   line-height:1 !important;
   letter-spacing:.00em !important;
-  text-align:right !important;
+  text-align:center !important;
   font-variant-numeric:tabular-nums !important;
   color:#ff1d28 !important;
   text-shadow:
@@ -6308,7 +6373,13 @@ body{
   display:none;
 }
 .jagPayoutMeterCredit b{
-  font-size:min(56cqh, 20cqw) !important;
+  font-size:min(55cqh, 38cqw) !important;
+}
+.jagPayoutMeterCount b{
+  font-size:min(55cqh, 28cqw) !important;
+}
+.jagPayoutMeterCount span{
+  font-size:min(19cqh, 8.8cqw) !important;
 }
 .jagGogoChance{
   display:none !important;
@@ -6571,9 +6642,31 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
+  position:relative;
   transition:filter .12s ease, transform .12s ease, opacity .12s ease, visibility .12s ease;
 }
+.pushOrderNaviItem::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:96px;
+  height:78px;
+  z-index:0;
+  transform:translate(-50%,-50%);
+  border-radius:28px 28px 20px 20px;
+  background:
+    radial-gradient(ellipse at 50% 50%,rgba(20,0,2,.9),rgba(0,0,0,.98) 68%),
+    #000;
+  border:2px solid rgba(255,207,48,.72);
+  box-shadow:
+    inset 0 0 0 3px rgba(92,0,8,.78),
+    inset 0 0 16px rgba(255,31,18,.28),
+    0 0 7px rgba(255,196,31,.24);
+}
 .pushOrderNaviVideo{
+  position:relative;
+  z-index:1;
   width:100px;
   height:100px;
   flex:0 0 100px;
@@ -6616,7 +6709,7 @@ body{
   :root{
     --jag-cabinet-width:930px;
     --jag-cabinet-height:1558px;
-    --jag-reel-top:451px;
+    --jag-reel-top:439px;
     --jag-reel-height:463px;
   }
   .machine{min-height:1615px !important;}
@@ -6654,10 +6747,15 @@ body{
       <div class="jagCabinetShell" aria-hidden="true">
         <div class="cabinetPartsScene" aria-hidden="true">
           <img class="cabinetPart cabinetPartChassis" src="assets/cabinet/parts/coladoki_part_chassis_v5.png" alt="">
-          <img class="cabinetPart cabinetPartTop" src="assets/cabinet/parts/coladoki_part_top_v4.png" alt="">
+          <img class="cabinetPart cabinetPartTop" src="assets/cabinet/parts/coladoki_part_top_v5.png" alt="">
           <img class="cabinetPart cabinetPartReelBack" src="assets/cabinet/parts/coladoki_part_reel_face_v4.png" alt="">
           <img class="cabinetPart cabinetPartControls" src="assets/cabinet/parts/coladoki_part_controls_v5.png" alt="">
           <img class="cabinetPart cabinetPartLower" src="assets/cabinet/parts/coladoki_part_lower_v4.png" alt="">
+          <div class="cabinetTopArtworkRow">
+            <img class="cabinetTopArtworkLogo cabinetTopArtworkLogoLeft" src="assets/cabinet/artwork/coladoki_hibiscus_logo_user_v1.png" alt="">
+            <img class="cabinetTopArtworkMascot" src="assets/cabinet/artwork/coladoki_mascot_user_v1.png" alt="">
+            <img class="cabinetTopArtworkLogo cabinetTopArtworkLogoRight" src="assets/cabinet/artwork/coladoki_hibiscus_logo_user_v1.png" alt="">
+          </div>
         </div>
         <div class="jagSideRail jagSideRailLeft"></div>
         <div class="jagSideRail jagSideRailRight"></div>
@@ -6783,7 +6881,7 @@ body{
               <div class="layoutEditGroupTitle">BONUS DATA</div>
               <div class="layoutEditRows">
                 <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="0" max="95" step="0.1" data-layout-target="bonusdata" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="bonusdata-x"></b></label>
-                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="0" max="40" step="0.1" data-layout-target="bonusdata" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="bonusdata-y"></b></label>
+                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="-40" max="40" step="0.1" data-layout-target="bonusdata" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="bonusdata-y"></b></label>
                 <label class="layoutEditRow"><span>W</span><input class="layoutEditInput" type="range" min="20" max="95" step="0.1" data-layout-target="bonusdata" data-layout-prop="w"><b class="layoutEditValue" data-layout-view="bonusdata-w"></b></label>
                 <label class="layoutEditRow"><span>H</span><input class="layoutEditInput" type="range" min="4" max="24" step="0.1" data-layout-target="bonusdata" data-layout-prop="h"><b class="layoutEditValue" data-layout-view="bonusdata-h"></b></label>
               </div>
@@ -7013,7 +7111,7 @@ body{
           </div>
           <div class="jagPayoutMeter jagPayoutMeterCount">
             <b id="jagCountMeter">000</b>
-            <span>COUNT</span>
+            <span>BONUS / AT 残りG</span>
           </div>
           <div class="jagPayoutMeter jagPayoutMeterPayout">
             <b id="jagGamePayoutMeter">000</b>
@@ -8140,8 +8238,8 @@ body{
   if(SLOT_DEBUG_ENABLED) document.body.classList.add("debugMode", "debugOpen");
   const PAGE_ZOOM_STORAGE_KEY = "jag_unified_page_zoom_v3";
   const PAGE_PAN_STORAGE_KEY = "jag_unified_page_pan_x_v3";
-  const LAYOUT_EDIT_STORAGE_KEY = "coladoki_layout_editor_v6";
-  const LAYOUT_DEFAULT_STORAGE_KEY = "coladoki_layout_default_v6";
+  const LAYOUT_EDIT_STORAGE_KEY = "coladoki_layout_editor_v7";
+  const LAYOUT_DEFAULT_STORAGE_KEY = "coladoki_layout_default_v7";
   const LAYOUT_EDITOR_ENABLED = true;
   const PAGE_STAGE_WIDTH = 1360;
   const PAGE_ZOOM_MIN = 0.75;
@@ -8163,10 +8261,10 @@ body{
   const LAYOUT_DEFAULTS = Object.freeze({
     reels:{x:14.0, y:25.1, w:72.0, h:46.2},
     chance:{x:16.0, y:79.0, w:11.0, h:12.0},
-    credit:{x:20.5, y:8.7, w:16.8, h:9.0},
-    count:{x:43.2, y:8.7, w:13.6, h:9.0},
-    payout:{x:62.8, y:8.7, w:16.5, h:9.0},
-    bonusdata:{x:19.0, y:6.5, w:62.9, h:13.3}
+    credit:{x:31.5, y:79.2, w:6.8, h:13.4},
+    count:{x:55.5, y:79.2, w:13.7, h:13.4},
+    payout:{x:38.8, y:79.2, w:6.8, h:13.4},
+    bonusdata:{x:15.0, y:-27.5, w:70.0, h:17.8}
   });
   let pageZoom = 1;
   let pagePanX = PAGE_PAN_DEFAULT;
@@ -13626,15 +13724,9 @@ body{
       gogoChance.setAttribute("aria-pressed", jagChanceLit ? "true" : "false");
     }
     const displayCredit = SLOT_PLAY_SESSION ? profit - playSessionBaselineProfit() : profit;
-    const displayCount = active
-      ? (isATypeBonusActive()
-        ? aTypeBonusNet()
-        : COLADOKI_MODE
-          ? coladokiBonusNet()
-          : Math.max(0, Number(session.paid) || 0))
-      : 0;
     setText("jagCreditMeter", formatCreditDifference(displayCredit));
-    setText("jagCountMeter", formatMeterDigits(displayCount, 3, 999));
+    const bonusAtRemain = active ? Math.max(0, Number(session.remain) || 0) : 0;
+    setText("jagCountMeter", formatMeterDigits(bonusAtRemain, 3, 999));
     setText("jagGamePayoutMeter", formatMeterDigits(jagLastGamePayout, 3, 999));
     const atCountText = stats.totalSessions || 0;
     const stEmblem = $("wdStEmblem");
