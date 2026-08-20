@@ -1283,6 +1283,12 @@ body.layoutEditOpen .jagBonusDataMeters{
   object-fit:cover;
   filter:saturate(1.16) brightness(1.04) contrast(.98);
 }
+body.layoutEditOpen .reels{
+  z-index:20 !important;
+}
+body.layoutEditOpen .cabinetFrontParts{
+  opacity:.22;
+}
 .devilRushEntryLayer{
   position:absolute;
   left:12.7%;
@@ -5933,10 +5939,10 @@ body{
   --jag-cabinet-height:1610px;
   --jag-reel-top:454px;
   --jag-reel-height:478px;
-  --layout-reels-x:14%;
-  --layout-reels-y:25.1%;
-  --layout-reels-w:72%;
-  --layout-reels-h:46.2%;
+  --layout-reels-x:12%;
+  --layout-reels-y:0%;
+  --layout-reels-w:76.3%;
+  --layout-reels-h:64%;
   --layout-chance-x:16%;
   --layout-chance-y:79%;
   --layout-chance-w:11%;
@@ -6209,7 +6215,7 @@ body{
   padding-bottom:0 !important;
   box-sizing:border-box !important;
   gap:3.2% !important;
-  z-index:20 !important;
+  z-index:3 !important;
   overflow:hidden !important;
   border-radius:6px !important;
   background:#07090b !important;
@@ -6748,7 +6754,7 @@ body{
         <div class="cabinetPartsScene" aria-hidden="true">
           <img class="cabinetPart cabinetPartChassis" src="assets/cabinet/parts/coladoki_part_chassis_v5.png" alt="">
           <img class="cabinetPart cabinetPartTop" src="assets/cabinet/parts/coladoki_part_top_v5.png" alt="">
-          <img class="cabinetPart cabinetPartReelBack" src="assets/cabinet/parts/coladoki_part_reel_face_v4.png" alt="">
+          <img class="cabinetPart cabinetPartReelBack" src="assets/cabinet/parts/coladoki_part_reel_face_v6.png" alt="">
           <img class="cabinetPart cabinetPartControls" src="assets/cabinet/parts/coladoki_part_controls_v5.png" alt="">
           <img class="cabinetPart cabinetPartLower" src="assets/cabinet/parts/coladoki_part_lower_v4.png" alt="">
           <div class="cabinetTopArtworkRow">
@@ -7072,7 +7078,7 @@ body{
           <div class="pushOrderNaviItem" data-push-reel="2"><video class="pushOrderNaviVideo" muted loop playsinline preload="auto" aria-hidden="true"></video></div>
         </div>
         <div class="cabinetFrontParts" aria-hidden="true">
-          <img class="cabinetPart cabinetPartReelFront" src="assets/cabinet/parts/coladoki_part_reel_face_v4.png" alt="">
+          <img class="cabinetPart cabinetPartReelFront" src="assets/cabinet/parts/coladoki_part_reel_face_v6.png" alt="">
         </div>
         <div class="jagBonusDataMeters" aria-label="BONUS GAME DATA">
           <div class="jagBonusDataMeter">
@@ -8259,7 +8265,7 @@ body{
   const BG_ORANGE_LOGO_ANCHOR_X = 964;
   const BG_LOGO_LOWER_ANCHOR_Y = 742;
   const LAYOUT_DEFAULTS = Object.freeze({
-    reels:{x:14.0, y:25.1, w:72.0, h:46.2},
+    reels:{x:12.0, y:0.0, w:76.3, h:64.0},
     chance:{x:16.0, y:79.0, w:11.0, h:12.0},
     credit:{x:31.5, y:79.2, w:6.8, h:13.4},
     count:{x:55.5, y:79.2, w:13.7, h:13.4},
