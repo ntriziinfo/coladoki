@@ -472,7 +472,9 @@ body.layoutEditOpen .cabinetTopArtworkLamp,
 body.layoutEditOpen .jagGogoChance,
 body.layoutEditOpen .jagPayoutMeter,
 body.layoutEditOpen .jagBonusDataMeters,
-body.layoutEditOpen .jagBonusDataFrame{
+body.layoutEditOpen .jagBonusDataFrame,
+body.layoutEditOpen .cabinetControlPart,
+body.layoutEditOpen .playControls .autoArea{
   outline:2px dashed rgba(77,231,255,.88);
   outline-offset:3px;
 }
@@ -493,6 +495,15 @@ body.layoutEditOpen .cabinetPartUpperReelUnified{
 }
 body.layoutEditOpen .cabinetTopArtworkLamp{
   outline-color:rgba(255,76,55,.96);
+}
+body.layoutEditOpen .cabinetStartLever{
+  outline-color:rgba(255,211,106,.96);
+}
+body.layoutEditOpen .cabinetStopButton{
+  outline-color:rgba(77,231,255,.96);
+}
+body.layoutEditOpen .playControls .autoArea{
+  outline-color:rgba(255,76,118,.96);
 }
 @media(max-width:640px){
   .pageZoomControls{
@@ -5989,6 +6000,16 @@ body{
   --layout-bonusframe-y:-32%;
   --layout-bonusframe-w:77%;
   --layout-bonusframe-h:27%;
+  --layout-lever-x:22.9%;
+  --layout-lever-y:61.9%;
+  --layout-stop0-x:39.8%;
+  --layout-stop0-y:62.4%;
+  --layout-stop1-x:50.4%;
+  --layout-stop1-y:62.4%;
+  --layout-stop2-x:61%;
+  --layout-stop2-y:62.4%;
+  --layout-auto-x:89%;
+  --layout-auto-y:61.9%;
 }
 .machine{
   min-height:1670px !important;
@@ -6626,8 +6647,8 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   opacity:.01 !important;
 }
 .playControls .betArea{
-  left:22.9% !important;
-  top:calc(61.9% + 20px) !important;
+  left:var(--layout-lever-x) !important;
+  top:calc(var(--layout-lever-y) + 20px) !important;
   width:11.5% !important;
   height:8.0% !important;
   overflow:visible !important;
@@ -6685,20 +6706,20 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   opacity:.78;
 }
 .playControls .centerStopBtns button:nth-child(1){
-  left:39.8% !important;
-  top:calc(62.4% + 20px) !important;
+  left:var(--layout-stop0-x) !important;
+  top:calc(var(--layout-stop0-y) + 20px) !important;
   width:10.5% !important;
   height:8.0% !important;
 }
 .playControls .centerStopBtns button:nth-child(2){
-  left:50.4% !important;
-  top:calc(62.4% + 20px) !important;
+  left:var(--layout-stop1-x) !important;
+  top:calc(var(--layout-stop1-y) + 20px) !important;
   width:10.5% !important;
   height:8.0% !important;
 }
 .playControls .centerStopBtns button:nth-child(3){
-  left:61.0% !important;
-  top:calc(62.4% + 20px) !important;
+  left:var(--layout-stop2-x) !important;
+  top:calc(var(--layout-stop2-y) + 20px) !important;
   width:10.5% !important;
   height:8.0% !important;
 }
@@ -6744,8 +6765,8 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   background-size:contain;
 }
 .cabinetStartLever{
-  left:22.9%;
-  top:calc(61.9% + 20px);
+  left:var(--layout-lever-x);
+  top:calc(var(--layout-lever-y) + 20px);
   width:15.4%;
   height:15.4%;
   transform:translate(-50%, -50%);
@@ -6754,12 +6775,11 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   transition:top .09s ease, transform .09s ease, filter .09s ease;
 }
 .playControls.leverDown .cabinetStartLever{
-  top:calc(62.6% + 20px);
+  top:calc(var(--layout-lever-y) + .7% + 20px);
   transform:translate(-50%, -50%) rotate(4deg) scale(.985);
   filter:brightness(.92) drop-shadow(0 2px 3px rgba(0,0,0,.46));
 }
 .cabinetStopButton{
-  top:calc(62.4% + 20px);
   width:8.8%;
   height:8.8%;
   transform:translate(-50%, -50%);
@@ -6786,9 +6806,9 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     inset 0 -2px 5px rgba(255,255,255,.16);
   transition:opacity .08s ease, transform .08s ease;
 }
-.cabinetStopButton0{left:39.8%;}
-.cabinetStopButton1{left:50.4%;}
-.cabinetStopButton2{left:61.0%;}
+.cabinetStopButton0{left:var(--layout-stop0-x);top:calc(var(--layout-stop0-y) + 20px);}
+.cabinetStopButton1{left:var(--layout-stop1-x);top:calc(var(--layout-stop1-y) + 20px);}
+.cabinetStopButton2{left:var(--layout-stop2-x);top:calc(var(--layout-stop2-y) + 20px);}
 .cabinetStopButton.is-reel-live{
   background-image:url("assets/controls/stop_button_blue_cut.png");
   opacity:1;
@@ -6804,8 +6824,8 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
   transform:scale(.92);
 }
 .playControls .autoArea{
-  left:89.0% !important;
-  top:calc(61.9% + 20px) !important;
+  left:var(--layout-auto-x) !important;
+  top:calc(var(--layout-auto-y) + 20px) !important;
   width:8.2% !important;
   height:auto !important;
   aspect-ratio:1 / 1 !important;
@@ -7073,6 +7093,41 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
                 <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="0" max="55" step="0.1" data-layout-target="reels" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="reels-y"></b></label>
                 <label class="layoutEditRow"><span>W</span><input class="layoutEditInput" type="range" min="30" max="90" step="0.1" data-layout-target="reels" data-layout-prop="w"><b class="layoutEditValue" data-layout-view="reels-w"></b></label>
                 <label class="layoutEditRow"><span>H</span><input class="layoutEditInput" type="range" min="25" max="75" step="0.1" data-layout-target="reels" data-layout-prop="h"><b class="layoutEditValue" data-layout-view="reels-h"></b></label>
+              </div>
+            </div>
+            <div class="layoutEditGroup">
+              <div class="layoutEditGroupTitle">LEVER</div>
+              <div class="layoutEditRows">
+                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="0" max="100" step="0.1" data-layout-target="lever" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="lever-x"></b></label>
+                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="45" max="95" step="0.1" data-layout-target="lever" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="lever-y"></b></label>
+              </div>
+            </div>
+            <div class="layoutEditGroup">
+              <div class="layoutEditGroupTitle">STOP LEFT</div>
+              <div class="layoutEditRows">
+                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="0" max="100" step="0.1" data-layout-target="stop0" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="stop0-x"></b></label>
+                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="45" max="95" step="0.1" data-layout-target="stop0" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="stop0-y"></b></label>
+              </div>
+            </div>
+            <div class="layoutEditGroup">
+              <div class="layoutEditGroupTitle">STOP CENTER</div>
+              <div class="layoutEditRows">
+                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="0" max="100" step="0.1" data-layout-target="stop1" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="stop1-x"></b></label>
+                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="45" max="95" step="0.1" data-layout-target="stop1" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="stop1-y"></b></label>
+              </div>
+            </div>
+            <div class="layoutEditGroup">
+              <div class="layoutEditGroupTitle">STOP RIGHT</div>
+              <div class="layoutEditRows">
+                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="0" max="100" step="0.1" data-layout-target="stop2" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="stop2-x"></b></label>
+                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="45" max="95" step="0.1" data-layout-target="stop2" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="stop2-y"></b></label>
+              </div>
+            </div>
+            <div class="layoutEditGroup">
+              <div class="layoutEditGroupTitle">AUTO</div>
+              <div class="layoutEditRows">
+                <label class="layoutEditRow"><span>X</span><input class="layoutEditInput" type="range" min="0" max="100" step="0.1" data-layout-target="auto" data-layout-prop="x"><b class="layoutEditValue" data-layout-view="auto-x"></b></label>
+                <label class="layoutEditRow"><span>Y</span><input class="layoutEditInput" type="range" min="45" max="95" step="0.1" data-layout-target="auto" data-layout-prop="y"><b class="layoutEditValue" data-layout-view="auto-y"></b></label>
               </div>
             </div>
             <div class="layoutEditGroup">
@@ -8548,7 +8603,12 @@ body.coladokiJackpotLampChase .cabinetDynamicLampRail span{
     count:{x:55.5, y:79.2, w:13.7, h:13.4},
     payout:{x:38.8, y:79.2, w:6.8, h:13.4},
     bonuscontent:{x:4.5, y:17.0, w:91.0, h:66.0},
-    bonusframe:{x:11.5, y:-32.0, w:77.0, h:27.0}
+    bonusframe:{x:11.5, y:-32.0, w:77.0, h:27.0},
+    lever:{x:22.9, y:61.9},
+    stop0:{x:39.8, y:62.4},
+    stop1:{x:50.4, y:62.4},
+    stop2:{x:61.0, y:62.4},
+    auto:{x:89.0, y:61.9}
   });
   let pageZoom = 1;
   let pagePanX = PAGE_PAN_DEFAULT;
