@@ -6093,11 +6093,22 @@ body{
   }
 }
 .cabinetTopArtworkMascot{
+  width:100%;
+  height:100%;
+  display:grid;
+  place-items:center;
   transform:translateY(-7px) scale(.92);
   filter:
     drop-shadow(0 7px 5px rgba(0,0,0,.74))
     drop-shadow(0 0 9px rgba(255,211,81,.22));
 }
+.cabinetTopArtworkMascot img{
+  grid-area:1 / 1;
+}
+.cabinetTopArtworkMascotOn{opacity:0;}
+.cabinetTopArtworkMascotOff{opacity:1;}
+.cabinetTopArtworkRow.is-jackpot-blinking .cabinetTopArtworkMascotOn{opacity:1;}
+.cabinetTopArtworkRow.is-jackpot-blinking .cabinetTopArtworkMascotOff{opacity:0;}
 .cabinetTopSevenOverlay{
   position:absolute;
   left:18.8%;
@@ -6821,7 +6832,10 @@ body{
               <img class="cabinetTopArtworkLogo cabinetTopArtworkLampOff" src="assets/cabinet/artwork/coladoki_lamp_off_user_v1.png" alt="">
               <img class="cabinetTopArtworkLogo cabinetTopArtworkLampOn" src="assets/cabinet/artwork/coladoki_lamp_on_user_v1.png" alt="">
             </span>
-            <img class="cabinetTopArtworkMascot" src="assets/cabinet/artwork/coladoki_mascot_user_v1.png" alt="">
+            <span class="cabinetTopArtworkMascot">
+              <img class="cabinetTopArtworkMascotOff" src="assets/cabinet/artwork/coladoki_mascot_off_user_v1.png" alt="">
+              <img class="cabinetTopArtworkMascotOn" src="assets/cabinet/artwork/coladoki_mascot_on_user_v1.png" alt="">
+            </span>
             <span class="cabinetTopArtworkLamp cabinetTopArtworkLampRight">
               <img class="cabinetTopArtworkLogo cabinetTopArtworkLampOff" src="assets/cabinet/artwork/coladoki_lamp_off_user_v1.png" alt="">
               <img class="cabinetTopArtworkLogo cabinetTopArtworkLampOn" src="assets/cabinet/artwork/coladoki_lamp_on_user_v1.png" alt="">
